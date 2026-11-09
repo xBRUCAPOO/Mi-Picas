@@ -1,0 +1,826 @@
+:root {
+
+    /*==========================================
+        COLORES PRINCIPALES (paleta del original)
+    ==========================================*/
+
+    --color-principal: #000180;
+    --color-principal-hover: #1B2FBF;
+    --color-principal-activo: #3248E6;
+
+    /*==========================================
+        FONDOS
+    ==========================================*/
+
+    --color-fondo: #02030A;
+    --color-fondo-secundario: #04060F;
+    --color-fondo-terciario: #060A1C;
+
+    /*==========================================
+        TEXTO
+    ==========================================*/
+
+    --color-texto: #E8EEFF;
+    --color-texto-secundario: #BFCBFF;
+    --color-texto-apagado: #8796D8;
+
+    /*==========================================
+        BORDES Y SOMBRAS
+    ==========================================*/
+
+    --color-borde: #243CBE;
+    --color-borde-suave: rgba(36, 60, 190, .25);
+    --color-brillo-borde: rgba(191, 203, 255, .10);
+    --sombra-principal: rgba(0, 1, 128, .45);
+    --sombra-suave: rgba(39, 64, 255, .18);
+    --resplandor-titulo: rgba(111, 134, 255, .35);
+    --resplandor-titulo-suave: rgba(111, 134, 255, .12);
+    --color-seleccion: rgba(50, 72, 230, .45);
+
+    /*==========================================
+        COLORES DE ESTADO (pedidos por BRUCA)
+    ==========================================*/
+
+    --color-success: #22c55e;   /* Contraseña correcta */
+    --color-warning: #facc15;   /* Mensajes suaves y destellos dorados (la llave) */
+    --color-error: #ef4444;     /* Contraseña incorrecta */
+    --color-info: #3b82f6;      /* Foco de los campos, latido del corazón y destellos */
+
+    /* Fondos suaves de esos estados (se usan dentro de los campos) */
+    --success-fondo: rgba(34, 197, 94, .14);
+    --error-fondo: rgba(239, 68, 68, .14);
+    --info-fondo: rgba(59, 130, 246, .22);
+    --info-resplandor: rgba(59, 130, 246, .55);
+
+    /*==========================================
+        VIDRIO (cajas y velos)
+    ==========================================*/
+
+    --glass: rgba(4, 6, 16, .50);            /* Caja de las contraseñas */
+    --glass-solido: rgba(4, 6, 16, .92);     /* Respaldo para navegadores sin backdrop-filter */
+    --velo-escena: rgba(2, 3, 10, .70);      /* Oscurece el cielo durante la animación */
+
+    /*==========================================
+        DEGRADADOS
+    ==========================================*/
+
+    --degradado-fondo: linear-gradient(
+        180deg,
+        #02030A 0%,
+        #04060F 35%,
+        #05081A 70%,
+        #060A1C 100%
+    );
+
+    --degradado-boton: linear-gradient(
+        135deg,
+        #000180 0%,
+        #3248E6 100%
+    );
+
+    /*==========================================
+        CIELO (los usa script.js para dibujar en el canvas)
+    ==========================================*/
+
+    --estrella-blanca: #F4F6FF;
+    --estrella-azul: #BFCBFF;
+    --estrella-celeste: #9FB4FF;
+    --estrella-fugaz: #F4F6FF;
+
+    --nebulosa-azul: rgba(50, 72, 230, .14);
+    --nebulosa-violeta: rgba(112, 84, 214, .10);
+    --nebulosa-profunda: rgba(27, 47, 191, .10);
+    --via-lactea-centro: rgba(191, 203, 255, .07);
+    --via-lactea-borde: rgba(111, 134, 255, .03);
+    --transparente: rgba(0, 0, 0, 0);
+    --luna-centro: #F4F6FF;
+
+    /*==========================================
+        TIPOGRAFÍAS (todas de Google Fonts)
+    ==========================================*/
+
+    --fuente-playwrite-id: "Playwrite ID", cursive;
+    --fuente-ibm-plex-mono: "IBM Plex Mono", monospace;
+    --fuente-share-tech-mono: "Share Tech Mono", monospace;
+    --fuente-iconos: "Material Symbols Rounded";
+
+    /* Roles: cambiando estas 3 líneas cambia la tipografía de toda la página */
+    --fuente-titulo: var(--fuente-playwrite-id);
+    --fuente-texto: var(--fuente-ibm-plex-mono);
+    --fuente-detalle: var(--fuente-share-tech-mono);
+
+    /*==========================================
+        MOVIMIENTO
+    ==========================================*/
+
+    --curva-calma: cubic-bezier(.22, 1, .36, 1);
+
+    /*==========================================
+        MEDIDAS (mobile first: los valores base son para celular)
+    ==========================================*/
+
+    --margen: 16px;
+    --relleno-caja: 1.3rem;
+    --radio-caja: 1.25rem;
+    --alto-campo: 48px;
+    --tamano-luna: 44px;
+}
+
+/*==========================================
+    BASE
+==========================================*/
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-principal) var(--color-fondo-secundario);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-fondo-secundario);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-principal);
+    border-radius: 10px;
+    border: 2px solid var(--color-fondo-secundario);
+}
+
+::selection {
+    background: var(--color-seleccion);
+    color: var(--color-texto);
+}
+
+html,
+body {
+    background: var(--color-fondo);
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    color: var(--color-texto-secundario);
+    font-family: var(--fuente-texto);
+    -webkit-tap-highlight-color: var(--transparente); /* Sin recuadro al tocar en celular */
+    -webkit-font-smoothing: antialiased;
+}
+
+/*==========================================
+    FONDO DE NOCHE ESTRELLADA
+==========================================*/
+
+/* 100lvh: el cielo no salta cuando la barra del celular aparece o se esconde */
+.fondo-noche {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    z-index: 0;
+    overflow: hidden;
+    background: var(--degradado-fondo);
+    pointer-events: none;
+}
+
+.cielo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    animation: aparecer 3.5s ease .2s forwards;
+}
+
+.nebulosa {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    will-change: transform;
+}
+
+.nebulosa-1 {
+    width: 90vmax;
+    height: 60vmax;
+    top: -18vmax;
+    left: -30vmax;
+    background: radial-gradient(closest-side, var(--nebulosa-azul), var(--transparente));
+    animation: flotar-nebulosa 70s ease-in-out infinite alternate;
+}
+
+.nebulosa-2 {
+    width: 80vmax;
+    height: 55vmax;
+    bottom: -12vmax;
+    right: -30vmax;
+    background: radial-gradient(closest-side, var(--nebulosa-violeta), var(--transparente));
+    animation: flotar-nebulosa 90s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes flotar-nebulosa {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(6vmax, 4vmax) scale(1.12); }
+}
+
+/* Franja de la vía láctea: más inclinada en celular para cruzar la pantalla */
+.via-lactea {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180vmax;
+    height: 30vmax;
+    transform: translate(-50%, -50%) rotate(-58deg);
+    background:
+        radial-gradient(ellipse 50% 50% at 50% 50%, var(--via-lactea-centro), var(--transparente) 70%),
+        radial-gradient(ellipse 35% 80% at 38% 55%, var(--nebulosa-profunda), var(--transparente) 70%),
+        radial-gradient(ellipse 30% 70% at 64% 45%, var(--via-lactea-borde), var(--transparente) 70%);
+    filter: blur(20px);
+    animation: respirar-via-lactea 24s ease-in-out infinite;
+}
+
+@keyframes respirar-via-lactea {
+    0%, 100% { opacity: .75; }
+    50%      { opacity: 1; }
+}
+
+.luna {
+    position: absolute;
+    top: calc(5% + env(safe-area-inset-top, 0px));
+    right: 8%;
+    width: var(--tamano-luna);
+    height: var(--tamano-luna);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--luna-centro) 0%, var(--color-principal-activo) 55%, var(--transparente) 75%);
+    box-shadow: 0 0 50px 10px var(--sombra-suave), 0 0 120px 30px var(--resplandor-titulo-suave);
+    opacity: 0;
+    animation:
+        aparecer-luna 4s ease .6s forwards,
+        respirar-luna 10s ease-in-out 4.6s infinite;
+}
+
+@keyframes aparecer-luna {
+    to { opacity: .8; }
+}
+
+@keyframes respirar-luna {
+    0%, 100% { opacity: .8; transform: scale(1); }
+    50%      { opacity: .95; transform: scale(1.04); }
+}
+
+/*==========================================
+    PANTALLA DE CONTRASEÑAS
+==========================================*/
+
+/* Ocupa la pantalla visible del celular y centra la caja (si no entra, se puede scrollear) */
+.acceso {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:
+        max(24px, env(safe-area-inset-top, 0px))
+        max(var(--margen), env(safe-area-inset-right, 0px))
+        max(20px, env(safe-area-inset-bottom, 0px))
+        max(var(--margen), env(safe-area-inset-left, 0px));
+    box-sizing: border-box;
+}
+
+/* Caja de vidrio oscuro con las contraseñas */
+.caja {
+    width: 100%;
+    max-width: 380px;
+    box-sizing: border-box;
+    padding: var(--relleno-caja);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    backdrop-filter: blur(14px) saturate(120%);
+    border: 1px solid var(--color-borde-suave);
+    border-radius: var(--radio-caja);
+    box-shadow: 0 24px 60px var(--sombra-principal), 0 0 50px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecer-caja 1.6s var(--curva-calma) .3s forwards;
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+/* Si el navegador no soporta el desenfoque, la caja se vuelve más opaca */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .caja {
+        background: var(--glass-solido);
+    }
+}
+
+@keyframes aparecer-caja {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* La caja se desvanece al empezar la animación del candado.
+   Se quita "animation" porque su entrada usa "forwards" y, si no, le ganaría la opacidad */
+.caja.oculta {
+    animation: none;
+    opacity: 0;
+    transform: scale(.96);
+}
+
+.titulo {
+    font-family: var(--fuente-titulo);
+    font-weight: 400;
+    font-size: clamp(2rem, 9vw, 2.6rem);
+    line-height: 1.4;
+    color: var(--color-texto);
+    text-align: center;
+    margin: 0 0 .2rem;
+}
+
+.subtitulo {
+    font-family: var(--fuente-texto);
+    font-size: .8rem;
+    line-height: 1.6;
+    color: var(--color-texto-apagado);
+    text-align: center;
+    margin: 0 0 1.2rem;
+}
+
+/* Lista de contraseñas: una debajo de la otra, con espacio para el dedo */
+.claves {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.clave {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.clave-etiqueta {
+    font-family: var(--fuente-texto);
+    font-size: .72rem;
+    color: var(--color-texto-apagado);
+    letter-spacing: .04em;
+}
+
+.clave-campo {
+    width: 100%;
+    height: var(--alto-campo);
+    box-sizing: border-box;
+    padding: 0 .8rem;
+    font-family: var(--fuente-texto);
+    font-size: 16px; /* 16px o más: evita que el celular haga zoom al escribir */
+    letter-spacing: .35em;
+    text-align: center;
+    color: var(--color-texto);
+    background: var(--color-fondo-secundario);
+    border: 1px solid var(--color-borde);
+    border-radius: .75rem;
+    transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
+}
+
+/* Foco: borde azul de info */
+.clave-campo:focus {
+    outline: none;
+    border-color: var(--color-info);
+    box-shadow: 0 0 0 3px var(--info-fondo);
+}
+
+/* Correcta: verde */
+.clave-campo.correcta {
+    border-color: var(--color-success);
+    background: var(--success-fondo);
+}
+
+/* Incorrecta: roja */
+.clave-campo.incorrecta {
+    border-color: var(--color-error);
+    background: var(--error-fondo);
+}
+
+/* Sacudida de los campos mal escritos */
+.clave-campo.agitar {
+    animation: agitar-campo .4s ease;
+}
+
+@keyframes agitar-campo {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-5px); }
+    50%      { transform: translateX(5px); }
+    75%      { transform: translateX(-3px); }
+}
+
+/* Mensaje suave si algo no coincide (color warning) */
+.anuncio {
+    min-height: 1.2rem;
+    margin: .8rem 0 0;
+    font-family: var(--fuente-texto);
+    font-size: .78rem;
+    color: var(--color-warning);
+    text-align: center;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.anuncio.mostrar {
+    opacity: 1;
+}
+
+/* Botón de continuar: área táctil cómoda */
+.boton {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    padding: .8rem;
+    border: none;
+    border-radius: .85rem;
+    background: var(--degradado-boton);
+    color: var(--color-texto);
+    font-family: var(--fuente-texto);
+    font-size: .95rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    box-shadow: 0 8px 22px var(--sombra-principal);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform .15s ease, filter .2s ease, opacity .3s ease;
+}
+
+.boton:active {
+    transform: scale(.97);
+    filter: brightness(.95);
+}
+
+.boton:focus-visible,
+.clave-campo:focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 3px;
+}
+
+.boton:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
+.material-symbols-rounded {
+    font-family: var(--fuente-iconos);
+    font-size: 1.2rem;
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    line-height: 1;
+}
+
+.pie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .6rem;
+    margin-top: 1.4rem;
+    font-family: var(--fuente-detalle);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    color: var(--color-texto-apagado);
+    opacity: .6;
+}
+
+/*==========================================
+    ESCENA: CANDADO DE CORAZÓN Y LLAVE DE AS DE PICAS
+==========================================*/
+
+/* Velo oscuro que cubre la pantalla durante la animación */
+.escena {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--velo-escena);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s ease, visibility .8s ease;
+}
+
+.escena.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Caja de la escena: proporción fija para que el candado y la llave se alineen */
+/* Tamaño de la escena: en celular ocupa el ancho; en pantallas grandes se agranda para que se vea bien */
+.escena-caja {
+    position: relative;
+    width: min(78vw, 66vh, 300px);
+    aspect-ratio: 1 / 1.1;
+}
+
+/* Escritorio: el candado y la llave pasan a ser grandes y se ven desde lejos */
+@media (min-width: 900px) {
+    .escena-caja {
+        width: min(50vh, 480px);
+    }
+
+    /* La imagen del premio también crece en escritorio */
+    .premio-marco {
+        max-width: min(60vw, 640px);
+    }
+
+    .premio-imagen {
+        max-height: 80vh;
+    }
+}
+
+/* Contenedor del candado: aparece con escala y luego se desvanece */
+.candado {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(.6);
+}
+
+.candado.aparecer {
+    animation: aparecer-candado 1s var(--curva-calma) forwards;
+}
+
+.candado.desvanecer {
+    animation: desvanecer-candado .7s ease forwards;
+}
+
+@keyframes aparecer-candado {
+    0%   { opacity: 0; transform: scale(.6); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes desvanecer-candado {
+    0%   { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.15); }
+}
+
+.candado-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+
+/* Cuerpo del corazón: color info con resplandor */
+.corazon {
+    fill: var(--color-principal-activo);
+    stroke: var(--color-info);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 18px var(--info-resplandor));
+}
+
+/* Latido suave del corazón mientras espera la llave */
+.candado.latir .corazon {
+    animation: latido 1.2s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.04); }
+}
+
+/* Grillete: se levanta para abrir (la propiedad translate tiene transición fluida) */
+.arco {
+    fill: none;
+    stroke: var(--color-texto-secundario);
+    stroke-width: 14;
+    stroke-linecap: round;
+    transition: translate 1s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.candado.abierto .arco {
+    translate: 0 -34px;
+}
+
+/* Cerradura: del color del fondo para que se lea como un agujero */
+.ojo {
+    fill: var(--color-fondo);
+}
+
+/* Llave: dorada (warning), entra desde abajo a la derecha, gira y abre */
+.llave {
+    position: absolute;
+    left: 50%;
+    bottom: 54.5%;                  /* La punta de la llave queda justo sobre la cerradura */
+    width: 26%;
+    height: auto;
+    translate: -50% 0;
+    rotate: 0deg;
+    opacity: 0;
+    transform-origin: 50% 100%;     /* Gira alrededor de la punta, como en una cerradura real */
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* Mientras entra o gira, la llave queda visible. Sin esto, "girar" le quitaría la opacidad de entrada */
+.llave.entrar,
+.llave.girar {
+    opacity: 1;
+}
+
+.llave.entrar {
+    animation: llave-entrar 1.3s var(--curva-calma) forwards;
+}
+
+/* Va después de "entrar": al tener las dos clases, esta animación es la que corre */
+.llave.girar {
+    animation: llave-girar .7s ease-in-out forwards;
+}
+
+@keyframes llave-entrar {
+    0%   { translate: 150% 220%; rotate: 60deg; opacity: 0; }
+    20%  { opacity: 1; }
+    100% { translate: -50% 0; rotate: 0deg; opacity: 1; }
+}
+
+@keyframes llave-girar {
+    0%   { translate: -50% 0; rotate: 0deg; }
+    100% { translate: -50% 0; rotate: 90deg; }
+}
+
+.llave-pala {
+    fill: var(--color-warning);
+    stroke: var(--color-warning);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 10px var(--color-warning));
+}
+
+.llave-as {
+    fill: var(--color-fondo);
+    font-family: var(--fuente-titulo);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.llave-vastago,
+.llave-diente {
+    fill: var(--color-warning);
+}
+
+/* Destellos que salen al abrirse el candado: alternan warning e info */
+.destello {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--color-warning);
+    box-shadow: 0 0 12px var(--color-warning);
+    opacity: 0;
+    animation: estallar 1.2s var(--curva-calma) var(--retraso, 0s) forwards;
+}
+
+.destello:nth-child(even) {
+    background: var(--color-info);
+    box-shadow: 0 0 12px var(--color-info);
+}
+
+@keyframes estallar {
+    0%   { opacity: 1; scale: .4; translate: 0 0; }
+    100% { opacity: 0; scale: 1; translate: var(--dx) var(--dy); }
+}
+
+/*==========================================
+    PREMIO: LA IMAGEN QUE APARECE
+==========================================*/
+
+.premio {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    box-sizing: border-box;
+    background: var(--velo-escena);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.premio.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.premio-marco {
+    margin: 0;
+    max-width: min(88vw, 420px);
+    padding: 10px;
+    box-sizing: border-box;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--color-borde-suave);
+    border-radius: 1.25rem;
+    box-shadow: 0 0 60px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
+}
+
+.premio-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 72svh;
+    object-fit: contain;
+    border-radius: .9rem;
+}
+
+/* La imagen sale de un destello dorado, se enfoca y se agranda despacio */
+.premio.visible .premio-imagen {
+    animation: revelar-premio 2.4s var(--curva-calma) .2s both;
+}
+
+@keyframes revelar-premio {
+    0%   { opacity: 0; filter: blur(18px) brightness(2.2); transform: scale(.9); }
+    60%  { opacity: 1; }
+    100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); }
+}
+
+/*==========================================
+    RESPONSIVE
+==========================================*/
+
+/* Celulares muy angostos (iPhone SE y similares) */
+@media (max-width: 360px) {
+    :root {
+        --margen: 12px;
+        --relleno-caja: 1.05rem;
+        --alto-campo: 44px;
+    }
+}
+
+/* Celular con poco alto (acostado): la caja se achica para entrar sin scroll */
+@media (max-height: 640px) {
+    .titulo {
+        font-size: 1.8rem;
+    }
+
+    .subtitulo {
+        margin-bottom: .8rem;
+    }
+
+    .claves {
+        gap: .5rem;
+    }
+}
+
+/* Tablets */
+@media (min-width: 600px) {
+    :root {
+        --margen: 24px;
+        --relleno-caja: 2rem;
+        --radio-caja: 1.5rem;
+        --alto-campo: 52px;
+        --tamano-luna: 58px;
+    }
+
+    .caja {
+        max-width: 440px;
+    }
+}
+
+/*==========================================
+    MOVIMIENTO REDUCIDO
+    Todo aparece directo y sin animaciones
+==========================================*/
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+    }
+
+    .caja {
+        opacity: 1;
+        transform: none;
+    }
+}
