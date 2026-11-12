@@ -120,9 +120,9 @@
     --arco-sombra: #262626;
     --arco-brillo: rgba(255, 255, 255, .30);
 
-    --llave-base: #7C3AED;
-    --llave-lado: #6425C9;             /* Costado derecho del vástago (volumen) */
-    --llave-sombra: #4C1D95;           /* Labio 3D */
+    --llave-base: #3B82F6;             /* Llave azul */
+    --llave-lado: #2D6FE0;             /* Costado derecho del vástago (volumen) */
+    --llave-sombra: #1D4ED8;           /* Labio 3D */
     --llave-brillo: rgba(255, 255, 255, .45);
     --llave-letra: #FFFFFF;
     --llave-barrido: rgba(255, 255, 255, .55); /* Destello que cruza la llave */
@@ -140,6 +140,8 @@
     --glass: rgba(4, 6, 16, .50);
     --glass-solido: rgba(4, 6, 16, .92);
     --velo-escena: rgba(2, 3, 10, .72);
+    --velo-quiz: rgba(2, 3, 10, .84);       /* Velo de la recompensa y el quiz: más opaco, así no hace falta desenfocar (rinde mucho mejor) */
+    --velo-intenso: rgba(1, 2, 6, .82);     /* Fondo de la animación "Pregunta difícil" */
 
     /*==========================================
         DEGRADADOS
@@ -319,10 +321,10 @@ button {
     animation: aparecer 3.5s ease .2s forwards;
 }
 
+/* Sin filter: blur (los degradados radiales ya son suaves y el desenfoque costaba mucho rendimiento) */
 .nebulosa {
     position: absolute;
     border-radius: 50%;
-    filter: blur(50px);
     will-change: transform;
 }
 
@@ -361,7 +363,7 @@ button {
         radial-gradient(ellipse 50% 50% at 50% 50%, var(--via-lactea-centro), var(--transparente) 70%),
         radial-gradient(ellipse 35% 80% at 38% 55%, var(--nebulosa-profunda), var(--transparente) 70%),
         radial-gradient(ellipse 30% 70% at 64% 45%, var(--via-lactea-borde), var(--transparente) 70%);
-    filter: blur(20px);
+    will-change: opacity;              /* Sin filter: blur, por rendimiento */
     animation: respirar-via-lactea 24s ease-in-out infinite;
 }
 
@@ -514,14 +516,14 @@ button {
     box-sizing: border-box;
     padding: var(--relleno-caja);
     background: var(--glass);
-    -webkit-backdrop-filter: blur(14px) saturate(120%);
-    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px);   /* Desenfoque más liviano (rinde mejor en celular) */
+    backdrop-filter: blur(10px);
     border: 1px solid var(--color-borde-suave);
     border-radius: var(--radio-caja);
     box-shadow: 0 24px 60px var(--sombra-principal), 0 0 50px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
     opacity: 0;
     transform: translateY(30px) scale(.94);
-    animation: aparecer-caja .9s var(--curva-resorte) .3s forwards;
+    animation: aparecer-caja .6s var(--curva-resorte) .1s forwards; /* Más rápida: menos sensación de retraso */
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -537,7 +539,7 @@ button {
 
 /* Salida de la caja (cambio de página): cae un poco, se achica y se desvanece */
 .caja.oculta {
-    animation: salir-caja .45s var(--curva-salida) forwards;
+    animation: salir-caja .3s var(--curva-salida) forwards;
     pointer-events: none;
 }
 
@@ -576,7 +578,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: .3rem;
-    animation: entrar-arriba .55s var(--curva-resorte) both;
+    animation: entrar-arriba .4s var(--curva-resorte) both;
 }
 
 .clave-etiqueta {
@@ -689,12 +691,10 @@ button {
         max(24px, env(safe-area-inset-bottom, 0px))
         max(var(--margen), env(safe-area-inset-left, 0px));
     box-sizing: border-box;
-    background: var(--velo-escena);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    background: var(--velo-quiz);          /* Sin backdrop-filter: velo más opaco (mucho mejor rendimiento) */
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s var(--curva-calma), visibility .5s var(--curva-calma);
+    transition: opacity .35s var(--curva-calma), visibility .35s var(--curva-calma);
 }
 
 .recompensa.visible {
@@ -885,16 +885,14 @@ button {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
-    background: var(--velo-escena);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    background: var(--velo-quiz);          /* Sin backdrop-filter: velo más opaco (mucho mejor rendimiento) */
     opacity: 0;
     visibility: hidden;
     transform: translateY(30px);
     transition:
-        opacity .5s var(--curva-calma),
-        visibility .5s var(--curva-calma),
-        transform .6s var(--curva-resorte);
+        opacity .35s var(--curva-calma),
+        visibility .35s var(--curva-calma),
+        transform .45s var(--curva-resorte);
 }
 
 .quiz.visible {
@@ -972,9 +970,10 @@ button {
     color: var(--color-texto);
 }
 
+/* Margen a los costados: así la calavera de la primera pregunta (al 0%) no se sale */
 .progreso-envoltura {
     position: relative;
-    margin: 0 10px;
+    margin: 0 12px;
 }
 
 .progreso-pista {
@@ -992,7 +991,7 @@ button {
     min-width: 0;
     border-radius: 999px;
     background: var(--color-success);
-    transition: width .8s var(--curva-resorte), background .3s ease;
+    transition: width .55s var(--curva-resorte), background .3s ease;
 }
 
 .progreso-barra::after {
@@ -1041,8 +1040,12 @@ button {
     box-shadow: 0 0 12px var(--color-dificil-a40);
 }
 
+/* Pregunta difícil respondida bien: círculo verde con tilde, con su labio 3D */
 .progreso-marca--hecha {
-    opacity: .45;
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: var(--color-blanco);
+    box-shadow: 0 2px 0 var(--color-success-oscuro);
 }
 
 /* "+1" que sube desde el contador al acertar */
@@ -1059,11 +1062,10 @@ button {
 
 /* ---------- Tarjeta de la pregunta ---------- */
 
+/* Superficie sólida (sin desenfoque): se ve igual sobre el velo oscuro y rinde mucho mejor */
 .tarjeta {
     padding: 22px 18px;
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(14px) saturate(120%);
-    backdrop-filter: blur(14px) saturate(120%);
+    background: var(--superficie-1);
     border: 1px solid var(--color-borde-suave);
     border-radius: 1.25rem;
     box-shadow: 0 24px 60px var(--sombra-principal), inset 0 1px 0 var(--color-brillo-borde);
@@ -1072,7 +1074,7 @@ button {
 
 /* Entrada desde la derecha con rebote (al pasar de pregunta, como en Duolingo) */
 .tarjeta--entrar {
-    animation: entrar-tarjeta .6s var(--curva-resorte) both;
+    animation: entrar-tarjeta .42s var(--curva-resorte) both;
 }
 
 body.is-hard .tarjeta {
@@ -1161,7 +1163,7 @@ body.is-hard .tarjeta {
     border-radius: 14px;
     box-shadow: 0 4px 0 var(--opcion-labio);
     cursor: pointer;
-    animation: entrar-opcion .55s var(--curva-resorte) both;
+    animation: entrar-opcion .4s var(--curva-resorte) both;
     transition:
         background .2s ease,
         border-color .2s ease,
@@ -1345,7 +1347,7 @@ body.is-hard .tarjeta {
     background: var(--hoja-fondo);
     border-top: 2px solid var(--color-borde-suave);
     transform: translateY(110%);
-    transition: transform .55s var(--curva-resorte), background .3s ease, border-color .3s ease;
+    transition: transform .4s var(--curva-resorte), background .25s ease, border-color .25s ease;
 }
 
 /* Sube cuando el quiz está a la vista */
@@ -1449,10 +1451,13 @@ body.en-quiz .hoja {
     justify-content: center;
 }
 
+/* Fondo de la animación "Pregunta difícil": más oscuro y borroso (solo dura un instante) */
 .intro-dificil-fondo {
     position: absolute;
     inset: 0;
-    background: var(--velo-escena);
+    background: var(--velo-intenso);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }
 
 .intro-dificil-etiqueta {
@@ -1476,7 +1481,7 @@ body.en-quiz .hoja {
     background: var(--velo-escena);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s var(--curva-calma), visibility .5s var(--curva-calma);
+    transition: opacity .35s var(--curva-calma), visibility .35s var(--curva-calma);
 }
 
 .escena.visible {
@@ -1692,14 +1697,13 @@ body.en-quiz .hoja {
     margin: -5px 0 0 -5px;
     border-radius: 50%;
     background: var(--color-warning);
-    box-shadow: 0 0 12px var(--color-warning);
     opacity: 0;
     pointer-events: none;
+    will-change: transform, opacity;   /* Sin box-shadow difuso: por rendimiento */
 }
 
 .destello:nth-child(even) {
     background: var(--color-info);
-    box-shadow: 0 0 12px var(--color-info);
 }
 
 .flash {
@@ -1806,9 +1810,7 @@ body.en-quiz .hoja {
     max-width: min(88vw, 420px);
     padding: 10px;
     box-sizing: border-box;
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+    background: var(--glass-solido);       /* Sólido en vez de desenfoque: por rendimiento */
     border: 2px solid var(--color-borde-fuerte);
     border-radius: 1.4rem;
     box-shadow: 0 6px 0 var(--opcion-labio), 0 0 60px var(--sombra-suave);

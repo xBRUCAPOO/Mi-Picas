@@ -361,16 +361,19 @@
     },
     {
       "tipo": "normal",
-      "pregunta": "¿Cómo se llama el emprendimiento de desarrollo de software que estoy formando?",
+      "pregunta": "¿Cómo se llama el emprendimiento de desarrollo de software en el que estoy trabajando con mis compañeros?",
       "opciones": [
         "Softdev",
+        "Kern",
+        "Orden",
         "Softend",
-        "Softcode",
+        "Proaspind",
+        "Altren",
         "Devsoft"
       ],
-      "correcta": 1,
+      "correcta": 3,
       "tema": "Trabajo - Emprendimiento",
-      "descripcion": "Estoy formando Softend junto con otras personas."
+      "descripcion": "Estoy formando Softend con mis compañeros."
     },
     {
       "tipo": "normal",
