@@ -15,17 +15,30 @@
 // "valor": la contraseña correcta (solo números; el campo acepta tantos dígitos como tenga el valor).
 // "etiqueta": el texto chiquito que se ve arriba de cada campo (puede ser el acertijo).
 // ============================================
+// const CLAVES = [
+//     { etiqueta: "Mi numero favorito",  valor: "5" },
+//     { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
+//     { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
+//     { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
+//     { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños", valor: "6" },
+//     { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
+//     { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
+//     { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
+//     { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "3" },
+//     { etiqueta: "Sic seben", valor: "67" }
+// ];
+
 const CLAVES = [
-    { etiqueta: "Mi numero favorito",  valor: "5" },
-    { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
-    { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
-    { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
-    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños",    },
-    { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
-    { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
-    { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
-    { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "3" },
-    { etiqueta: "Sic seben", valor: "67" }
+    { etiqueta: "Mi numero favorito",  valor: "0" },
+    { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "0" },
+    { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "0" },
+    { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "0" },
+    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños", valor: "0" },
+    { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "0" },
+    { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "0" },
+    { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "0" },
+    { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "0" },
+    { etiqueta: "Sic seben", valor: "0" }
 ];
 
 // ===== AJUSTES DE LA PRUEBA =====
