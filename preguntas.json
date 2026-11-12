@@ -5,52 +5,544 @@
     {
       "tipo": "normal",
       "pregunta": "¿Cuál es mi fecha de nacimiento?",
-      "opciones": ["11 de Diciembre", "15 de Diciembre", "10 de Diciembre", "8 de Diciembre"],
+      "opciones": [
+        "11 de Diciembre",
+        "15 de Diciembre",
+        "10 de Diciembre",
+        "8 de Diciembre"
+      ],
       "correcta": 2,
-      "tema": "Cumpleaños",
-      "descripcion": "Nací el 10 de Diciembre del 2008."
+      "tema": "Datos personales - Cumpleaños",
+      "descripcion": "Nací el 10 de diciembre de 2008."
     },
     {
-      "tipo": "dificil",
-      "pregunta": "¿Cuál fue el primer Call of Duty que jugué?",
-      "opciones": ["Call of Duty", "Call of Duty 2", "Call of Duty 3", "Call of Duty Modern Warfare 4", "Call of Duty World at War", "Call of Duty Black Ops", "Call of Duty Call of Duty Modern Warfare 2", "Call of Duty Black Ops 2"],
+      "tipo": "normal",
+      "pregunta": "¿De qué ciudad soy?",
+      "opciones": [
+        "Villa Carlos Paz",
+        "Córdoba Capital",
+        "Buenos Aires",
+        "Rosario"
+      ],
+      "correcta": 1,
+      "tema": "Datos personales",
+      "descripcion": "Soy de Córdoba Capital, Argentina."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es mi gaseosa favorita?",
+      "opciones": [
+        "Coca-Cola",
+        "Sprite",
+        "Pepsi",
+        "Fanta"
+      ],
       "correcta": 2,
+      "tema": "Gustos - Bebidas",
+      "descripcion": "Mi gaseosa favorita es Pepsi."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué prefiero antes que tomar Coca-Cola?",
+      "opciones": [
+        "Sprite",
+        "Agua",
+        "Fanta",
+        "Jugo"
+      ],
+      "correcta": 1,
+      "tema": "Gustos - Bebidas",
+      "descripcion": "No me gusta Coca-Cola, al punto de preferir tomar agua."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué instrumento musical toco?",
+      "opciones": [
+        "Guitarra",
+        "Violín",
+        "Piano",
+        "Batería"
+      ],
+      "correcta": 2,
+      "tema": "Gustos - Música",
+      "descripcion": "Toco el piano."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Cómo suelo aprender canciones nuevas en el piano?",
+      "opciones": [
+        "Leyendo partituras tradicionales",
+        "Mirando tutoriales de notas que van cayendo",
+        "Escuchando las canciones una sola vez",
+        "Utilizando aplicaciones de acordes"
+      ],
+      "correcta": 1,
+      "tema": "Gustos - Música",
+      "descripcion": "Suelo aprender canciones mediante tutoriales visuales de notas que van cayendo."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué suelo hacer cuando olvido una parte de una canción que estoy tocando?",
+      "opciones": [
+        "Dejo de tocarla",
+        "Improviso una versión propia",
+        "Cambio de canción",
+        "Empiezo desde cero"
+      ],
+      "correcta": 1,
+      "tema": "Gustos - Música",
+      "descripcion": "Suelo improvisar una versión propia y adaptar la canción hasta perfeccionarla."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de estas canciones, videojuegos o series he interpretado en el piano?",
+      "opciones": [
+        "Undertale",
+        "Five Nights at Freddy's",
+        "The Owl House",
+        "Geometry Dash",
+        "Eda's Requiem",
+        "Minecraft",
+        "League of Legends"
+      ],
+      "correctas": [0, 1, 2, 3, 4],
+      "tema": "Gustos - Música",
+      "descripcion": "He tocado canciones de Undertale, FNAF, The Owl House, Geometry Dash y Eda's Requiem."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es mi videojuego de novela visual favorito?",
+      "opciones": [
+        "Undertale",
+        "The Coffin of Andy and Leyley",
+        "Doki Doki Literature Club",
+        "Deltarune",
+        "Until Then",
+        "Dispatch"
+      ],
+      "correcta": 4,
       "tema": "Gustos - Videojuegos",
-      "descripcion": "El primer Call of Duty que jugué fue el Call of Duty 3."
+      "descripcion": "Until Then es mi novela visual favorita. Es la única que me ha hecho llorar cuatro veces."
     },
     {
-      "tipo": "dificil",
-      "pregunta": "¿Cuál es videojuego multijugador favorito?",
-      "opciones": ["Counter-Strike 2", "Call of Duty World at War", "Call of Duty Call of Duty Modern Warfare 2", "Zero Ours", "Call of Duty Black Ops 2", "Ready or Not","Call of Duty Modern Warfare 4", "Call of Duty Black Ops", "Call of Duty 3"],
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Con qué personaje de Until Then siento que tengo cosas en común?",
+      "opciones": [
+        "Mark",
+        "Nicole",
+        "Cathy",
+        "Renee"
+      ],
+      "correcta": 0,
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "Me identifico con Mark, entre otras cosas porque ambos tocamos el piano."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es mi videojuego multijugador favorito?",
+      "opciones": [
+        "Counter-Strike 2",
+        "Call of Duty World at War",
+        "Call of Duty Modern Warfare 2",
+        "Zero Hour",
+        "Call of Duty Black Ops 2",
+        "Ready or Not",
+        "Call of Duty 4 Modern Warfare",
+        "Call of Duty Black Ops"
+      ],
       "correcta": 5,
       "tema": "Gustos - Videojuegos",
       "descripcion": "Actualmente, Ready or Not es mi videojuego multijugador favorito."
     },
     {
       "tipo": "normal",
-      "pregunta": "¿Cuál es mi videojuego de novela visual favorito?",
-      "opciones": ["Undertale", "The Coffin of Andy and Leyley", "Doki Doki Literature Club", "Deltarune", "Until Then", "Dispatch"],
-      "correcta": 4,
+      "dificil": true,
+      "pregunta": "¿Cuál fue el primer Call of Duty que jugué?",
+      "opciones": [
+        "Call of Duty",
+        "Call of Duty 2",
+        "Call of Duty 3",
+        "Call of Duty 4 Modern Warfare",
+        "World at War",
+        "Black Ops",
+        "Modern Warfare 2",
+        "Black Ops 2"
+      ],
+      "correcta": 2,
       "tema": "Gustos - Videojuegos",
-      "descripcion": "Es la única novela visual que me ha hecho llorar 4 veces, Until Then es mi videojuego de novela visual favorito."
+      "descripcion": "El primer Call of Duty que jugué fue Call of Duty 3."
     },
     {
-      "tipo": "dificil",
+      "tipo": "normal",
+      "dificil": true,
       "pregunta": "¿Cuál es mi pistola favorita?",
-      "opciones": ["Desert Eagle", "M1911", "Glock 17", "Beretta M9", "Five-Seven", "S 2011-P", "FN Herstal", "CZ 75", "SIG Sauer P226", "CZ 75"],
+      "opciones": [
+        "Desert Eagle",
+        "M1911",
+        "Glock 17",
+        "Beretta M9",
+        "Five-SeveN",
+        "Staccato 2011-P",
+        "CZ 75",
+        "SIG Sauer P226"
+      ],
       "correcta": 5,
       "tema": "Gustos - Pistolas",
-      "descripcion": "La S 2011-P es una pistola semiautomática de doble hilera basada en la plataforma clásica 1911, recamarada en calibre 9x19 mm (9mm). Me encanta su ergonomia y su diseño, es mi pistola favorita."
+      "descripcion": "Mi favorita es la Staccato 2011-P. Me encanta su ergonomía y su diseño."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Cuál era mi pistola favorita antes de conocer la Staccato 2011-P?",
+      "opciones": [
+        "Glock 17",
+        "Desert Eagle",
+        "Beretta M9",
+        "SIG Sauer P226"
+      ],
+      "correcta": 1,
+      "tema": "Gustos - Pistolas",
+      "descripcion": "Antes mi pistola favorita era la Desert Eagle."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Con qué personaje de Call of Duty me identifico más?",
+      "opciones": [
+        "Ghost",
+        "Soap",
+        "Price",
+        "Gaz"
+      ],
+      "correcta": 1,
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "Me identifico más con Soap que con Ghost."
     },
     {
       "tipo": "multiple",
-      "pregunta": "¿En que lugares del cuerpo no me molestaria que me besaras?",
-      "opciones": ["Cuello", "Mejillas", "Labios", "Espalda", "Pecho", "Brazos", "Manos", "Pelo", "Nariz"],
+      "pregunta": "¿Cuáles de estos géneros o experiencias de videojuegos disfruto?",
+      "opciones": [
+        "Novelas visuales",
+        "Simuladores tácticos",
+        "Videojuegos de ritmo y dificultad",
+        "Juegos de estrategia",
+        "Exclusivamente juegos deportivos"
+      ],
+      "correctas": [0, 1, 2],
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "Disfruto especialmente las novelas visuales, las experiencias tácticas como Ready or Not y los desafíos musicales y de precisión de Geometry Dash."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué videojuego utilizo como ejemplo de un desafío musical y de precisión?",
+      "opciones": [
+        "Geometry Dash",
+        "FIFA",
+        "Minecraft",
+        "GTA V"
+      ],
+      "correcta": 0,
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "Geometry Dash es uno de los videojuegos que más disfruto por su complejidad."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Qué canción de Geometry Dash he mencionado que puedo tocar en el piano?",
+      "opciones": [
+        "Stereo Madness",
+        "Duelo Maestro",
+        "Deadlocked",
+        "Bloodbath"
+      ],
+      "correcta": 1,
+      "tema": "Gustos - Música",
+      "descripcion": "He mencionado Duelo Maestro como una de las canciones que puedo tocar."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿En cuáles de estas actividades o áreas he trabajado?",
+      "opciones": [
+        "Desarrollo web",
+        "Programación en Python",
+        "Bases de datos MySQL",
+        "Diseño de aplicaciones web",
+        "Edición cinematográfica profesional",
+        "Desarrollo de páginas web"
+      ],
+      "correctas": [0, 1, 2, 3, 5],
+      "tema": "Estudios y trabajo - Programación",
+      "descripcion": "He realizado proyectos utilizando diferentes tecnologías de programación y desarrollo web."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué editor de código utilizo habitualmente?",
+      "opciones": [
+        "Visual Studio Code",
+        "Notepad++",
+        "Sublime Text",
+        "Eclipse"
+      ],
+      "correcta": 0,
+      "tema": "Tecnología - Programación",
+      "descripcion": "Utilizo Visual Studio Code."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Qué sistema operativo utilizo en mi computadora principal?",
+      "opciones": [
+        "Ubuntu",
+        "Windows 10",
+        "Windows 11",
+        "macOS"
+      ],
+      "correcta": 2,
+      "tema": "Tecnología - Computadora",
+      "descripcion": "Mi computadora principal utiliza Windows 11."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Qué tarjeta gráfica tiene mi computadora?",
+      "opciones": [
+        "RTX 2060",
+        "RTX 3060",
+        "RTX 3060 Ti",
+        "RTX 4060"
+      ],
+      "correcta": 2,
+      "tema": "Tecnología - Computadora",
+      "descripcion": "Tengo una NVIDIA GeForce RTX 3060 Ti."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Qué placa madre tiene mi computadora?",
+      "opciones": [
+        "ASUS PRIME B550M-A",
+        "Gigabyte A520M DS3H V2",
+        "MSI B450 TOMAHAWK",
+        "ASRock B550 Steel Legend"
+      ],
+      "correcta": 1,
+      "tema": "Tecnología - Computadora",
+      "descripcion": "Mi placa madre es una Gigabyte A520M DS3H V2."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Con cuáles de estas tecnologías he trabajado?",
+      "opciones": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python",
+        "MySQL",
+        "Swift",
+        "Kotlin"
+      ],
+      "correctas": [0, 1, 2, 3, 4],
+      "tema": "Tecnología - Programación",
+      "descripcion": "He trabajado con HTML, CSS, JavaScript, Python y MySQL."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué sistema gestor de bases de datos he utilizado?",
+      "opciones": [
+        "MongoDB",
+        "MySQL",
+        "Firebase",
+        "Oracle Database"
+      ],
+      "correcta": 1,
+      "tema": "Tecnología - Programación",
+      "descripcion": "He trabajado con MySQL, incluyendo MySQL Workbench."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cómo se llama el emprendimiento de desarrollo de software que estoy formando?",
+      "opciones": [
+        "Softdev",
+        "Softend",
+        "Softcode",
+        "Devsoft"
+      ],
+      "correcta": 1,
+      "tema": "Trabajo - Emprendimiento",
+      "descripcion": "Estoy formando Softend junto con otras personas."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿A qué se dedica principalmente Softend?",
+      "opciones": [
+        "Venta de componentes informáticos",
+        "Desarrollo de páginas y aplicaciones web a medida",
+        "Reparación de computadoras",
+        "Venta de videojuegos"
+      ],
+      "correcta": 1,
+      "tema": "Trabajo - Emprendimiento",
+      "descripcion": "Softend es un emprendimiento dedicado al desarrollo de páginas web y aplicaciones web personalizadas."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cómo se llama mi proyecto de seguimiento de deudas y recompensas escolares?",
+      "opciones": [
+        "MeDebe",
+        "Softend",
+        "Study Bloom",
+        "ELIX"
+      ],
+      "correcta": 0,
+      "tema": "Trabajo - Proyectos",
+      "descripcion": "MeDebe es un proyecto que desarrollé para llevar el seguimiento de deudas y recompensas escolares."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Qué plataforma utilicé para alojar MeDebe?",
+      "opciones": [
+        "GitHub Pages",
+        "Cloudflare Pages",
+        "Vercel",
+        "Netlify"
+      ],
+      "correcta": 1,
+      "tema": "Tecnología - Proyectos",
+      "descripcion": "MeDebe está alojado en Cloudflare Pages."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué proyecto desarrollé para Azafrán Mediterráneo?",
+      "opciones": [
+        "Una calculadora de precios",
+        "Una aplicación de mensajería",
+        "Una red social",
+        "Un videojuego"
+      ],
+      "correcta": 0,
+      "tema": "Trabajo - Proyectos",
+      "descripcion": "Desarrollé una calculadora de precios para Azafrán Mediterráneo."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de estas características valoro en un proyecto grupal?",
+      "opciones": [
+        "Organización",
+        "Compromiso",
+        "Seriedad",
+        "Respeto por las opiniones diferentes",
+        "Que nadie pueda opinar",
+        "Falta de planificación"
+      ],
+      "correctas": [0, 1, 2, 3],
+      "tema": "Personalidad - Trabajo en equipo",
+      "descripcion": "En mis proyectos valoro la organización, el compromiso, la seriedad y el respeto por las opiniones de los demás."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué hago cuando quiero descansar mentalmente?",
+      "opciones": [
+        "Toco el piano",
+        "Estudio programación",
+        "Trabajo en un proyecto",
+        "Hago ejercicios de matemática"
+      ],
+      "correcta": 0,
+      "tema": "Personalidad - Actividades",
+      "descripcion": "Tocar el piano es una actividad que utilizo para descansar mentalmente."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de estas actividades forman parte de mis intereses?",
+      "opciones": [
+        "Programación",
+        "Tocar el piano",
+        "Videojuegos",
+        "Desarrollo de proyectos",
+        "Fotografía profesional",
+        "Edición cinematográfica"
+      ],
+      "correctas": [0, 1, 2, 3],
+      "tema": "Personalidad - Intereses",
+      "descripcion": "La programación, el piano, los videojuegos y el desarrollo de proyectos forman parte de mis intereses."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué personaje de Ready or Not me interesa especialmente por su historia y contexto?",
+      "opciones": [
+        "No tengo uno confirmado",
+        "Judge",
+        "Gum",
+        "King"
+      ],
+      "correcta": 0,
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "No tengo un personaje favorito de Ready or Not confirmado."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿En cuáles de estas plataformas o herramientas he trabajado en mis proyectos?",
+      "opciones": [
+        "GitHub",
+        "Cloudflare Pages",
+        "MySQL Workbench",
+        "Visual Studio Code",
+        "Unity",
+        "Unreal Engine"
+      ],
+      "correctas": [0, 1, 2, 3],
+      "tema": "Tecnología - Herramientas",
+      "descripcion": "He utilizado GitHub, Cloudflare Pages, MySQL Workbench y Visual Studio Code."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué estilo de desarrollo prefiero cuando trabajo sobre un proyecto que ya existe?",
+      "opciones": [
+        "Rehacer todo desde cero siempre",
+        "Conservar la estructura existente cuando sea posible",
+        "Eliminar todas las funcionalidades",
+        "Cambiar de lenguaje obligatoriamente"
+      ],
+      "correcta": 1,
+      "tema": "Personalidad - Programación",
+      "descripcion": "Suelo preferir conservar la estructura del proyecto y realizar los cambios necesarios sin rehacer todo innecesariamente."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿En cuáles de estos videojuegos o franquicias tengo interés?",
+      "opciones": [
+        "Ready or Not",
+        "Counter-Strike 2",
+        "Call of Duty",
+        "Undertale",
+        "Until Then",
+        "The Sims",
+        "FIFA"
+      ],
+      "correctas": [0, 1, 2, 3, 4],
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "He hablado de todos los videojuegos seleccionados como parte de mis gustos o intereses."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿En qué lugares del cuerpo no me molestaría que me besaras?",
+      "opciones": [
+        "Cuello",
+        "Mejillas",
+        "Labios",
+        "Espalda",
+        "Pecho",
+        "Brazos",
+        "Manos",
+        "Pelo",
+        "Nariz"
+      ],
       "correctas": [0, 1, 2, 3, 4, 5, 6, 7, 8],
       "tema": "Gustos - Besos",
-      "descripcion": "Es q amo tus besos ❤️"
+      "descripcion": "Es que amo tus besos ❤️"
     }
   ]
 }
-
-

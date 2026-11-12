@@ -15,6 +15,7 @@
     --color-fondo: #02030A;
     --color-fondo-secundario: #04060F;
     --color-fondo-terciario: #060A1C;
+    --negro: #000000;                  /* Interior del corazón y fundido final */
 
     /*==========================================
         TEXTO
@@ -24,6 +25,7 @@
     --color-texto-secundario: #BFCBFF;
     --color-texto-apagado: #8796D8;
     --color-gris: #8E95A1;            /* Tema de la pregunta y explicaciones (como en Test) */
+    --color-blanco: #FFFFFF;
 
     /*==========================================
         BORDES Y SOMBRAS
@@ -40,18 +42,23 @@
 
     /*==========================================
         COLORES DE ESTADO (pedidos por BRUCA)
+        Cada uno tiene su tono "oscuro" para el labio 3D estilo Duolingo
     ==========================================*/
 
-    --color-success: #22c55e;   /* Correcto */
-    --color-warning: #facc15;   /* Mensaje suave y destellos dorados */
-    --color-error: #ef4444;     /* Incorrecto y preguntas difíciles */
-    --color-info: #3b82f6;      /* Foco, selección y acento del quiz */
+    --color-success: #22c55e;
+    --color-success-oscuro: #15803d;
+    --color-success-claro: #86efac;
+    --color-warning: #facc15;
+    --color-warning-oscuro: #ca8a04;
+    --color-error: #ef4444;
+    --color-error-oscuro: #b91c1c;
+    --color-info: #3b82f6;
+    --color-info-oscuro: #1d4ed8;
 
     --success-fondo: rgba(34, 197, 94, .14);
     --error-fondo: rgba(239, 68, 68, .14);
     --info-fondo: rgba(59, 130, 246, .22);
 
-    /* Transparencias de estado para el quiz (cartel de corrección y opciones) */
     --color-success-a10: rgba(34, 197, 94, .10);
     --color-success-a35: rgba(34, 197, 94, .35);
     --color-error-a10: rgba(239, 68, 68, .10);
@@ -59,37 +66,72 @@
 
     /*==========================================
         ACENTO DEL QUIZ
-        Azul (info) en las preguntas normales. En las preguntas difíciles, body.is-hard
-        cambia estas variables por el rojo (igual que en Test)
+        Azul (info) en las preguntas normales; body.is-hard lo cambia a rojo (como en Test)
     ==========================================*/
 
     --color-acento: #3b82f6;
+    --color-acento-oscuro: #1d4ed8;
     --color-acento-a10: rgba(59, 130, 246, .10);
     --color-acento-a20: rgba(59, 130, 246, .20);
     --color-acento-a40: rgba(59, 130, 246, .40);
 
     --color-dificil: #ef4444;
+    --color-dificil-oscuro: #b91c1c;
     --color-dificil-a10: rgba(239, 68, 68, .10);
     --color-dificil-a20: rgba(239, 68, 68, .20);
     --color-dificil-a40: rgba(239, 68, 68, .40);
 
     /*==========================================
-        SUPERFICIES DEL QUIZ (vidrio oscuro azulado)
+        BOTONES 3D (labio de abajo, como Duolingo)
+    ==========================================*/
+
+    --boton-base: #3248E6;
+    --boton-labio: #000180;
+    --boton-gris: #1A2142;             /* Botón deshabilitado */
+    --boton-gris-labio: #0E1330;
+    --boton-gris-texto: #5D6890;
+    --alto-labio: 4px;                 /* Cuánto "se hunde" un botón al tocarlo */
+
+    /*==========================================
+        SUPERFICIES DEL QUIZ
     ==========================================*/
 
     --superficie-1: rgba(6, 9, 24, .78);
     --superficie-2: rgba(10, 15, 38, .85);
     --superficie-3: rgba(16, 24, 56, .92);
+    --opcion-labio: #1E2C6E;           /* Labio de las opciones sin elegir */
+
+    /* Hoja inferior (sólida, como la de Duolingo) */
+    --hoja-fondo: #070B1C;
+    --hoja-bien-fondo: #0A2615;
+    --hoja-mal-fondo: #2B0C10;
 
     /*==========================================
-        CANDADO Y LLAVE (réplica de las imágenes de referencia)
+        CANDADO Y LLAVE (estilo Duolingo: plano, gordo, labio oscuro y brillo blanco)
     ==========================================*/
 
-    --color-corazon: #FF0000;       /* Cuerpo del candado */
-    --color-arco: #111111;          /* Grillete */
-    --color-ojo: #111111;           /* Cerradura */
-    --color-llave: #42089A;         /* Llave */
-    --color-letra-llave: #FFFFFF;   /* La M del as de picas */
+    --corazon-base: #FF4B4B;
+    --corazon-sombra: #C21F2C;         /* Grosor 3D de abajo */
+    --corazon-brillo: rgba(255, 255, 255, .45);
+    --corazon-tapa-interna: #7A0F18;   /* Cara de adentro de las mitades al abrirse */
+    --color-ojo: #2A0B10;              /* Cerradura */
+
+    --arco-base: #4B4B4B;              /* Grillete */
+    --arco-sombra: #262626;
+    --arco-brillo: rgba(255, 255, 255, .30);
+
+    --llave-base: #7C3AED;
+    --llave-lado: #6425C9;             /* Costado derecho del vástago (volumen) */
+    --llave-sombra: #4C1D95;           /* Labio 3D */
+    --llave-brillo: rgba(255, 255, 255, .45);
+    --llave-letra: #FFFFFF;
+    --llave-barrido: rgba(255, 255, 255, .55); /* Destello que cruza la llave */
+
+    /* Rayos giratorios detrás de la recompensa */
+    --rayo-color: rgba(250, 204, 21, .16);
+
+    /* Confeti y chispas */
+    --confeti-morado: #a78bfa;
 
     /*==========================================
         VIDRIO (cajas y velos)
@@ -97,7 +139,7 @@
 
     --glass: rgba(4, 6, 16, .50);
     --glass-solido: rgba(4, 6, 16, .92);
-    --velo-escena: rgba(2, 3, 10, .70);
+    --velo-escena: rgba(2, 3, 10, .72);
 
     /*==========================================
         DEGRADADOS
@@ -109,12 +151,6 @@
         #04060F 35%,
         #05081A 70%,
         #060A1C 100%
-    );
-
-    --degradado-boton: linear-gradient(
-        135deg,
-        #000180 0%,
-        #3248E6 100%
     );
 
     /*==========================================
@@ -149,13 +185,14 @@
     --fuente-detalle: var(--fuente-share-tech-mono);
 
     /*==========================================
-        MOVIMIENTO
-        --curva-resorte: pasa de largo el final y vuelve (rebote tipo Balatro).
-        --curva-calma: llega suave, sin rebote (para cosas que solo aparecen).
+        MOVIMIENTO (estilo Duolingo: todo rebota un poquito)
+        --curva-resorte: pasa de largo el final y vuelve.
+        --curva-calma: llega suave, sin rebote.
     ==========================================*/
 
     --curva-resorte: cubic-bezier(.34, 1.56, .64, 1);
     --curva-calma: cubic-bezier(.22, 1, .36, 1);
+    --curva-salida: cubic-bezier(.55, 0, .75, .2);
 
     /*==========================================
         MEDIDAS (mobile first: los valores base son para celular)
@@ -164,15 +201,16 @@
     --margen: 16px;
     --relleno-caja: 1.3rem;
     --radio-caja: 1.25rem;
-    --alto-campo: 48px;
+    --alto-campo: 50px;
     --tamano-luna: 44px;
+    --alto-hoja: 96px;                 /* Lo actualiza script.js según lo que mida la hoja inferior */
 }
 
 /*==========================================
     BASE
 ==========================================*/
 
-/* El atributo hidden siempre oculta, aunque el elemento tenga su propio display (como en Test) */
+/* El atributo hidden siempre oculta, aunque el elemento tenga su propio display */
 [hidden] {
     display: none !important;
 }
@@ -219,9 +257,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Pregunta difícil: mientras dura, todo el acento azul del quiz pasa a rojo (script.js pone la clase) */
+/* Pregunta difícil: el acento azul del quiz pasa a rojo (script.js pone la clase) */
 body.is-hard {
     --color-acento: var(--color-dificil);
+    --color-acento-oscuro: var(--color-dificil-oscuro);
     --color-acento-a10: var(--color-dificil-a10);
     --color-acento-a20: var(--color-dificil-a20);
     --color-acento-a40: var(--color-dificil-a40);
@@ -360,7 +399,94 @@ button {
 }
 
 /*==========================================
-    PANTALLA DE CONTRASEÑAS
+    BOTONES 3D (estilo Duolingo)
+    Tienen un "labio" oscuro abajo; al tocarlos bajan y el labio desaparece, como una tecla
+==========================================*/
+
+.boton {
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: .8rem 1rem;
+    border: none;
+    border-radius: 16px;
+    background: var(--boton-base);
+    color: var(--color-blanco);
+    font-family: var(--fuente-texto);
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    box-shadow: 0 var(--alto-labio) 0 var(--boton-labio);
+    cursor: pointer;
+    transition:
+        transform .12s ease,
+        box-shadow .12s ease,
+        background .3s ease,
+        color .3s ease,
+        filter .2s ease;
+}
+
+@media (hover: hover) {
+    .boton:hover:not(:disabled) {
+        filter: brightness(1.1);
+    }
+}
+
+/* Al presionar: baja lo mismo que mide el labio (se "hunde" como en Duolingo) */
+.boton:active:not(:disabled) {
+    transform: translateY(var(--alto-labio));
+    box-shadow: 0 0 0 var(--boton-labio);
+}
+
+.boton:focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 4px;
+}
+
+.boton:disabled {
+    background: var(--boton-gris);
+    color: var(--boton-gris-texto);
+    box-shadow: 0 var(--alto-labio) 0 var(--boton-gris-labio);
+    cursor: default;
+}
+
+/* Variantes de color (cada una con su labio oscuro) */
+.boton--verde {
+    background: var(--color-success);
+    box-shadow: 0 var(--alto-labio) 0 var(--color-success-oscuro);
+}
+
+.boton--verde:active:not(:disabled) {
+    box-shadow: 0 0 0 var(--color-success-oscuro);
+}
+
+.boton--rojo {
+    background: var(--color-error);
+    box-shadow: 0 var(--alto-labio) 0 var(--color-error-oscuro);
+}
+
+.boton--rojo:active:not(:disabled) {
+    box-shadow: 0 0 0 var(--color-error-oscuro);
+}
+
+.boton--dorado {
+    background: var(--color-warning);
+    color: var(--color-fondo);
+    box-shadow: 0 var(--alto-labio) 0 var(--color-warning-oscuro);
+}
+
+.boton--dorado:active:not(:disabled) {
+    box-shadow: 0 0 0 var(--color-warning-oscuro);
+}
+
+/*==========================================
+    1) PANTALLA DE CONTRASEÑAS
 ==========================================*/
 
 /* Ocupa la pantalla visible del celular y centra la caja (si no entra, se puede scrollear) */
@@ -381,7 +507,7 @@ button {
     box-sizing: border-box;
 }
 
-/* Caja de vidrio oscuro con las contraseñas: entra con un pequeño rebote */
+/* Caja de vidrio oscuro con las contraseñas: entra con un rebote */
 .caja {
     width: 100%;
     max-width: 380px;
@@ -394,11 +520,10 @@ button {
     border-radius: var(--radio-caja);
     box-shadow: 0 24px 60px var(--sombra-principal), 0 0 50px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
     opacity: 0;
-    transform: translateY(24px) scale(.97);
-    animation: aparecer-caja 1.1s var(--curva-resorte) .3s forwards;
+    transform: translateY(30px) scale(.94);
+    animation: aparecer-caja .9s var(--curva-resorte) .3s forwards;
 }
 
-/* Si el navegador no soporta el desenfoque, la caja se vuelve más opaca */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .caja,
     .tarjeta {
@@ -410,13 +535,15 @@ button {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* La caja se desvanece al empezar la animación del candado.
-   Se quita "animation" porque su entrada usa "forwards" y, si no, le ganaría la opacidad */
+/* Salida de la caja (cambio de página): cae un poco, se achica y se desvanece */
 .caja.oculta {
-    animation: none;
-    opacity: 0;
-    transform: scale(.94);
-    transition: opacity .5s ease, transform .5s var(--curva-calma);
+    animation: salir-caja .45s var(--curva-salida) forwards;
+    pointer-events: none;
+}
+
+@keyframes salir-caja {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(40px) scale(.9); }
 }
 
 .titulo {
@@ -438,7 +565,7 @@ button {
     margin: 0 0 1.2rem;
 }
 
-/* Lista de contraseñas: una debajo de la otra */
+/* Lista de contraseñas: una debajo de la otra; cada una entra con rebote, de a una */
 .claves {
     display: flex;
     flex-direction: column;
@@ -449,6 +576,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: .3rem;
+    animation: entrar-arriba .55s var(--curva-resorte) both;
 }
 
 .clave-etiqueta {
@@ -459,6 +587,7 @@ button {
     transition: color .3s ease;
 }
 
+/* Campo con labio (como los de Duolingo): borde de 2px y 4px abajo */
 .clave-campo {
     width: 100%;
     height: var(--alto-campo);
@@ -466,20 +595,38 @@ button {
     padding: 0 .8rem;
     font-family: var(--fuente-texto);
     font-size: 16px; /* 16px o más: evita que el celular haga zoom al escribir */
+    font-weight: 600;
     letter-spacing: .35em;
     text-align: center;
     color: var(--color-texto);
     background: var(--color-fondo-secundario);
-    border: 1px solid var(--color-borde);
-    border-radius: .75rem;
-    transition: border-color .35s var(--curva-calma), box-shadow .35s var(--curva-calma), background .35s var(--curva-calma);
+    border: 2px solid var(--color-borde-fuerte);
+    border-bottom-width: 4px;
+    border-radius: 14px;
+    caret-color: var(--color-info);
+    transition:
+        border-color .25s ease,
+        box-shadow .3s ease,
+        background .3s ease,
+        transform .35s var(--curva-resorte);
 }
 
-/* Foco: borde azul de info */
+/* Foco: sube un poquito y se ilumina en azul */
 .clave-campo:focus {
     outline: none;
     border-color: var(--color-info);
-    box-shadow: 0 0 0 3px var(--info-fondo);
+    box-shadow: 0 0 0 4px var(--info-fondo);
+    transform: translateY(-2px);
+}
+
+.clave-campo:focus + .clave-etiqueta,
+.clave:focus-within .clave-etiqueta {
+    color: var(--color-info);
+}
+
+/* Completo (tiene todos los caracteres, todavía sin revisar): borde azul fijo */
+.clave-campo.lleno {
+    border-color: var(--color-info-oscuro);
 }
 
 /* Correcta: verde */
@@ -512,54 +659,6 @@ button {
     transform: translateY(0);
 }
 
-/* Botón principal: área táctil cómoda y respuesta con rebote al tocar */
-.boton {
-    width: 100%;
-    min-height: 48px;
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .4rem;
-    padding: .8rem;
-    border: none;
-    border-radius: .85rem;
-    background: var(--degradado-boton);
-    color: var(--color-texto);
-    font-family: var(--fuente-texto);
-    font-size: .95rem;
-    font-weight: 600;
-    letter-spacing: .02em;
-    box-shadow: 0 8px 22px var(--sombra-principal);
-    cursor: pointer;
-    transition: transform .3s var(--curva-resorte), filter .25s ease, opacity .3s ease, background .3s ease;
-}
-
-@media (hover: hover) {
-    .boton:hover:not(:disabled) {
-        transform: translateY(-2px);
-        filter: brightness(1.08);
-    }
-}
-
-.boton:active:not(:disabled) {
-    transform: scale(.94);
-    transition-duration: .08s;
-}
-
-.boton:focus-visible,
-.clave-campo:focus-visible {
-    outline: 2px solid var(--color-info);
-    outline-offset: 3px;
-}
-
-.boton:disabled {
-    opacity: .5;
-    cursor: default;
-    transform: none;
-    filter: none;
-}
-
 .pie {
     display: flex;
     justify-content: center;
@@ -574,197 +673,211 @@ button {
 }
 
 /*==========================================
-    ESCENA: CANDADO DE CORAZÓN Y LLAVE DE AS DE PICAS
-    Las animaciones paso a paso las dibuja script.js (Web Animations API)
+    2) RECOMPENSA: "¡OBTUVISTE LA LLAVE!"
 ==========================================*/
 
-/* Velo oscuro que cubre la pantalla durante la animación */
-.escena {
+.recompensa {
     position: fixed;
     inset: 0;
-    z-index: 10;
+    z-index: 12;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding:
+        max(24px, env(safe-area-inset-top, 0px))
+        max(var(--margen), env(safe-area-inset-right, 0px))
+        max(24px, env(safe-area-inset-bottom, 0px))
+        max(var(--margen), env(safe-area-inset-left, 0px));
+    box-sizing: border-box;
     background: var(--velo-escena);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .6s var(--curva-calma), visibility .6s var(--curva-calma);
+    transition: opacity .5s var(--curva-calma), visibility .5s var(--curva-calma);
 }
 
-.escena.visible {
+.recompensa.visible {
     opacity: 1;
     visibility: visible;
 }
 
-/* Tamaño de la escena: misma proporción que el candado calcado (250 x 310).
-   En celular ocupa el ancho; en pantallas grandes se agranda */
-.escena-caja {
+.recompensa-contenido {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Escenario de la llave: los rayos giran detrás */
+.recompensa-escenario {
     position: relative;
-    width: min(74vw, 56vh, 290px);
-    aspect-ratio: 250 / 310;
+    width: min(70vw, 42vh, 280px);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (min-width: 900px) {
-    .escena-caja {
-        width: min(46vh, 440px);
-    }
-}
-
-/* Contenedor del candado: lo escala y rota script.js. Empieza invisible */
-.candado {
+/* Rayos de sol girando (como cuando Duolingo te da un premio) */
+.rayos {
     position: absolute;
-    inset: 0;
+    inset: -30%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg, var(--rayo-color) 0deg 12deg, var(--transparente) 12deg 30deg);
+    -webkit-mask: radial-gradient(closest-side, var(--negro) 35%, var(--transparente) 100%);
+    mask: radial-gradient(closest-side, var(--negro) 35%, var(--transparente) 100%);
+    opacity: 0;
+    transform: scale(.3);
+}
+
+.rayos.visible {
+    animation:
+        aparecer-rayos .8s var(--curva-resorte) forwards,
+        girar 18s linear infinite;
+}
+
+@keyframes aparecer-rayos {
+    to { opacity: 1; scale: 1; transform: scale(1); }
+}
+
+@keyframes girar {
+    to { rotate: 360deg; }
+}
+
+/* Llave de la recompensa: script.js la hace subir; después flota y se balancea sola */
+.llave-flotante {
+    position: relative;
+    width: 34%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.llave-flotante.flotando .llave-svg {
+    animation: balanceo-llave 3s ease-in-out infinite;
+}
+
+@keyframes balanceo-llave {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50%      { transform: translateY(-10px) rotate(4deg); }
+}
+
+/* Título: cada letra salta por separado (script.js arma los spans) */
+.recompensa-titulo {
+    margin: 1.2rem 0 0;
+    font-family: var(--fuente-titulo);
+    font-weight: 400;
+    font-size: clamp(1.7rem, 8vw, 2.4rem);
+    line-height: 1.5;
+    color: var(--color-warning);
+    text-shadow: 0 3px 0 var(--color-warning-oscuro);
+}
+
+.letra {
+    display: inline-block;
+    opacity: 0;
+    white-space: pre;
+}
+
+.recompensa-titulo.visible .letra {
+    animation: saltar-letra .6s var(--curva-resorte) both;
+}
+
+@keyframes saltar-letra {
+    0%   { opacity: 0; transform: translateY(24px) scale(.3) rotate(-12deg); }
+    60%  { opacity: 1; transform: translateY(-6px) scale(1.18) rotate(4deg); }
+    100% { opacity: 1; transform: none; }
+}
+
+.recompensa-texto {
+    margin: .6rem 0 0;
+    font-size: .85rem;
+    line-height: 1.6;
+    color: var(--color-texto-secundario);
     opacity: 0;
 }
 
-/* Cuerpo del candado: flota suave mientras espera la llave */
-.candado-cuerpo {
-    width: 100%;
-    height: 100%;
-    animation: flotar-candado 3.2s ease-in-out infinite;
+.recompensa-texto.visible {
+    animation: entrar-arriba .6s var(--curva-resorte) both;
 }
 
-@keyframes flotar-candado {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-6px); }
+/* El botón entra desde abajo con rebote */
+#boton-recompensa {
+    max-width: 320px;
+    margin-top: 1.6rem;
+    opacity: 0;
+    transform: translateY(40px);
 }
 
-.candado-svg {
-    width: 100%;
-    height: auto;
+#boton-recompensa.visible {
+    animation: entrar-boton .6s var(--curva-resorte) forwards;
+}
+
+@keyframes entrar-boton {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/*==========================================
+    LLAVE (estilo Duolingo) — la dibuja script.js
+==========================================*/
+
+.llave-svg {
     display: block;
-    overflow: visible;
-}
-
-/* Cuerpo rojo del corazón (plano, como la referencia) */
-.corazon {
-    fill: var(--color-corazon);
-}
-
-/* Latido suave del corazón mientras espera la llave */
-.candado.latir .corazon {
-    animation: latido 1.4s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-}
-
-@keyframes latido {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.035); }
-}
-
-/* Grillete negro (20 de grosor, como en la imagen): script.js lo levanta al abrir */
-.arco {
-    fill: none;
-    stroke: var(--color-arco);
-    stroke-width: 20;
-    stroke-linecap: butt;
-}
-
-/* Cerradura */
-.ojo {
-    fill: var(--color-ojo);
-}
-
-/* Llave: entra desde arriba a la derecha y su punta cae en el centro de la cerradura.
-   bottom 45.8% = altura del círculo de la cerradura dentro del candado calcado.
-   El margen negativo centra la llave para que el giro sea alrededor de la punta */
-.llave {
-    position: absolute;
-    left: 49.8%;
-    bottom: 45.8%;
-    margin-left: -13%;              /* Mitad del ancho (26%): centra la llave */
-    width: 26%;
+    width: 100%;
     height: auto;
-    opacity: 0;
-    transform-origin: 50% 100%;     /* Gira alrededor de la punta, como en una cerradura real */
     overflow: visible;
-    pointer-events: none;
-    z-index: 2;
 }
 
-.llave-pala,
-.llave-parte {
-    fill: var(--color-llave);
+.llave-pieza {
+    fill: var(--llave-base);
+}
+
+.llave-sombra {
+    fill: var(--llave-sombra);
+}
+
+.llave-lado {
+    fill: var(--llave-lado);
+}
+
+.llave-brillo {
+    fill: var(--llave-brillo);
 }
 
 .llave-letra {
-    fill: var(--color-letra-llave);
+    fill: var(--llave-letra);
     font-family: var(--fuente-texto);
-    font-size: 46px;
+    font-size: 44px;
     font-weight: 700;
     text-anchor: middle;
 }
 
-/* Centro del estallido: en la escena es la cerradura (54% desde arriba); en la celebración final, el medio */
-.escena-caja {
-    --centro-y: 54%;
+.llave-letra-sombra {
+    fill: var(--llave-sombra);
+    font-family: var(--fuente-texto);
+    font-size: 44px;
+    font-weight: 700;
+    text-anchor: middle;
 }
 
-.celebracion {
-    --centro-y: 50%;
+/* Destello que cruza la llave cada tanto (recortado a la forma de la llave) */
+.llave-barrido {
+    fill: var(--llave-barrido);
+    animation: barrido 3.2s ease-in-out infinite;
 }
 
-/* Rayos que salen del centro al abrirse el candado.
-   Se anclan desde abajo: su base queda justo en el centro del estallido y giran alrededor de ella */
-.rayo {
-    position: absolute;
-    left: 50%;
-    bottom: calc(100% - var(--centro-y, 50%));
-    width: 3px;
-    height: 46%;
-    margin-left: -1.5px;
-    transform-origin: 50% 100%;
-    background: linear-gradient(to top, var(--color-warning), var(--transparente));
-    border-radius: 2px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Destellos que salen del centro: alternan dorado y azul */
-.destello {
-    position: absolute;
-    left: 50%;
-    top: var(--centro-y, 50%);     /* Sale del centro del estallido */
-    width: 10px;
-    height: 10px;
-    margin: -5px 0 0 -5px;
-    border-radius: 50%;
-    background: var(--color-warning);
-    box-shadow: 0 0 12px var(--color-warning);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.destello:nth-child(even) {
-    background: var(--color-info);
-    box-shadow: 0 0 12px var(--color-info);
-}
-
-/* Destello blanco grande: el "flash" del momento en que se abre */
-.flash {
-    position: absolute;
-    left: 50%;
-    top: var(--centro-y, 50%);     /* Sale del centro del estallido */
-    width: 180px;
-    height: 180px;
-    margin: -90px 0 0 -90px;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, var(--color-letra-llave), var(--transparente));
-    opacity: 0;
-    pointer-events: none;
+@keyframes barrido {
+    0%, 55% { transform: translateX(0); }
+    100%    { transform: translateX(200px); }
 }
 
 /*==========================================
-    QUIZ: 10 PREGUNTAS SEGUIDAS
-    Misma estructura que Test (progreso, tarjeta, opciones, cartel de corrección)
-    con la paleta de esta página
+    3) PRUEBA (QUIZ)
 ==========================================*/
 
-/* Capa a pantalla completa con scroll propio (en celular la pregunta puede ser larga) */
+/* Capa a pantalla completa con scroll propio. Abajo deja lugar para la hoja inferior */
 .quiz {
     position: fixed;
     inset: 0;
@@ -777,12 +890,17 @@ button {
     backdrop-filter: blur(6px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .6s var(--curva-calma), visibility .6s var(--curva-calma);
+    transform: translateY(30px);
+    transition:
+        opacity .5s var(--curva-calma),
+        visibility .5s var(--curva-calma),
+        transform .6s var(--curva-resorte);
 }
 
 .quiz.visible {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
 }
 
 .quiz-contenido {
@@ -791,9 +909,9 @@ button {
     margin: 0 auto;
     box-sizing: border-box;
     padding:
-        max(28px, env(safe-area-inset-top, 0px))
+        max(24px, env(safe-area-inset-top, 0px))
         max(var(--margen), env(safe-area-inset-right, 0px))
-        max(28px, env(safe-area-inset-bottom, 0px))
+        calc(var(--alto-hoja) + 20px)
         max(var(--margen), env(safe-area-inset-left, 0px));
     display: flex;
     flex-direction: column;
@@ -818,19 +936,19 @@ button {
 .quiz-titulo {
     margin: 0;
     font-family: var(--fuente-titulo);
-    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    font-size: clamp(1.5rem, 7vw, 2rem);
     line-height: 1.5;
     color: var(--color-texto);
 }
 
 .quiz-subtitulo {
     margin: .2rem 0 0;
-    font-size: .78rem;
+    font-size: .76rem;
     line-height: 1.6;
     color: var(--color-texto-apagado);
 }
 
-/* ---------- Progreso (racha) ---------- */
+/* ---------- Progreso (racha): barra gruesa con brillo, como la de Duolingo ---------- */
 
 .progreso-cabeza {
     display: flex;
@@ -848,38 +966,50 @@ button {
 }
 
 .progreso-contador {
+    position: relative;
     display: inline-block;
-    font-size: .95rem;
+    font-size: 1rem;
     color: var(--color-texto);
 }
 
-/* Margen a los costados: así la calavera de la última pregunta (al 100%) no se sale de la pantalla */
 .progreso-envoltura {
     position: relative;
     margin: 0 10px;
 }
 
 .progreso-pista {
-    height: 6px;
+    height: 16px;
     border-radius: 999px;
-    background: var(--color-borde-suave);
+    background: var(--boton-gris);
     overflow: hidden;
 }
 
-/* Barra de racha: en el acento (azul, o rojo en las difíciles); se llena con rebote */
+/* Barra verde que se llena con rebote; la línea clara de arriba es el brillo típico de Duolingo */
 .progreso-barra {
+    position: relative;
     height: 100%;
     width: 0;
+    min-width: 0;
     border-radius: 999px;
-    background: var(--color-acento);
-    box-shadow: 0 0 12px var(--color-acento-a40);
-    transition: width .7s var(--curva-resorte), background .3s ease;
+    background: var(--color-success);
+    transition: width .8s var(--curva-resorte), background .3s ease;
+}
+
+.progreso-barra::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    right: 8px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--corazon-brillo);
+    opacity: .7;
 }
 
 /* Racha perdida: la barra se pone roja hasta que se empieza de nuevo */
 .progreso--perdido .progreso-barra {
     background: var(--color-error);
-    box-shadow: 0 0 14px var(--color-error-a35);
 }
 
 /* Calaveras sobre la barra: marcan dónde hay preguntas difíciles en la ronda */
@@ -896,13 +1026,13 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: var(--color-fondo);
-    border: 1px solid var(--color-dificil-a40);
+    border: 2px solid var(--color-dificil-a40);
     color: var(--color-dificil);
-    font-size: 14px;
+    font-size: 15px;
     transition: transform .4s var(--curva-resorte), opacity .3s ease;
 }
 
@@ -913,6 +1043,18 @@ button {
 
 .progreso-marca--hecha {
     opacity: .45;
+}
+
+/* "+1" que sube desde el contador al acertar */
+.flotante {
+    position: fixed;
+    z-index: 70;
+    font-family: var(--fuente-texto);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-success);
+    text-shadow: 0 2px 0 var(--color-success-oscuro);
+    pointer-events: none;
 }
 
 /* ---------- Tarjeta de la pregunta ---------- */
@@ -928,12 +1070,11 @@ button {
     transition: border-color .4s ease, box-shadow .4s ease;
 }
 
-/* script.js reinicia esta clase en cada pregunta para repetir la entrada con rebote */
+/* Entrada desde la derecha con rebote (al pasar de pregunta, como en Duolingo) */
 .tarjeta--entrar {
     animation: entrar-tarjeta .6s var(--curva-resorte) both;
 }
 
-/* Pregunta difícil: borde y resplandor rojos */
 body.is-hard .tarjeta {
     border-color: var(--color-dificil-a40);
     box-shadow: 0 24px 60px var(--sombra-principal), 0 0 40px var(--color-dificil-a20);
@@ -960,7 +1101,6 @@ body.is-hard .tarjeta {
     font-size: 16px;
 }
 
-/* Tema de la pregunta: chiquito y gris (si está vacío no se ve) */
 .pregunta-tema {
     margin: 0 0 8px;
     font-size: .76rem;
@@ -983,7 +1123,6 @@ body.is-hard .tarjeta {
     overflow-wrap: anywhere;
 }
 
-/* Aviso de selección múltiple ("Seleccioná todas las correctas") */
 .pregunta-ayuda {
     margin: 10px 0 0;
     font-size: .8rem;
@@ -994,11 +1133,11 @@ body.is-hard .tarjeta {
     display: none;
 }
 
-/* ---------- Opciones ---------- */
+/* ---------- Opciones (tarjetas con labio, como Duolingo) ---------- */
 
 .opciones {
     display: grid;
-    gap: 10px;
+    gap: 12px;
     margin-top: 20px;
 }
 
@@ -1009,7 +1148,7 @@ body.is-hard .tarjeta {
     align-items: center;
     gap: 12px;
     width: 100%;
-    min-height: 52px;
+    min-height: 54px;
     padding: 10px 12px;
     box-sizing: border-box;
     text-align: left;
@@ -1018,30 +1157,35 @@ body.is-hard .tarjeta {
     line-height: 1.4;
     color: var(--color-texto);
     background: var(--superficie-2);
-    border: 1px solid var(--color-borde-suave);
-    border-radius: 12px;
+    border: 2px solid var(--color-borde-fuerte);
+    border-radius: 14px;
+    box-shadow: 0 4px 0 var(--opcion-labio);
     cursor: pointer;
     animation: entrar-opcion .55s var(--curva-resorte) both;
-    transition: background .2s ease, border-color .2s ease, box-shadow .25s ease, transform .25s var(--curva-resorte);
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .12s ease,
+        transform .12s ease;
 }
 
 @media (hover: hover) {
     .opcion:hover {
         background: var(--superficie-3);
-        border-color: var(--color-borde-fuerte);
     }
 }
 
+/* Al tocar una opción se hunde como una tecla */
 .opcion:active {
-    transform: scale(.98);
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--opcion-labio);
 }
 
 .opcion:focus-visible {
     outline: 2px solid var(--color-acento);
-    outline-offset: 2px;
+    outline-offset: 3px;
 }
 
-/* Letra A / B / C / D (o ícono ✓ / ✕ en verdadero y falso) */
 .opcion-letra {
     display: flex;
     align-items: center;
@@ -1051,11 +1195,11 @@ body.is-hard .tarjeta {
     box-sizing: border-box;
     font-family: var(--fuente-texto);
     font-size: .88rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-texto-apagado);
-    border: 1px solid var(--color-borde-fuerte);
-    border-radius: 8px;
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    border: 2px solid var(--color-borde-fuerte);
+    border-radius: 10px;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .3s var(--curva-resorte);
 }
 
 .opcion-letra .material-symbols-rounded {
@@ -1067,7 +1211,6 @@ body.is-hard .tarjeta {
     white-space: pre-wrap;
 }
 
-/* Selección múltiple: tercera columna con la casilla */
 .opcion--multi {
     grid-template-columns: 34px 1fr auto;
 }
@@ -1078,25 +1221,26 @@ body.is-hard .tarjeta {
     transition: color .2s ease;
 }
 
-/* Opción elegida: borde y letra en el acento, fondo apenas teñido y un pulso */
+/* Elegida: borde, labio y letra en el acento (azul, o rojo en las difíciles) */
 .opcion--elegida,
 .opcion--elegida:hover {
     border-color: var(--color-acento);
     background: var(--color-acento-a10);
-    animation: entrar-opcion .55s var(--curva-resorte) both, pulso-eleccion .35s var(--curva-resorte);
+    box-shadow: 0 4px 0 var(--color-acento-oscuro);
 }
 
 .opcion--elegida .opcion-letra {
     background: var(--color-acento);
     border-color: var(--color-acento);
-    color: var(--color-fondo);
+    color: var(--color-blanco);
+    transform: scale(1.08);
 }
 
 .opcion--elegida .opcion-marca {
     color: var(--color-acento);
 }
 
-/* Verdadero y falso: ✓ en verde y ✕ en rojo; la elegida brilla en su color (como en Test) */
+/* Verdadero y falso: ✓ en verde y ✕ en rojo */
 .opcion--vf-v .opcion-letra {
     color: var(--color-success);
 }
@@ -1109,31 +1253,31 @@ body.is-hard .tarjeta {
 .opcion--vf-v.opcion--elegida:hover {
     border-color: var(--color-success);
     background: var(--color-success-a10);
-    box-shadow: 0 0 22px var(--color-success-a35);
+    box-shadow: 0 4px 0 var(--color-success-oscuro);
 }
 
 .opcion--vf-v.opcion--elegida .opcion-letra {
     background: var(--color-success);
     border-color: var(--color-success);
-    color: var(--color-fondo);
+    color: var(--color-blanco);
 }
 
 .opcion--vf-f.opcion--elegida,
 .opcion--vf-f.opcion--elegida:hover {
     border-color: var(--color-error);
     background: var(--color-error-a10);
-    box-shadow: 0 0 22px var(--color-error-a35);
+    box-shadow: 0 4px 0 var(--color-error-oscuro);
 }
 
 .opcion--vf-f.opcion--elegida .opcion-letra {
     background: var(--color-error);
     border-color: var(--color-error);
-    color: var(--color-fondo);
+    color: var(--color-blanco);
 }
 
-/* Corregida: las opciones quedan bloqueadas y pintadas.
+/* Corregida: bloqueadas y pintadas.
    bien = elegida y correcta (verde), mal = elegida e incorrecta (roja),
-   faltó = era correcta y no se eligió (verde con borde cortado) */
+   faltó = era correcta y no se eligió (verde con borde cortado, latiendo suave) */
 .opciones--bloqueadas .opcion {
     pointer-events: none;
 }
@@ -1141,13 +1285,13 @@ body.is-hard .tarjeta {
 .opciones--bloqueadas .opcion.opcion--bien {
     border-color: var(--color-success);
     background: var(--color-success-a10);
-    box-shadow: 0 0 22px var(--color-success-a35);
+    box-shadow: 0 4px 0 var(--color-success-oscuro), 0 0 24px var(--color-success-a35);
 }
 
 .opciones--bloqueadas .opcion.opcion--bien .opcion-letra {
     background: var(--color-success);
     border-color: var(--color-success);
-    color: var(--color-fondo);
+    color: var(--color-blanco);
 }
 
 .opciones--bloqueadas .opcion.opcion--bien .opcion-marca {
@@ -1157,13 +1301,13 @@ body.is-hard .tarjeta {
 .opciones--bloqueadas .opcion.opcion--mal {
     border-color: var(--color-error);
     background: var(--color-error-a10);
-    box-shadow: 0 0 22px var(--color-error-a35);
+    box-shadow: 0 4px 0 var(--color-error-oscuro), 0 0 24px var(--color-error-a35);
 }
 
 .opciones--bloqueadas .opcion.opcion--mal .opcion-letra {
     background: var(--color-error);
     border-color: var(--color-error);
-    color: var(--color-fondo);
+    color: var(--color-blanco);
 }
 
 .opciones--bloqueadas .opcion.opcion--mal .opcion-marca {
@@ -1174,7 +1318,8 @@ body.is-hard .tarjeta {
     border-color: var(--color-success);
     border-style: dashed;
     background: var(--color-success-a10);
-    box-shadow: none;
+    box-shadow: 0 4px 0 var(--color-success-a35);
+    animation: latir-falto 1.2s ease-in-out 3;
 }
 
 .opciones--bloqueadas .opcion.opcion--falto .opcion-letra {
@@ -1183,27 +1328,54 @@ body.is-hard .tarjeta {
     color: var(--color-success);
 }
 
-/* ---------- Cartel de corrección ---------- */
+@keyframes latir-falto {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.025); }
+}
 
+/* ---------- Hoja inferior (como en Duolingo) ---------- */
+
+.hoja {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 16;
+    padding: 14px max(var(--margen), env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(var(--margen), env(safe-area-inset-left, 0px));
+    background: var(--hoja-fondo);
+    border-top: 2px solid var(--color-borde-suave);
+    transform: translateY(110%);
+    transition: transform .55s var(--curva-resorte), background .3s ease, border-color .3s ease;
+}
+
+/* Sube cuando el quiz está a la vista */
+body.en-quiz .hoja {
+    transform: translateY(0);
+}
+
+.hoja--bien {
+    background: var(--hoja-bien-fondo);
+    border-top-color: var(--color-success);
+}
+
+.hoja--mal {
+    background: var(--hoja-mal-fondo);
+    border-top-color: var(--color-error);
+}
+
+.hoja-interior {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.hoja .boton {
+    margin-top: 0;
+}
+
+/* Cartel de corrección: sube dentro de la hoja con rebote */
 .veredicto {
-    margin-top: 16px;
-    padding: 14px 16px;
-    border: 1px solid var(--color-borde-suave);
-    border-left-width: 3px;
-    border-radius: 12px;
+    margin-bottom: 14px;
     animation: entrar-arriba .5s var(--curva-resorte) both;
-}
-
-.veredicto--bien {
-    border-color: var(--color-success-a35);
-    border-left-color: var(--color-success);
-    background: var(--color-success-a10);
-}
-
-.veredicto--mal {
-    border-color: var(--color-error-a35);
-    border-left-color: var(--color-error);
-    background: var(--color-error-a10);
 }
 
 .veredicto-cabeza {
@@ -1211,77 +1383,59 @@ body.is-hard .tarjeta {
     align-items: center;
     gap: 10px;
     font-family: var(--fuente-texto);
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
-.veredicto-cabeza .material-symbols-rounded {
-    font-size: 22px;
+/* Círculo blanco con el ícono adentro (como el de Duolingo) */
+.veredicto-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color-blanco);
 }
 
-.veredicto--bien .veredicto-cabeza {
+.veredicto-icono .material-symbols-rounded {
+    font-size: 26px;
+    font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+}
+
+.veredicto--bien .veredicto-cabeza,
+.veredicto--bien .veredicto-icono {
     color: var(--color-success);
 }
 
-.veredicto--mal .veredicto-cabeza {
+.veredicto--mal .veredicto-cabeza,
+.veredicto--mal .veredicto-icono {
     color: var(--color-error);
 }
 
-/* Línea "Correcta: ..." */
 .veredicto-linea {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 10px;
+    margin: 10px 0 0;
     font-size: .88rem;
     line-height: 1.45;
     color: var(--color-texto);
 }
 
-.veredicto-linea .material-symbols-rounded {
-    font-size: 19px;
-    color: var(--color-success);
-}
-
 .veredicto-linea strong {
-    color: var(--color-success);
-    font-weight: 600;
+    color: var(--color-error);
+    font-weight: 700;
 }
 
-/* Explicación de la pregunta, en gris */
 .veredicto-descripcion {
-    margin: 10px 0 0;
-    padding-top: 10px;
-    border-top: 1px solid var(--color-borde-suave);
-    font-size: .82rem;
+    margin: 8px 0 0;
+    font-size: .8rem;
     line-height: 1.55;
     color: var(--color-gris);
 }
 
-/* Mensaje de "racha perdida" */
 .veredicto-racha {
-    margin: 10px 0 0;
-    font-size: .8rem;
+    margin: 8px 0 0;
+    font-size: .78rem;
     color: var(--color-warning);
-}
-
-/* Botón del quiz: queda pegado abajo mientras se scrollea, así siempre está a mano en el celular */
-.boton-quiz {
-    position: sticky;
-    bottom: max(12px, env(safe-area-inset-bottom, 0px));
-    margin-top: 0;
-    z-index: 2;
-}
-
-/* "Empezar de nuevo": se tiñe de rojo */
-.boton-quiz.boton--reiniciar {
-    background: var(--color-error);
-}
-
-/* "Ver la sorpresa": dorado */
-.boton-quiz.boton--final {
-    background: var(--color-warning);
-    color: var(--color-fondo);
 }
 
 /* ---------- Animación "Pregunta difícil" (copiada de Test) ---------- */
@@ -1308,33 +1462,312 @@ body.is-hard .tarjeta {
     transform-origin: center;
 }
 
-/* ---------- Animaciones del quiz ---------- */
+/*==========================================
+    4) ESCENA FINAL: CANDADO QUE SE ABRE COMO UN LIBRO
+==========================================*/
 
-@keyframes entrar-tarjeta {
-    0%   { opacity: 0; transform: translateY(22px) scale(.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+.escena {
+    position: fixed;
+    inset: 0;
+    z-index: 18;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--velo-escena);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s var(--curva-calma), visibility .5s var(--curva-calma);
 }
 
-@keyframes entrar-opcion {
-    0%   { opacity: 0; transform: translateY(10px) scale(.98); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+.escena.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
-@keyframes entrar-arriba {
-    0%   { opacity: 0; transform: translateY(14px); }
-    100% { opacity: 1; transform: translateY(0); }
+/* Misma proporción que el corazón dibujado (250 x 320). La perspectiva da la profundidad 3D al abrirse */
+.escena-caja {
+    position: relative;
+    width: min(70vw, 52vh, 290px);
+    aspect-ratio: 250 / 320;
+    perspective: 900px;
+    transform-origin: 50% 52%;      /* La cámara "entra" justo por el centro del corazón */
 }
 
-@keyframes pulso-eleccion {
-    0%   { transform: scale(.97); }
-    100% { transform: scale(1); }
+@media (min-width: 900px) {
+    .escena-caja {
+        width: min(44vh, 420px);
+    }
+}
+
+.candado {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform-style: preserve-3d;
+}
+
+/* Cuerpo: flota y late esperando la llave */
+.candado-cuerpo {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+}
+
+.candado-cuerpo.latir {
+    animation: flotar-latir 1.6s ease-in-out infinite;
+}
+
+@keyframes flotar-latir {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25%      { transform: translateY(-4px) scale(1.04); }
+    50%      { transform: translateY(-7px) scale(1); }
+    75%      { transform: translateY(-3px) scale(1.03); }
+}
+
+/* Capas del candado (todas ocupan la misma caja, así el dibujo coincide) */
+.candado-capa {
+    position: absolute;
+    inset: 0;
+}
+
+.candado-capa svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+/* Las dos mitades: cada una ocupa medio corazón y gira como la tapa de un libro.
+   La izquierda gira desde su borde izquierdo y la derecha desde el derecho */
+.candado-mitad {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    transform-style: preserve-3d;
+}
+
+.candado-mitad--izq {
+    left: 0;
+    transform-origin: 0% 50%;
+}
+
+.candado-mitad--der {
+    left: 50%;
+    transform-origin: 100% 50%;
+}
+
+/* Cada mitad tiene dos caras: el frente (rojo) y el dorso (cara de adentro).
+   Con backface-visibility solo se ve la que mira a la cámara */
+.cara {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.cara--dorso {
+    transform: rotateY(180deg);
+}
+
+/* El dibujo mide el corazón entero: cada cara muestra solo su mitad */
+.cara svg {
+    display: block;
+    width: 200%;
+    height: 100%;
+}
+
+.candado-mitad--der .cara svg {
+    margin-left: -100%;
+}
+
+/* Piezas del corazón */
+.corazon-base {
+    fill: var(--corazon-base);
+}
+
+.corazon-sombra {
+    fill: var(--corazon-sombra);
+}
+
+.corazon-brillo {
+    fill: var(--corazon-brillo);
+}
+
+.corazon-interior {
+    fill: var(--negro);
+}
+
+/* Cara de adentro de las tapas (rojo oscuro con borde más claro) */
+.corazon-tapa {
+    fill: var(--corazon-tapa-interna);
+}
+
+.corazon-tapa-borde {
+    fill: none;
+    stroke: var(--corazon-sombra);
+    stroke-width: 8;
+}
+
+.corazon-interior-borde {
+    fill: none;
+    stroke: var(--corazon-tapa-interna);
+    stroke-width: 6;
+}
+
+.ojo {
+    fill: var(--color-ojo);
+    stroke: var(--color-ojo);
+    stroke-width: 4;
+    stroke-linejoin: round;
+}
+
+/* Grillete grueso con labio y brillo */
+.arco-base,
+.arco-sombra,
+.arco-brillo {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.arco-base {
+    stroke: var(--arco-base);
+    stroke-width: 22;
+}
+
+.arco-sombra {
+    stroke: var(--arco-sombra);
+    stroke-width: 22;
+}
+
+.arco-brillo {
+    stroke: var(--arco-brillo);
+    stroke-width: 5;
+}
+
+/* Llave de la escena final: su punta cae en el centro de la cerradura.
+   bottom 47.5% = altura del círculo de la cerradura dentro del corazón; gira desde la punta */
+.llave-final {
+    position: absolute;
+    left: 49.8%;
+    bottom: 47.5%;
+    margin-left: -13%;
+    width: 26%;
+    opacity: 0;
+    transform-origin: 50% 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Rayos y destellos del estallido */
+.escena-caja {
+    --centro-y: 52%;
+}
+
+.celebracion {
+    --centro-y: 50%;
+}
+
+.rayo {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% - var(--centro-y, 50%));
+    width: 4px;
+    height: 46%;
+    margin-left: -2px;
+    transform-origin: 50% 100%;
+    background: linear-gradient(to top, var(--color-warning), var(--transparente));
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.destello {
+    position: absolute;
+    left: 50%;
+    top: var(--centro-y, 50%);
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--color-warning);
+    box-shadow: 0 0 12px var(--color-warning);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.destello:nth-child(even) {
+    background: var(--color-info);
+    box-shadow: 0 0 12px var(--color-info);
+}
+
+.flash {
+    position: absolute;
+    left: 50%;
+    top: var(--centro-y, 50%);
+    width: 180px;
+    height: 180px;
+    margin: -90px 0 0 -90px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--color-blanco), var(--transparente));
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Fundido a negro (cuando la cámara termina de entrar al corazón) */
+.fundido {
+    position: fixed;
+    inset: 0;
+    z-index: 19;
+    background: var(--negro);
+    opacity: 0;
+    pointer-events: none;
 }
 
 /*==========================================
-    ESTALLIDO FINAL Y PREMIO
+    PARTÍCULAS: CHISPAS (estrellas de 4 puntas), PUNTOS Y CONFETI
 ==========================================*/
 
-/* Contenedor del estallido final (centrado en la pantalla) */
+.particulas {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particula {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+/* Chispa: estrella de 4 puntas como las de Duolingo */
+.chispa {
+    width: 14px;
+    height: 14px;
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.confeti {
+    width: 9px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+/*==========================================
+    5) PREMIO: LA IMAGEN
+==========================================*/
+
 .celebracion {
     position: fixed;
     left: 50%;
@@ -1376,9 +1809,9 @@ body.is-hard .tarjeta {
     background: var(--glass);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
-    border: 1px solid var(--color-borde-suave);
-    border-radius: 1.25rem;
-    box-shadow: 0 0 60px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
+    border: 2px solid var(--color-borde-fuerte);
+    border-radius: 1.4rem;
+    box-shadow: 0 6px 0 var(--opcion-labio), 0 0 60px var(--sombra-suave);
 }
 
 .premio-imagen {
@@ -1387,7 +1820,26 @@ body.is-hard .tarjeta {
     height: auto;
     max-height: 72svh;
     object-fit: contain;
-    border-radius: .9rem;
+    border-radius: 1rem;
+}
+
+/*==========================================
+    ANIMACIONES COMPARTIDAS
+==========================================*/
+
+@keyframes entrar-tarjeta {
+    0%   { opacity: 0; transform: translateX(60px) scale(.96); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes entrar-opcion {
+    0%   { opacity: 0; transform: translateY(14px) scale(.94); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes entrar-arriba {
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /*==========================================
@@ -1399,7 +1851,7 @@ body.is-hard .tarjeta {
     :root {
         --margen: 12px;
         --relleno-caja: 1.05rem;
-        --alto-campo: 44px;
+        --alto-campo: 46px;
     }
 
     .tarjeta {
@@ -1412,7 +1864,7 @@ body.is-hard .tarjeta {
     }
 }
 
-/* Celular con poco alto (acostado): la caja se achica para entrar sin scroll */
+/* Celular con poco alto (acostado) */
 @media (max-height: 640px) {
     .titulo {
         font-size: 1.8rem;
@@ -1429,6 +1881,10 @@ body.is-hard .tarjeta {
     .quiz-contenido {
         justify-content: flex-start;
     }
+
+    .recompensa-titulo {
+        margin-top: .6rem;
+    }
 }
 
 /* Tablets */
@@ -1437,7 +1893,7 @@ body.is-hard .tarjeta {
         --margen: 24px;
         --relleno-caja: 2rem;
         --radio-caja: 1.5rem;
-        --alto-campo: 52px;
+        --alto-campo: 54px;
         --tamano-luna: 58px;
     }
 
@@ -1468,7 +1924,6 @@ body.is-hard .tarjeta {
 
 /*==========================================
     MOVIMIENTO REDUCIDO
-    Todo aparece directo y sin animaciones
 ==========================================*/
 
 @media (prefers-reduced-motion: reduce) {

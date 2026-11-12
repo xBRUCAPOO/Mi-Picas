@@ -16,7 +16,7 @@
     <!-- Íconos de Google Fonts (Material Symbols): solo se descargan los usados (en orden alfabético, como pide Google) -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=arrow_forward,cancel,check,check_box,check_box_outline_blank,check_circle,close,restart_alt,skull&display=block" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <div class="luna"></div>
     </div>
 
-    <!-- ===== PANTALLA DE CONTRASEÑAS ===== -->
+    <!-- ===== 1) PANTALLA DE CONTRASEÑAS ===== -->
     <main class="acceso">
         <section class="caja" id="caja">
             <h1 class="titulo">Hola</h1>
@@ -41,58 +41,40 @@
             <p class="anuncio" id="anuncio" aria-live="polite"></p>
 
             <button class="boton" id="boton" type="button">
-                Continuar
+                <span>Continuar</span>
                 <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
             </button>
         </section>
 
         <footer class="pie">
-            <span>v1.2</span>
+            <span>v1.3</span>
             <span aria-hidden="true">·</span>
-            <time datetime="2026-11-09">09/11/2026</time>
+            <time datetime="2026-11-11">11/11/2026</time>
         </footer>
     </main>
 
-    <!-- ===== ESCENA: candado de corazón y llave de as de picas ===== -->
-    <section class="escena" id="escena" aria-hidden="true">
-        <div class="escena-caja" id="escena-caja">
-
-            <!-- El contenedor (.candado) lo anima script.js con los resortes;
-                 el cuerpo (.candado-cuerpo) flota solo con CSS -->
-            <div class="candado" id="candado">
-                <div class="candado-cuerpo" id="candado-cuerpo">
-                    <!-- Candado calcado de la imagen de referencia (mismas medidas en píxeles: 262 x 341) -->
-                    <svg class="candado-svg" viewBox="9.5 20 250 310" aria-hidden="true">
-                        <!-- Grillete negro: se levanta para abrir -->
-                        <path class="arco" id="arco" d="M64 135 V107.5 A69.5 69.5 0 0 1 203 107.5 V135"></path>
-                        <!-- Cuerpo rojo: contorno calcado del corazón de la imagen -->
-                        <path class="corazon" d="M135.6 321.2 C137.6 321.2 139.7 318.1 141.7 316.3 C143.7 314.5 145.5 312.5 147.4 310.6 C149.3 308.7 151.1 306.8 153.0 305.0 C155.0 303.1 156.9 301.3 158.9 299.5 C160.9 297.7 162.9 296.0 164.9 294.1 C166.8 292.3 168.6 290.4 170.5 288.5 C172.4 286.6 174.3 284.7 176.2 282.8 C178.1 280.9 180.0 279.0 181.9 277.1 C183.8 275.2 185.6 273.4 187.5 271.5 C189.4 269.6 191.3 267.7 193.2 265.8 C195.1 263.9 196.9 261.9 198.9 260.1 C200.8 258.3 203.0 256.8 205.0 255.0 C207.0 253.2 208.8 251.2 210.7 249.3 C212.6 247.4 214.5 245.5 216.4 243.6 C218.2 241.8 220.1 239.9 222.0 238.0 C223.9 236.1 225.8 234.2 227.7 232.3 C229.6 230.4 231.5 228.6 233.4 226.6 C235.2 224.7 237.0 222.7 238.7 220.7 C240.3 218.6 241.9 216.4 243.3 214.1 C244.7 211.9 246.0 209.5 247.2 207.1 C248.3 204.7 249.5 202.3 250.4 199.8 C251.3 197.3 252.0 194.7 252.6 192.1 C253.2 189.5 253.8 186.9 254.0 184.3 C254.2 181.6 254.1 178.9 254.0 176.2 C253.9 173.6 253.8 170.9 253.5 168.3 C253.1 165.6 252.4 163.0 251.7 160.5 C251.0 157.9 250.2 155.3 249.2 152.9 C248.1 150.4 246.8 148.1 245.5 145.8 C244.1 143.5 242.7 141.3 241.1 139.1 C239.5 137.0 237.8 134.9 236.0 133.0 C234.1 131.0 232.1 129.3 230.0 127.6 C227.9 125.9 225.7 124.4 223.5 123.0 C221.2 121.6 219.0 120.1 216.5 119.0 C214.1 117.9 211.6 117.0 209.0 116.2 C206.5 115.4 204.0 114.6 201.4 114.1 C198.8 113.5 196.1 113.2 193.4 113.0 C190.8 112.8 188.2 112.7 185.5 112.7 C182.9 112.7 180.2 112.8 177.5 113.1 C174.9 113.4 172.3 114.0 169.7 114.7 C167.1 115.4 164.6 116.3 162.1 117.3 C159.7 118.4 157.2 119.5 154.9 120.8 C152.6 122.2 150.4 123.7 148.3 125.3 C146.2 127.0 144.3 128.8 142.3 130.7 C140.4 132.5 138.6 135.9 136.6 136.2 C134.6 136.6 132.6 134.0 130.6 132.6 C128.5 131.1 126.5 129.1 124.4 127.4 C122.3 125.8 120.2 124.2 117.9 122.8 C115.7 121.3 113.4 119.9 111.0 118.8 C108.6 117.6 106.0 116.7 103.5 115.8 C101.0 114.9 98.5 114.2 95.9 113.6 C93.3 113.0 90.6 112.5 88.0 112.2 C85.3 111.9 82.6 112.0 80.0 112.0 C77.3 112.0 74.6 112.1 72.0 112.4 C69.4 112.7 66.7 113.1 64.1 113.8 C61.5 114.4 59.0 115.2 56.5 116.2 C54.0 117.2 51.6 118.3 49.3 119.6 C47.0 120.9 44.7 122.4 42.6 124.0 C40.4 125.5 38.3 127.2 36.3 129.0 C34.3 130.8 32.5 132.7 30.8 134.8 C29.1 136.8 27.4 138.9 25.9 141.1 C24.4 143.3 23.0 145.6 21.7 147.9 C20.4 150.2 19.2 152.6 18.2 155.1 C17.1 157.5 16.2 160.1 15.5 162.6 C14.8 165.2 14.2 167.8 14.0 170.5 C13.8 173.1 14.0 175.8 14.0 178.5 C14.0 181.2 13.7 183.9 14.0 186.5 C14.3 189.2 14.9 191.8 15.7 194.3 C16.4 196.9 17.3 199.4 18.4 201.9 C19.4 204.3 20.5 206.8 21.8 209.1 C23.2 211.4 24.7 213.6 26.2 215.8 C27.8 217.9 29.5 220.0 31.2 222.0 C33.0 224.0 34.9 225.9 36.8 227.8 C38.7 229.7 40.8 231.4 42.7 233.2 C44.7 235.0 46.7 236.8 48.6 238.6 C50.5 240.5 52.4 242.4 54.3 244.3 C56.2 246.2 58.0 248.1 59.9 249.9 C61.8 251.8 63.7 253.7 65.7 255.5 C67.6 257.3 69.8 258.9 71.8 260.8 C73.7 262.6 75.5 264.5 77.4 266.4 C79.3 268.3 81.2 270.2 83.1 272.1 C85.0 274.0 86.8 276.0 88.8 277.8 C90.7 279.6 92.9 281.1 94.9 282.9 C96.9 284.7 98.7 286.7 100.6 288.6 C102.5 290.5 104.4 292.4 106.2 294.2 C108.1 296.1 110.0 298.1 111.9 299.9 C113.9 301.7 116.0 303.4 118.0 305.2 C119.9 307.0 121.8 308.9 123.7 310.7 C125.6 312.6 127.4 314.7 129.4 316.4 C131.4 318.1 133.5 321.2 135.6 321.2 Z"></path>
-                        <!-- Cerradura negra: círculo arriba y trapecio abajo (medidas de la imagen) -->
-                        <circle class="ojo" cx="134" cy="188" r="20"></circle>
-                        <path class="ojo" d="M129 202 H139 L154 233 H114 Z"></path>
-                    </svg>
-                </div>
+    <!-- ===== 2) RECOMPENSA: "¡Obtuviste la llave!" (estilo Duolingo) =====
+         La llave sube desde abajo con rebote, con rayos girando atrás y chispas alrededor -->
+    <section class="recompensa" id="recompensa" aria-hidden="true">
+        <div class="recompensa-contenido">
+            <div class="recompensa-escenario" id="recompensa-escenario">
+                <div class="rayos" id="rayos" aria-hidden="true"></div>
+                <!-- La llave la dibuja script.js (función crearLlave) -->
+                <div class="llave-flotante" id="llave-recompensa"></div>
             </div>
 
-            <!-- Llave morada con as de picas. La punta (abajo) entra en la cerradura.
-                 viewBox alto 246 = la punta queda justo en la base de la llave -->
-            <svg class="llave" id="llave" viewBox="0 0 100 246" aria-hidden="true">
-                <!-- As de picas: pala con la letra M -->
-                <path class="llave-pala" d="M50 0 C42 20 8 36 8 60 C8 78 22 86 36 80 C40 78 44 77 46 74 L38 94 H62 L54 74 C56 77 60 78 64 80 C78 86 92 78 92 60 C92 36 58 20 50 0 Z"></path>
-                <text class="llave-letra" x="50" y="60">M</text>
-                <!-- Collar y vástago -->
-                <rect class="llave-parte" x="30" y="86" width="40" height="12" rx="5"></rect>
-                <rect class="llave-parte" x="43" y="96" width="14" height="150" rx="3"></rect>
-                <!-- Dientes hacia la izquierda -->
-                <rect class="llave-parte" x="28" y="206" width="18" height="10" rx="2"></rect>
-                <rect class="llave-parte" x="28" y="228" width="18" height="10" rx="2"></rect>
-            </svg>
+            <!-- script.js separa el título en letras para que salten de a una -->
+            <h2 class="recompensa-titulo" id="recompensa-titulo">¡Obtuviste la llave!</h2>
+            <p class="recompensa-texto" id="recompensa-texto">Ahora demostrá cuánto me conocés: respondé 10 preguntas seguidas bien para abrir el corazón.</p>
+
+            <button class="boton boton--verde" id="boton-recompensa" type="button">
+                <span>Continuar</span>
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+            </button>
         </div>
     </section>
 
-    <!-- ===== PRUEBA: 10 preguntas seguidas bien para ver la imagen =====
-         Copia la estructura de "Test": progreso, tarjeta de pregunta, opciones, cartel de corrección y botón.
-         Las preguntas salen al azar de preguntas.json -->
+    <!-- ===== 3) PRUEBA: 10 preguntas seguidas bien para abrir el corazón ===== -->
     <section class="quiz" id="quiz" aria-hidden="true">
         <div class="quiz-contenido">
 
@@ -101,7 +83,7 @@
                 <p class="quiz-subtitulo">Respondé 10 preguntas seguidas bien. Si fallás una, la racha vuelve a cero.</p>
             </header>
 
-            <!-- Racha: contador, barra y calaveras sobre las preguntas difíciles -->
+            <!-- Racha: contador, barra gruesa con brillo y calaveras sobre las preguntas difíciles -->
             <div class="progreso" id="progreso">
                 <div class="progreso-cabeza">
                     <span class="progreso-etiqueta">Racha</span>
@@ -125,32 +107,55 @@
                 <h2 class="pregunta-texto" id="pregunta-texto"></h2>
                 <p class="pregunta-ayuda" id="pregunta-ayuda"></p>
                 <div class="opciones" id="opciones"></div>
-                <div class="veredicto" id="veredicto" hidden aria-live="polite"></div>
             </article>
+        </div>
+    </section>
 
-            <!-- Un solo botón que cambia según el momento: Comprobar / Continuar / Empezar de nuevo / Ver la sorpresa -->
+    <!-- Hoja inferior (como en Duolingo): tiene el botón y, al comprobar, se pinta de verde o rojo
+         y sube el cartel de corrección -->
+    <div class="hoja" id="hoja" aria-hidden="true">
+        <div class="hoja-interior">
+            <div class="veredicto" id="veredicto" hidden aria-live="polite"></div>
             <button class="boton boton-quiz" id="boton-quiz" type="button" disabled>
                 <span id="boton-quiz-texto">Comprobar</span>
                 <span class="material-symbols-rounded" id="boton-quiz-icono" aria-hidden="true">check</span>
             </button>
         </div>
-    </section>
+    </div>
 
     <!-- Animación "Pregunta difícil": capa a pantalla completa (la arma script.js) -->
     <div class="intro-dificil" id="intro-dificil" hidden></div>
 
+    <!-- ===== 4) ESCENA FINAL: la llave abre el corazón, se parte como un libro y la cámara entra =====
+         Las piezas (grillete, interior negro y las dos mitades) las dibuja script.js -->
+    <section class="escena" id="escena" aria-hidden="true">
+        <div class="escena-caja" id="escena-caja">
+            <div class="candado" id="candado">
+                <div class="candado-cuerpo" id="candado-cuerpo">
+                    <!-- La llave va DENTRO del cuerpo: así acompaña al corazón cuando flota y late -->
+                    <div class="llave-final" id="llave"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fundido a negro: cuando la cámara termina de entrar al corazón -->
+    <div class="fundido" id="fundido" aria-hidden="true"></div>
+
     <!-- Contenedor del estallido final, justo antes de la imagen -->
     <div class="celebracion" id="celebracion" aria-hidden="true"></div>
 
-    <!-- ===== PREMIO: la imagen que aparece al desbloquear ===== -->
+    <!-- ===== 5) PREMIO: la imagen ===== -->
     <section class="premio" id="premio" aria-live="polite">
         <figure class="premio-marco" id="premio-marco">
-            <!-- Reemplazá "imagen.jpg" por la imagen real (misma carpeta que index.html) -->
             <img class="premio-imagen" id="imagen-premio" src="PaVo.png" alt="Imagen desbloqueada">
         </figure>
     </section>
 
-    <script src="script.js?v=4"></script>
+    <!-- Chispas, confeti y "+1": capa de partículas por encima de todo -->
+    <div class="particulas" id="particulas" aria-hidden="true"></div>
+
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>
