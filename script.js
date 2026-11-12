@@ -16,21 +16,25 @@
 // "etiqueta": el texto chiquito que se ve arriba de cada campo (puede ser el acertijo).
 // ============================================
 const CLAVES = [
-    { etiqueta: "Contraseña 1",  valor: "0" },
-    { etiqueta: "Contraseña 2",  valor: "0" },
-    { etiqueta: "Contraseña 3",  valor: "0" },
-    { etiqueta: "Contraseña 4",  valor: "0" },
-    { etiqueta: "Contraseña 5",  valor: "0" },
-    { etiqueta: "Contraseña 6",  valor: "0" },
-    { etiqueta: "Contraseña 7",  valor: "0" },
-    { etiqueta: "Contraseña 8",  valor: "0" },
-    { etiqueta: "Contraseña 9",  valor: "0" },
-    { etiqueta: "Contraseña 10", valor: "0" }
+    { etiqueta: "Mi numero favorito",  valor: "5" },
+    { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
+    { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
+    { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
+    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños",    },
+    { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
+    { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
+    { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
+    { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "3" },
+    { etiqueta: "Sic seben", valor: "67" }
 ];
 
 // ===== AJUSTES DE LA PRUEBA =====
 const ARCHIVO_PREGUNTAS = "preguntas.json"; // Archivo con el banco de preguntas (misma carpeta que index.html)
 const PREGUNTAS_POR_RONDA = 10;             // Cuántas hay que responder bien seguidas
+
+// ===== TOPES DE PARTÍCULAS (rendimiento) =====
+const MAX_PARTICULAS = 36;              // Nunca hay más de 36 partículas a la vez en pantalla
+const PARTICULAS_POR_PREGUNTA = 16;     // Chispas verdes al acertar, repartidas entre todas las opciones correctas
 
 // Frases al acertar (sale una al azar, como en Duolingo)
 const FRASES_BIEN = ["¡Excelente!", "¡Muy bien!", "¡Genial!", "¡Correcto!", "¡Perfecto!", "¡Así se hace!"];
@@ -219,9 +223,11 @@ function temblarLargo(elemento, ms = 1600, fuerza = 9) {
 // Viven en la capa #particulas, con posición fija sobre la pantalla
 // ============================================
 
-// Crea una partícula en la capa de partículas
+// Crea una partícula en la capa de partículas.
+// Si ya hay MAX_PARTICULAS en pantalla, no crea más (devuelve null): así nunca se traba
 function crearParticula(clase, color) {
     const capa = $("particulas");
+    if (capa.childElementCount >= MAX_PARTICULAS) return null;
     const el = document.createElement("span");
     el.className = `particula ${clase}`;
     el.style.background = color;
@@ -237,6 +243,7 @@ function chispasDesde(rect, colores, cantidad = 10) { // 10 por defecto: menos p
     for (let i = 0; i < cantidad; i++) {
         const esChispa = Math.random() < 0.6;
         const el = crearParticula(esChispa ? "chispa" : "punto", alAzar(colores));
+        if (!el) break; // Se llegó al tope de partículas
         const tamano = esChispa ? 14 : 8;
         // Arranca en algún punto del rectángulo y sale en dirección opuesta al centro
         const x0 = rect.left + Math.random() * rect.width;
@@ -268,6 +275,7 @@ function confeti(cantidad = 45) { // 45 piezas: se ve lleno y no traba el celula
     const alto = window.innerHeight;
     for (let i = 0; i < cantidad; i++) {
         const el = crearParticula(Math.random() < 0.75 ? "confeti" : "chispa", alAzar(colores));
+        if (!el) break; // Se llegó al tope de partículas
         const x0 = ancho / 2 + (Math.random() - 0.5) * 60;
         const y0 = alto * 0.55;
         const xMax = x0 + (Math.random() - 0.5) * ancho * 1.1;
@@ -421,75 +429,191 @@ function dibujarPiezas() {
 }
 
 // ============================================
-// 1) CAMPOS DE CONTRASEÑA
+// 1) CONTRASEÑAS: UN CASILLERO POR DÍGITO (como el código de 6 dígitos de ÉLIX)
+// Cada contraseña muestra tantos casilleros como caracteres tenga su "valor":
+//   valor "17" → 2 casilleros · valor "6" → 1 casillero.
+// Al escribir un dígito salta solo al siguiente casillero (y de una contraseña a la otra).
+// Borrar en un casillero vacío vuelve al anterior. Se puede pegar un número entero.
 // ============================================
 
-// Crea un campo por cada contraseña de CLAVES (entran de a uno con rebote)
+// Devuelve el valor de una contraseña como texto. Si falta en CLAVES, avisa en la consola
+// (la página sigue funcionando, pero esa contraseña nunca va a dar correcta hasta que se complete)
+function valorDeClave(clave, indice) {
+    if (clave && clave.valor !== undefined && clave.valor !== null && String(clave.valor) !== "") {
+        return String(clave.valor);
+    }
+    console.error(`[Contraseñas] A la contraseña ${indice + 1} le falta el "valor" en CLAVES (script.js).`);
+    return "";
+}
+
+// Todos los casilleros de todas las contraseñas, en orden (para saltar de uno al otro)
+function todosLosDigitos() {
+    return Array.from(document.querySelectorAll(".digito"));
+}
+
+// Casilleros de una contraseña
+function digitosDeClave(indice) {
+    return Array.from(document.querySelectorAll(`#fila-${indice} .digito`));
+}
+
+// Crea las contraseñas: etiqueta (el acertijo) + fila de casilleros
 function generarClaves() {
     const contenedor = $("claves");
     if (!contenedor) return;
 
     CLAVES.forEach((clave, indice) => {
+        const valor = valorDeClave(clave, indice);
+        const cantidad = Math.max(1, valor.length);
+
         const grupo = document.createElement("div");
         grupo.className = "clave";
-        grupo.style.animationDelay = `${150 + indice * 30}ms`; // Aparecen en cascada (más rápido)
+        grupo.style.animationDelay = `${150 + indice * 30}ms`; // Aparecen en cascada
 
         const etiqueta = document.createElement("label");
         etiqueta.className = "clave-etiqueta";
-        etiqueta.htmlFor = `clave-${indice}`;
-        etiqueta.textContent = clave.etiqueta;
+        etiqueta.htmlFor = `clave-${indice}-0`;
+        etiqueta.textContent = (clave && clave.etiqueta) || `Contraseña ${indice + 1}`;
 
-        const campo = document.createElement("input");
-        campo.id = `clave-${indice}`;
-        campo.className = "clave-campo";
-        campo.type = "text";
-        campo.inputMode = "numeric";        // Teclado numérico en el celular
-        campo.autocomplete = "off";
-        campo.maxLength = clave.valor.length;
-        campo.dataset.indice = indice;
+        const fila = document.createElement("div");
+        fila.className = "clave-digitos";
+        fila.id = `fila-${indice}`;
+        fila.setAttribute("role", "group");
+        fila.setAttribute("aria-label", etiqueta.textContent);
 
-        // Al escribir: solo números, un saltito por cada tecla y, al completarlo, pasa al siguiente
-        campo.addEventListener("input", () => {
-            campo.value = campo.value.replace(/\D/g, "").slice(0, campo.maxLength);
-            campo.classList.remove("correcta", "incorrecta");
-            ocultarAnuncio();
-            const completo = campo.value.length === campo.maxLength;
-            campo.classList.toggle("lleno", completo);
+        for (let d = 0; d < cantidad; d++) {
+            const digito = document.createElement("input");
+            digito.className = "digito";
+            digito.id = `clave-${indice}-${d}`;
+            digito.type = "text";
+            digito.inputMode = "numeric";       // Teclado numérico en el celular
+            digito.autocomplete = "off";
+            digito.setAttribute("aria-label", `${etiqueta.textContent}: dígito ${d + 1} de ${cantidad}`);
+            digito.dataset.clave = indice;
+            fila.appendChild(digito);
+        }
 
-            if (!MOVIMIENTO_REDUCIDO) {
-                // Saltito de "tecla" (como al escribir en Duolingo)
-                campo.animate(
-                    [{ transform: "translateY(-2px) scale(1)" }, { transform: "translateY(-2px) scale(1.035)" }, { transform: "translateY(-2px) scale(1)" }],
-                    { duration: 180, easing: "ease-out" }
-                );
-            }
-
-            if (completo) {
-                pop(campo, 1.06, 360);
-                if (indice < CLAVES.length - 1) {
-                    setTimeout(() => $(`clave-${indice + 1}`).focus(), 120); // Pasa al siguiente con una pausa mínima
-                }
-            }
-        });
-
-        // Enter: pasa al siguiente campo (en el último, verifica). Borrar en un campo vacío vuelve al anterior
-        campo.addEventListener("keydown", (evento) => {
-            if (evento.key === "Enter") {
-                evento.preventDefault();
-                if (indice < CLAVES.length - 1) {
-                    $(`clave-${indice + 1}`).focus();
-                } else {
-                    verificar();
-                }
-            }
-            if (evento.key === "Backspace" && campo.value.length === 0 && indice > 0) {
-                $(`clave-${indice - 1}`).focus();
-            }
-        });
-
-        grupo.append(etiqueta, campo);
+        grupo.append(etiqueta, fila);
         contenedor.appendChild(grupo);
     });
+
+    // Un solo "escuchador" para todos los casilleros (más liviano que uno por casillero)
+    contenedor.addEventListener("input", alEscribirDigito);
+    contenedor.addEventListener("keydown", alTeclaDigito);
+    contenedor.addEventListener("paste", alPegarDigitos);
+    contenedor.addEventListener("focusin", (evento) => {
+        if (evento.target.classList.contains("digito")) {
+            const casillero = evento.target;
+            // Al entrar, se selecciona: escribir reemplaza el dígito.
+            // Solo si sigue teniendo el foco: si se escribe rápido y ya pasó al siguiente casillero,
+            // seleccionar este le devolvería el foco y el próximo dígito caería en el lugar equivocado
+            setTimeout(() => {
+                if (document.activeElement === casillero) casillero.select();
+            }, 0);
+        }
+    });
+}
+
+// Saca el estado verde/rojo de una contraseña cuando se vuelve a escribir en ella
+function limpiarEstadoClave(indice) {
+    digitosDeClave(indice).forEach((d) => d.classList.remove("correcta", "incorrecta"));
+}
+
+// Marca un casillero como lleno (o no) y, si la contraseña quedó completa, hace un "pop" en la fila
+function actualizarCasillero(casillero) {
+    const lleno = casillero.value !== "";
+    casillero.classList.toggle("lleno", lleno);
+    if (!lleno) return;
+    if (!MOVIMIENTO_REDUCIDO) {
+        // Saltito al escribir (como en Duolingo)
+        casillero.animate(
+            [{ transform: "translateY(-2px) scale(1)" }, { transform: "translateY(-2px) scale(1.12)" }, { transform: "translateY(-2px) scale(1)" }],
+            { duration: 200, easing: "ease-out" }
+        );
+    }
+}
+
+// Escribir en un casillero: deja solo un dígito y pasa al siguiente
+function alEscribirDigito(evento) {
+    const casillero = evento.target;
+    if (!casillero.classList.contains("digito")) return;
+
+    const digitos = casillero.value.replace(/\D/g, "");
+    // Pegado o autocompletado de varios dígitos: se reparten en los casilleros siguientes
+    if (digitos.length > 2 || evento.inputType === "insertFromPaste") {
+        repartirDigitos(casillero, digitos);
+        return;
+    }
+    // Si ya tenía un dígito y se escribió otro, queda el nuevo (el que está justo antes del cursor)
+    let nuevo = digitos;
+    if (digitos.length === 2) {
+        const posicion = Math.max(1, casillero.selectionStart || 2);
+        nuevo = casillero.value.replace(/\D/g, "").charAt(posicion - 1) || digitos.charAt(1);
+    }
+    casillero.value = nuevo;
+    limpiarEstadoClave(Number(casillero.dataset.clave));
+    ocultarAnuncio();
+    actualizarCasillero(casillero);
+
+    if (nuevo !== "") {
+        const todos = todosLosDigitos();
+        const siguiente = todos[todos.indexOf(casillero) + 1];
+        if (siguiente) siguiente.focus();
+    }
+}
+
+// Teclas: borrar en un casillero vacío vuelve al anterior, flechas para moverse y Enter para seguir/verificar
+function alTeclaDigito(evento) {
+    const casillero = evento.target;
+    if (!casillero.classList.contains("digito")) return;
+    const todos = todosLosDigitos();
+    const posicion = todos.indexOf(casillero);
+
+    if (evento.key === "Backspace" && casillero.value === "" && posicion > 0) {
+        evento.preventDefault();
+        const anterior = todos[posicion - 1];
+        anterior.value = "";
+        actualizarCasillero(anterior);
+        limpiarEstadoClave(Number(anterior.dataset.clave));
+        anterior.focus();
+    } else if (evento.key === "ArrowLeft" && posicion > 0) {
+        evento.preventDefault();
+        todos[posicion - 1].focus();
+    } else if (evento.key === "ArrowRight" && posicion < todos.length - 1) {
+        evento.preventDefault();
+        todos[posicion + 1].focus();
+    } else if (evento.key === "Enter") {
+        evento.preventDefault();
+        if (posicion < todos.length - 1) todos[posicion + 1].focus();
+        else verificar();
+    }
+}
+
+// Pegar un número: se reparte en los casilleros desde el actual en adelante
+function alPegarDigitos(evento) {
+    const casillero = evento.target;
+    if (!casillero.classList.contains("digito")) return;
+    evento.preventDefault();
+    const texto = (evento.clipboardData || window.clipboardData).getData("text") || "";
+    repartirDigitos(casillero, texto.replace(/\D/g, ""));
+}
+
+function repartirDigitos(desde, digitos) {
+    const todos = todosLosDigitos();
+    let posicion = todos.indexOf(desde);
+    if (digitos === "") {
+        desde.value = "";
+        actualizarCasillero(desde);
+        return;
+    }
+    for (const caracter of digitos) {
+        if (posicion >= todos.length) break;
+        todos[posicion].value = caracter;
+        limpiarEstadoClave(Number(todos[posicion].dataset.clave));
+        actualizarCasillero(todos[posicion]);
+        posicion++;
+    }
+    ocultarAnuncio();
+    (todos[Math.min(posicion, todos.length - 1)]).focus();
 }
 
 function configurarBoton() {
@@ -497,7 +621,7 @@ function configurarBoton() {
     if (boton) boton.addEventListener("click", verificar);
 }
 
-// Mensaje suave debajo de los campos
+// Mensaje suave debajo de las contraseñas
 function mostrarAnuncio(texto) {
     const anuncio = $("anuncio");
     if (!anuncio) return;
@@ -510,30 +634,36 @@ function ocultarAnuncio() {
     if (anuncio) anuncio.classList.remove("mostrar");
 }
 
-// Revisa las 10 contraseñas: verdes con "pop", rojas con temblor largo.
-// Si todas están bien, salen chispas verdes de todas y se pasa a la recompensa
+// Revisa las 10 contraseñas: cada fila se pinta entera de verde (con "pop") o de rojo (con temblor largo).
+// Si todas están bien, salen unas chispas verdes y se pasa a la recompensa
 function verificar() {
-    const campos = Array.from(document.querySelectorAll(".clave-campo"));
     let todasCorrectas = true;
 
-    campos.forEach((campo, indice) => {
-        const correcta = campo.value === CLAVES[indice].valor;
-        campo.classList.remove("correcta", "incorrecta", "lleno");
+    CLAVES.forEach((clave, indice) => {
+        const fila = $(`fila-${indice}`);
+        const digitos = digitosDeClave(indice);
+        const valor = valorDeClave(clave, indice);
+        const ingresado = digitos.map((d) => d.value).join("");
+        const correcta = valor !== "" && ingresado === valor;
+
+        digitos.forEach((d) => {
+            d.classList.remove("correcta", "incorrecta", "lleno");
+            d.classList.add(correcta ? "correcta" : "incorrecta");
+        });
 
         if (correcta) {
-            campo.classList.add("correcta");
-            pop(campo, 1.05, 480);
+            pop(fila, 1.05, 420);
         } else {
-            campo.classList.add("incorrecta");
             todasCorrectas = false;
-            temblarLargo(campo, 1200, 7);
+            temblarLargo(fila, 1100, 7);
         }
     });
 
     if (todasCorrectas) {
         ocultarAnuncio();
+        if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // Cierra el teclado del celular
         const verdes = [leerVariable("--color-success"), leerVariable("--color-success-claro")];
-        campos.forEach((campo, i) => setTimeout(() => chispasDesde(campo.getBoundingClientRect(), verdes, 3), i * 30)); // 3 por campo (eran 8): no se superponen con la entrada de la recompensa
+        CLAVES.forEach((_, i) => setTimeout(() => chispasDesde($(`fila-${i}`).getBoundingClientRect(), verdes, 2), i * 30)); // Pocas chispas por fila
         $("boton").disabled = true;
         setTimeout(mostrarRecompensa, MOVIMIENTO_REDUCIDO ? 0 : 450);
     } else {
@@ -811,6 +941,7 @@ const CLAVE_MAZO = "acceso-mazo-preguntas";
 function configurarQuiz() {
     const boton = $("boton-quiz");
     if (boton) boton.addEventListener("click", accionBotonQuiz);
+    configurarFlechaScroll();
 
     // La hoja inferior cambia de alto (cartel corto o largo): el quiz le deja siempre el lugar justo abajo
     const hoja = $("hoja");
@@ -819,6 +950,44 @@ function configurarQuiz() {
             document.documentElement.style.setProperty("--alto-hoja", `${hoja.offsetHeight}px`);
         }).observe(hoja);
     }
+}
+
+// ============================================
+// FLECHA "HAY MÁS ABAJO"
+// En el quiz, si la pregunta no entra en la pantalla, aparece una flechita que rebota arriba de la hoja.
+// Se esconde sola al llegar abajo del todo; tocarla baja la pantalla
+// ============================================
+
+function configurarFlechaScroll() {
+    const capa = $("quiz");
+    const flecha = $("flecha-scroll");
+    if (!capa || !flecha) return;
+
+    let pendiente = false;
+    const programar = () => {
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(() => { pendiente = false; actualizarFlecha(); }); // Como mucho una vez por cuadro
+    };
+    capa.addEventListener("scroll", programar, { passive: true });
+    window.addEventListener("resize", programar);
+    if ("ResizeObserver" in window) {
+        new ResizeObserver(programar).observe(capa.querySelector(".quiz-contenido")); // Cambia el alto del contenido o de la hoja
+    }
+
+    flecha.addEventListener("click", () => {
+        capa.scrollBy({ top: Math.round(capa.clientHeight * 0.6), behavior: MOVIMIENTO_REDUCIDO ? "auto" : "smooth" });
+    });
+}
+
+// Muestra la flecha solo si estamos en el quiz y todavía queda contenido abajo
+function actualizarFlecha() {
+    const capa = $("quiz");
+    const flecha = $("flecha-scroll");
+    if (!capa || !flecha) return;
+    const enQuiz = document.body.classList.contains("en-quiz");
+    const faltaAbajo = capa.scrollTop + capa.clientHeight < capa.scrollHeight - 12;
+    flecha.classList.toggle("visible", enQuiz && faltaAbajo);
 }
 
 // Muestra la prueba (sube desde abajo, con la hoja inferior) y arranca la primera ronda
@@ -928,6 +1097,7 @@ function dibujarPregunta() {
     tarjeta.classList.add("tarjeta--entrar");
 
     $("quiz").scrollTop = 0; // En celular, cada pregunta arranca desde arriba
+    requestAnimationFrame(actualizarFlecha); // ¿La pregunta nueva entra en la pantalla o hay más abajo?
 
     // Primera vez que aparece esta pregunta difícil en la ronda: animación en el centro de la pantalla
     if (q.dificil && !quiz.introVistas.has(quiz.actual)) {
@@ -1000,6 +1170,11 @@ function comprobar() {
     const bien = quiz.elegidas.length === q.correctas.length && quiz.elegidas.every((i) => q.correctas.includes(i));
     const verdes = [leerVariable("--color-success"), leerVariable("--color-success-claro"), leerVariable("--color-blanco")];
 
+    // Chispas por opción: el total por pregunta se reparte entre las opciones bien elegidas
+    // (en una múltiple con 5 correctas salen 3 por opción, no 12 de cada una)
+    const bienElegidas = quiz.elegidas.filter((i) => q.correctas.includes(i)).length || 1;
+    const chispasPorOpcion = Math.max(2, Math.floor(PARTICULAS_POR_PREGUNTA / bienElegidas));
+
     // Pinta las opciones: bien (verde), mal (rojo) o faltó (verde cortado)
     const opciones = $("opciones");
     opciones.classList.add("opciones--bloqueadas");
@@ -1010,7 +1185,7 @@ function comprobar() {
         if (elegida && esCorrecta) {
             btn.classList.add("opcion--bien");
             pop(btn, 1.05, 450);
-            if (bien) chispasDesde(btn.getBoundingClientRect(), verdes, 12); // Chispas verdes de las bien respondidas
+            if (bien) chispasDesde(btn.getBoundingClientRect(), verdes, chispasPorOpcion); // Chispas verdes (con tope por pregunta)
         } else if (elegida && !esCorrecta) {
             btn.classList.add("opcion--mal");
             temblarLargo(btn, 1700, 9);                                      // Tiembla unos segundos
@@ -1061,7 +1236,16 @@ function mostrarVeredicto(q, bien) {
     caja.hidden = false;
     pop(circulo, 1.35, 500);
 
-    if (bien) return;
+    // Al acertar también se muestra la explicación
+    if (bien) {
+        if (q.descripcion) {
+            const descripcion = document.createElement("p");
+            descripcion.className = "veredicto-descripcion";
+            descripcion.textContent = q.descripcion;
+            caja.appendChild(descripcion);
+        }
+        return;
+    }
 
     // Respuesta correcta (en múltiple, todas las correctas)
     const linea = document.createElement("p");
@@ -1115,6 +1299,7 @@ async function terminarQuiz() {
     capa.classList.remove("visible");
     capa.setAttribute("aria-hidden", "true");
     document.body.classList.remove("en-quiz");   // La hoja baja
+    actualizarFlecha();                           // Y la flecha se esconde
     $("hoja").setAttribute("aria-hidden", "true");
 
     await esperar(MOVIMIENTO_REDUCIDO ? 0 : 300);
@@ -1607,7 +1792,7 @@ function iniciarCielo() {
     let proximaFugaz = 0;
     let ultimoTiempo = 0;
     let tiempoCielo = 0;     // Reloj propio del cielo: no salta al volver a la pestaña
-    let saltarCuadro = false;
+    let ultimoDibujo = 0;    // Momento del último cuadro dibujado (para limitar los cuadros por segundo)
 
     function colorAlAzar() {
         let tirada = Math.random();
@@ -1805,15 +1990,16 @@ function iniciarCielo() {
     }
 
     // Bucle de animación: el navegador lo pausa solo cuando la pestaña no se ve (ahorra batería).
-    // Con una capa abierta encima, dibuja un cuadro sí y uno no (30 por segundo)
+    // Las estrellas se mueven muy despacio, así que alcanza con 30 cuadros por segundo; con una capa
+    // encima (recompensa, quiz, escena, foto) baja a 15, porque detrás del velo casi no se ve.
+    // Así el celular queda libre para las animaciones de adelante
     function bucle(marca) {
         requestAnimationFrame(bucle);
-        if (document.body.classList.contains("capa-abierta")) {
-            saltarCuadro = !saltarCuadro;
-            if (saltarCuadro) return;
-        }
+        const intervalo = document.body.classList.contains("capa-abierta") ? 1000 / 15 : 1000 / 30;
+        if (marca - ultimoDibujo < intervalo - 2) return;
+        ultimoDibujo = marca;
         const ahora = marca / 1000;
-        const delta = Math.min(ahora - ultimoTiempo, 0.05);
+        const delta = Math.min(ahora - ultimoTiempo, 0.1);
         ultimoTiempo = ahora;
         tiempoCielo += delta;
         dibujarCuadro(tiempoCielo, delta);

@@ -68,20 +68,6 @@
     },
     {
       "tipo": "normal",
-      "dificil": true,
-      "pregunta": "TE AMO MUCHISISISIMO?",
-      "opciones": [
-        "Leyendo partituras tradicionales",
-        "Mirando tutoriales de notas que van cayendo",
-        "Escuchando las canciones una sola vez",
-        "Utilizando aplicaciones de acordes"
-      ],
-      "correcta": 1,
-      "tema": "Gustos - Música",
-      "descripcion": "Suelo aprender canciones mediante tutoriales visuales de notas que van cayendo."
-    },
-    {
-      "tipo": "normal",
       "pregunta": "¿Cuál es mi videojuego de novela visual favorito?",
       "opciones": [
         "Undertale",
@@ -302,13 +288,6 @@
       "correcta": true,
       "tema": "Factos",
       "descripcion": "Mely, sos la mujer mas hermosa que mis ojos han tenido el placer de presenciar y ninguna otra se acercará siquiera un poco de lo hermosos  que son tus ojos y esa bella carita, sos todo el significado de hermosa y para mi perfecta."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "TE AMO MUCHISISIMO.",
-      "correcta": true,
-      "tema": "Factos",
-      "descripcion": "Te amo inmensamente con toda mi alma amor mío."
     },
     {
       "tipo": "vf",

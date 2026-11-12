@@ -139,6 +139,7 @@
 
     --glass: rgba(4, 6, 16, .50);
     --glass-solido: rgba(4, 6, 16, .92);
+    --glass-caja: rgba(5, 8, 22, .80);       /* Caja de contraseñas: semitransparente, sin desenfoque (rinde mucho mejor) */
     --velo-escena: rgba(2, 3, 10, .72);
     --velo-quiz: rgba(2, 3, 10, .84);       /* Velo de la recompensa y el quiz: más opaco, así no hace falta desenfocar (rinde mucho mejor) */
     --velo-intenso: rgba(1, 2, 6, .82);     /* Fondo de la animación "Pregunta difícil" */
@@ -321,11 +322,11 @@ button {
     animation: aparecer 3.5s ease .2s forwards;
 }
 
-/* Sin filter: blur (los degradados radiales ya son suaves y el desenfoque costaba mucho rendimiento) */
+/* Nebulosas quietas: sin blur ni animación (eran capas enormes moviéndose todo el tiempo;
+   el movimiento ya lo dan las estrellas del canvas) */
 .nebulosa {
     position: absolute;
     border-radius: 50%;
-    will-change: transform;
 }
 
 .nebulosa-1 {
@@ -334,7 +335,6 @@ button {
     top: -18vmax;
     left: -30vmax;
     background: radial-gradient(closest-side, var(--nebulosa-azul), var(--transparente));
-    animation: flotar-nebulosa 70s ease-in-out infinite alternate;
 }
 
 .nebulosa-2 {
@@ -343,12 +343,6 @@ button {
     bottom: -12vmax;
     right: -30vmax;
     background: radial-gradient(closest-side, var(--nebulosa-violeta), var(--transparente));
-    animation: flotar-nebulosa 90s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes flotar-nebulosa {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(6vmax, 4vmax) scale(1.12); }
 }
 
 /* Franja de la vía láctea: más inclinada en celular para cruzar la pantalla */
@@ -363,13 +357,7 @@ button {
         radial-gradient(ellipse 50% 50% at 50% 50%, var(--via-lactea-centro), var(--transparente) 70%),
         radial-gradient(ellipse 35% 80% at 38% 55%, var(--nebulosa-profunda), var(--transparente) 70%),
         radial-gradient(ellipse 30% 70% at 64% 45%, var(--via-lactea-borde), var(--transparente) 70%);
-    will-change: opacity;              /* Sin filter: blur, por rendimiento */
-    animation: respirar-via-lactea 24s ease-in-out infinite;
-}
-
-@keyframes respirar-via-lactea {
-    0%, 100% { opacity: .75; }
-    50%      { opacity: 1; }
+    opacity: .9;                       /* Quieta (sin blur ni animación): por rendimiento */
 }
 
 .luna {
@@ -515,22 +503,13 @@ button {
     max-width: 380px;
     box-sizing: border-box;
     padding: var(--relleno-caja);
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(10px);   /* Desenfoque más liviano (rinde mejor en celular) */
-    backdrop-filter: blur(10px);
+    background: var(--glass-caja);         /* Sin desenfoque: era lo que más trababa la pantalla de contraseñas */
     border: 1px solid var(--color-borde-suave);
     border-radius: var(--radio-caja);
     box-shadow: 0 24px 60px var(--sombra-principal), 0 0 50px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
     opacity: 0;
     transform: translateY(30px) scale(.94);
     animation: aparecer-caja .6s var(--curva-resorte) .1s forwards; /* Más rápida: menos sensación de retraso */
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .caja,
-    .tarjeta {
-        background: var(--glass-solido);
-    }
 }
 
 @keyframes aparecer-caja {
@@ -571,74 +550,85 @@ button {
 .claves {
     display: flex;
     flex-direction: column;
-    gap: .75rem;
+    gap: 1rem;
 }
 
 .clave {
     display: flex;
     flex-direction: column;
-    gap: .3rem;
+    align-items: center;
+    gap: .45rem;
     animation: entrar-arriba .4s var(--curva-resorte) both;
 }
 
+/* Etiqueta = el acertijo: centrada y legible (pueden ser textos largos) */
 .clave-etiqueta {
     font-family: var(--fuente-texto);
-    font-size: .72rem;
-    color: var(--color-texto-apagado);
-    letter-spacing: .04em;
-    transition: color .3s ease;
+    font-size: .76rem;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--color-texto-secundario);
+    transition: color .25s ease;
 }
 
-/* Campo con labio (como los de Duolingo): borde de 2px y 4px abajo */
-.clave-campo {
+.clave:focus-within .clave-etiqueta {
+    color: var(--color-info);
+}
+
+/* Fila de casilleros (uno por dígito), centrada; si son muchos, se achican para entrar */
+.clave-digitos {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
+}
+
+/* Casillero de un dígito, con labio 3D (como Duolingo): borde de 2px y 4px abajo */
+.digito {
+    flex: 0 1 48px;
+    width: 48px;
+    min-width: 0;
     height: var(--alto-campo);
     box-sizing: border-box;
-    padding: 0 .8rem;
+    padding: 0;
     font-family: var(--fuente-texto);
-    font-size: 16px; /* 16px o más: evita que el celular haga zoom al escribir */
-    font-weight: 600;
-    letter-spacing: .35em;
+    font-size: 22px; /* Más de 16px: el celular no hace zoom al escribir */
+    font-weight: 700;
     text-align: center;
     color: var(--color-texto);
     background: var(--color-fondo-secundario);
     border: 2px solid var(--color-borde-fuerte);
     border-bottom-width: 4px;
-    border-radius: 14px;
+    border-radius: 12px;
     caret-color: var(--color-info);
     transition:
-        border-color .25s ease,
-        box-shadow .3s ease,
-        background .3s ease,
-        transform .35s var(--curva-resorte);
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        transform .25s var(--curva-resorte);
 }
 
 /* Foco: sube un poquito y se ilumina en azul */
-.clave-campo:focus {
+.digito:focus {
     outline: none;
     border-color: var(--color-info);
-    box-shadow: 0 0 0 4px var(--info-fondo);
+    box-shadow: 0 0 0 3px var(--info-fondo);
     transform: translateY(-2px);
 }
 
-.clave-campo:focus + .clave-etiqueta,
-.clave:focus-within .clave-etiqueta {
-    color: var(--color-info);
-}
-
-/* Completo (tiene todos los caracteres, todavía sin revisar): borde azul fijo */
-.clave-campo.lleno {
+/* Con un dígito escrito (todavía sin revisar): borde azul fijo */
+.digito.lleno {
     border-color: var(--color-info-oscuro);
 }
 
 /* Correcta: verde */
-.clave-campo.correcta {
+.digito.correcta {
     border-color: var(--color-success);
     background: var(--success-fondo);
 }
 
 /* Incorrecta: roja */
-.clave-campo.incorrecta {
+.digito.incorrecta {
     border-color: var(--color-error);
     background: var(--error-fondo);
 }
@@ -1287,7 +1277,7 @@ body.is-hard .tarjeta {
 .opciones--bloqueadas .opcion.opcion--bien {
     border-color: var(--color-success);
     background: var(--color-success-a10);
-    box-shadow: 0 4px 0 var(--color-success-oscuro), 0 0 24px var(--color-success-a35);
+    box-shadow: 0 4px 0 var(--color-success-oscuro), 0 0 14px var(--color-success-a35);
 }
 
 .opciones--bloqueadas .opcion.opcion--bien .opcion-letra {
@@ -1303,7 +1293,7 @@ body.is-hard .tarjeta {
 .opciones--bloqueadas .opcion.opcion--mal {
     border-color: var(--color-error);
     background: var(--color-error-a10);
-    box-shadow: 0 4px 0 var(--color-error-oscuro), 0 0 24px var(--color-error-a35);
+    box-shadow: 0 4px 0 var(--color-error-oscuro), 0 0 14px var(--color-error-a35);
 }
 
 .opciones--bloqueadas .opcion.opcion--mal .opcion-letra {
@@ -1438,6 +1428,57 @@ body.en-quiz .hoja {
     margin: 8px 0 0;
     font-size: .78rem;
     color: var(--color-warning);
+}
+
+/* ---------- Flecha "hay más abajo" (aparece en el quiz cuando no se está abajo del todo) ---------- */
+
+.flecha-scroll {
+    position: fixed;
+    left: 50%;
+    bottom: calc(var(--alto-hoja) + 14px);
+    z-index: 17;
+    width: 46px;
+    height: 46px;
+    margin-left: -23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-borde-fuerte);
+    background: var(--superficie-3);
+    color: var(--color-texto);
+    box-shadow: 0 4px 0 var(--opcion-labio);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(12px) scale(.7);
+    pointer-events: none;
+    transition: opacity .2s ease, transform .3s var(--curva-resorte);
+}
+
+.flecha-scroll.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.flecha-scroll:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--opcion-labio);
+}
+
+.flecha-scroll .material-symbols-rounded {
+    font-size: 30px;
+}
+
+/* La flechita rebota suave para llamar la atención */
+.flecha-scroll.visible .material-symbols-rounded {
+    animation: rebotar-flecha 1.1s ease-in-out infinite;
+}
+
+@keyframes rebotar-flecha {
+    0%, 100% { transform: translateY(-2px); }
+    50%      { transform: translateY(3px); }
 }
 
 /* ---------- Animación "Pregunta difícil" (copiada de Test) ---------- */

@@ -8,15 +8,16 @@
     <meta name="theme-color" id="color-tema" content="">
     <title>Hola</title>
 
-    <!-- Tipografías de Google Fonts (las 3 que usa esta página, cada una es una variable en el :root) -->
+    <!-- Tipografías de Google Fonts (las 3 que usa esta página, cada una es una variable en el :root).
+         De IBM Plex Mono se bajan solo los 4 grosores que usa la página (antes eran 14 archivos): carga más rápido -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Playwrite+ID:wght@100..400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Playwrite+ID:wght@100..400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <!-- Íconos de Google Fonts (Material Symbols): solo se descargan los usados (en orden alfabético, como pide Google) -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=arrow_forward,cancel,check,check_box,check_box_outline_blank,check_circle,close,restart_alt,skull&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=arrow_forward,cancel,check,check_box,check_box_outline_blank,check_circle,close,keyboard_arrow_down,restart_alt,skull&display=block" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=7">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
             <h1 class="titulo">Hola</h1>
             <p class="subtitulo">Ingresá las 10 contraseñas para continuar</p>
 
-            <!-- Los 10 campos se generan desde script.js (lista CLAVES) -->
+            <!-- Las 10 contraseñas se generan desde script.js (lista CLAVES): un casillero por cada dígito del valor -->
             <div class="claves" id="claves"></div>
 
             <p class="anuncio" id="anuncio" aria-live="polite"></p>
@@ -47,7 +48,7 @@
         </section>
 
         <footer class="pie">
-            <span>v1.4</span>
+            <span>v1.5</span>
             <span aria-hidden="true">·</span>
             <time datetime="2026-11-12">12/11/2026</time>
         </footer>
@@ -123,6 +124,11 @@
         </div>
     </div>
 
+    <!-- Flecha "hay más abajo": aparece en el quiz cuando la pregunta no entra en la pantalla -->
+    <button class="flecha-scroll" id="flecha-scroll" type="button" aria-label="Ver más abajo">
+        <span class="material-symbols-rounded" aria-hidden="true">keyboard_arrow_down</span>
+    </button>
+
     <!-- Animación "Pregunta difícil": capa a pantalla completa (la arma script.js) -->
     <div class="intro-dificil" id="intro-dificil" hidden></div>
 
@@ -155,7 +161,7 @@
     <!-- Chispas, confeti y "+1": capa de partículas por encima de todo -->
     <div class="particulas" id="particulas" aria-hidden="true"></div>
 
-    <script src="script.js?v=6"></script>
+    <script src="script.js?v=7"></script>
 </body>
 
 </html>
