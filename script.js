@@ -18,7 +18,7 @@ const CLAVES = [
     { etiqueta: "Contraseña 1",  valor: "0" },
     { etiqueta: "Contraseña 2",  valor: "0" },
     { etiqueta: "Contraseña 3",  valor: "0" },
- { etiqueta: "Contraseña 4",  valor: "0" },
+    { etiqueta: "Contraseña 4",  valor: "0" },
     { etiqueta: "Contraseña 5",  valor: "0" },
     { etiqueta: "Contraseña 6",  valor: "0" },
     { etiqueta: "Contraseña 7",  valor: "0" },
@@ -541,9 +541,16 @@ const quiz = {
     estadoBoton: "comprobar", // comprobar | continuar | reiniciar | final | reintentar
     introOcupada: false,    // true mientras corre la animación de "Pregunta difícil"
     ocupado: false,         // true mientras se cambia de pregunta (evita dobles toques)
-    primeraAnterior: null,  // Primera pregunta de la ronda anterior (para no repetirla al reiniciar)
-    introVistas: new Set()  // Preguntas difíciles cuya animación ya se mostró en esta ronda
+    introVistas: new Set(), // Preguntas difíciles cuya animación ya se mostró en esta ronda
+    // MAZO DE PREGUNTAS (sin reposición): ids de las preguntas que todavía no aparecieron en este ciclo.
+    // Cuando hacen falta más, se agrega un ciclo nuevo con todas, dejando al fondo las del intento anterior
+    mazo: [],
+    vistasIntento: [],      // ids de las preguntas que ya aparecieron en el intento actual
+    anteriores: []          // ids de las preguntas que aparecieron en el intento anterior (nunca se repiten en el siguiente)
 };
+
+// Clave para guardar el mazo en el navegador: así, aunque recargue la página, no se repiten preguntas
+const CLAVE_MAZO = "acceso-mazo-preguntas";
 
 function configurarQuiz() {
     const boton = $("boton-quiz");
@@ -560,6 +567,8 @@ async function mostrarQuiz() {
     try {
         quiz.banco = await (cargaPreguntas || cargarPreguntas());
         if (quiz.banco.length === 0) throw new Error(`${ARCHIVO_PREGUNTAS} no tiene preguntas válidas`);
+        quiz.banco.forEach((pregunta, i) => { pregunta.id = i; }); // Cada pregunta tiene un id fijo para el mazo
+        prepararMazo();
         armarRonda();
         dibujarPregunta();
     } catch (error) {
@@ -581,16 +590,97 @@ function mostrarErrorQuiz() {
     ponerBoton("Reintentar", "restart_alt", "reintentar", true);
 }
 
-// Arma una ronda nueva: mezcla el banco y toma las primeras 10.
-// Si la primera coincide con la de la ronda anterior, la cambia, así nunca arranca igual
-function armarRonda() {
-    const mezcla = mezclar(quiz.banco);
-    if (mezcla.length > 1 && mezcla[0] === quiz.primeraAnterior) {
-        const otra = 1 + Math.floor(Math.random() * (mezcla.length - 1));
-        [mezcla[0], mezcla[otra]] = [mezcla[otra], mezcla[0]];
+// ============================================
+// MAZO DE PREGUNTAS (selección sin repetir)
+// - Las preguntas salen de un mazo mezclado y, una vez que se vieron, se descartan.
+// - Las que se sacaron para una ronda pero NO llegaron a verse (porque falló antes) vuelven al mazo.
+// - Cuando el mazo se vacía, se rearma con TODAS, pero las vistas en el intento anterior van al fondo:
+//   así es imposible que una pregunta aparezca en dos intentos seguidos.
+// - El mazo se guarda en el navegador, así recargar la página tampoco repite preguntas.
+// ============================================
+
+// "Firma" del banco: cambia si se editan las preguntas del JSON (entonces el mazo guardado se descarta)
+function firmaBanco() {
+    let hash = 5381;
+    const texto = quiz.banco.map((q) => q.pregunta).join("|");
+    for (let i = 0; i < texto.length; i++) hash = ((hash << 5) + hash + texto.charCodeAt(i)) | 0;
+    return `${quiz.banco.length}:${hash}`;
+}
+
+// Recupera el mazo guardado (si es del mismo banco de preguntas) o arranca uno nuevo
+function prepararMazo() {
+    quiz.mazo = [];
+    quiz.anteriores = [];
+    try {
+        const guardado = JSON.parse(localStorage.getItem(CLAVE_MAZO) || "null");
+        if (guardado && guardado.firma === firmaBanco()) {
+            const valido = (id) => Number.isInteger(id) && id >= 0 && id < quiz.banco.length;
+            quiz.mazo = (guardado.mazo || []).filter(valido);
+            // Si recargó en medio de un intento, ese intento cuenta como "anterior" (no se repite)
+            const ultimo = (guardado.ronda && guardado.ronda.length) ? guardado.ronda : (guardado.anteriores || []);
+            quiz.anteriores = ultimo.filter(valido);
+        }
+    } catch (error) {
+        // Sin acceso al almacenamiento (modo privado, etc.): el mazo funciona igual mientras la página esté abierta
     }
-    quiz.ronda = mezcla.slice(0, Math.min(PREGUNTAS_POR_RONDA, mezcla.length));
-    quiz.primeraAnterior = quiz.ronda[0];
+}
+
+// Guarda el estado del mazo en el navegador
+function guardarMazo() {
+    try {
+        localStorage.setItem(CLAVE_MAZO, JSON.stringify({
+            firma: firmaBanco(),
+            mazo: quiz.mazo,
+            anteriores: quiz.anteriores,
+            ronda: quiz.ronda.map((q) => q.id)
+        }));
+    } catch (error) {
+        // Si no se puede guardar, no pasa nada: el mazo sigue funcionando en memoria
+    }
+}
+
+// Rearma el mazo con todas las preguntas. Las que hay que evitar (intento anterior y las ya
+// elegidas para esta ronda) van mezcladas AL FONDO, así salen recién después de todas las demás
+function rellenarMazo(evitar) {
+    const todas = quiz.banco.map((q) => q.id);
+    const frescas = todas.filter((id) => !evitar.has(id));
+    const alFondo = todas.filter((id) => evitar.has(id));
+    quiz.mazo = [...mezclar(frescas), ...mezclar(alFondo)];
+}
+
+// Saca "cantidad" preguntas del mazo, sin repetir dentro de la misma ronda
+function sacarDelMazo(cantidad) {
+    const elegidas = [];
+    const total = Math.min(cantidad, quiz.banco.length);
+    let vueltas = 0;
+    while (elegidas.length < total && vueltas < quiz.banco.length * 3) {
+        vueltas++;
+        if (quiz.mazo.length === 0) {
+            rellenarMazo(new Set([...quiz.anteriores, ...elegidas]));
+        }
+        const id = quiz.mazo.shift();
+        if (elegidas.includes(id)) {
+            quiz.mazo.push(id); // Ya está en esta ronda: vuelve al fondo
+        } else {
+            elegidas.push(id);
+        }
+    }
+    return elegidas;
+}
+
+// Arma una ronda nueva de 10 preguntas sacadas del mazo.
+// Si viene de un intento fallido: las preguntas que se vieron quedan descartadas y
+// las que no llegaron a verse vuelven al principio del mazo
+function armarRonda() {
+    if (quiz.ronda.length > 0) {
+        const vistas = quiz.ronda.slice(0, quiz.actual + 1).map((q) => q.id);
+        const sinVer = quiz.ronda.slice(quiz.actual + 1).map((q) => q.id);
+        quiz.mazo = [...mezclar(sinVer), ...quiz.mazo.filter((id) => !sinVer.includes(id))];
+        quiz.anteriores = vistas;
+    }
+
+    quiz.ronda = sacarDelMazo(PREGUNTAS_POR_RONDA).map((id) => quiz.banco[id]);
+    guardarMazo();
     quiz.actual = 0;
     quiz.introVistas.clear();
     $("progreso").classList.remove("progreso--perdido");

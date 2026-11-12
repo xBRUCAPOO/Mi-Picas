@@ -1,400 +1,56 @@
 {
-  "nombre": "Una última prueba",
+  "nombre": "Bien Amor",
   "tema": "Banco de preguntas: se eligen 10 al azar y hay que responderlas bien seguidas",
   "preguntas": [
     {
       "tipo": "normal",
-      "pregunta": "¿Cuál es el planeta más grande del sistema solar?",
-      "opciones": ["Saturno", "Júpiter", "Neptuno", "La Tierra"],
-      "correcta": 1,
-      "tema": "Astronomía",
-      "descripcion": "Júpiter es el planeta más grande: su masa es más del doble que la de todos los demás planetas juntos."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es la capital de Australia?",
-      "opciones": ["Sídney", "Melbourne", "Canberra", "Perth"],
+      "pregunta": "¿Cuál es mi fecha de nacimiento?",
+      "opciones": ["11 de Diciembre", "15 de Diciembre", "10 de Diciembre", "8 de Diciembre"],
       "correcta": 2,
-      "tema": "Geografía",
-      "descripcion": "Aunque Sídney es la ciudad más conocida, la capital es Canberra, construida especialmente para ese fin."
+      "tema": "Cumpleaños",
+      "descripcion": "Nací el 10 de Diciembre del 2008."
     },
     {
-      "tipo": "normal",
-      "pregunta": "¿En qué año llegó el ser humano a la Luna por primera vez?",
-      "opciones": ["1965", "1969", "1972", "1959"],
-      "correcta": 1,
-      "tema": "Historia",
-      "descripcion": "La misión Apolo 11 alunizó el 20 de julio de 1969."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es el océano más grande del mundo?",
-      "opciones": ["Atlántico", "Índico", "Pacífico", "Ártico"],
+      "tipo": "dificil",
+      "pregunta": "¿Cuál fue el primer Call of Duty que jugué?",
+      "opciones": ["Call of Duty", "Call of Duty 2", "Call of Duty 3", "Call of Duty Modern Warfare 4", "Call of Duty World at War", "Call of Duty Black Ops", "Call of Duty Call of Duty Modern Warfare 2", "Call of Duty Black Ops 2"],
       "correcta": 2,
-      "tema": "Geografía",
-      "descripcion": "El océano Pacífico es el más grande y el más profundo del planeta."
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "El primer Call of Duty que jugué fue el Call of Duty 3."
+    },
+    {
+      "tipo": "dificil",
+      "pregunta": "¿Cuál es videojuego multijugador favorito?",
+      "opciones": ["Counter-Strike 2", "Call of Duty World at War", "Call of Duty Call of Duty Modern Warfare 2", "Zero Ours", "Call of Duty Black Ops 2", "Ready or Not","Call of Duty Modern Warfare 4", "Call of Duty Black Ops", "Call of Duty 3"],
+      "correcta": 5,
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "Actualmente, Ready or Not es mi videojuego multijugador favorito."
     },
     {
       "tipo": "normal",
-      "pregunta": "¿Qué gas absorben las plantas para hacer la fotosíntesis?",
-      "opciones": ["Oxígeno", "Dióxido de carbono", "Nitrógeno", "Helio"],
-      "correcta": 1,
-      "tema": "Ciencia",
-      "descripcion": "Las plantas toman dióxido de carbono y, con la luz del sol, producen glucosa y liberan oxígeno."
+      "pregunta": "¿Cuál es mi videojuego de novela visual favorito?",
+      "opciones": ["Undertale", "The Coffin of Andy and Leyley", "Doki Doki Literature Club", "Deltarune", "Until Then", "Dispatch"],
+      "correcta": 4,
+      "tema": "Gustos - Videojuegos",
+      "descripcion": "Es la única novela visual que me ha hecho llorar 4 veces, Until Then es mi videojuego de novela visual favorito."
     },
     {
-      "tipo": "normal",
-      "pregunta": "¿Quién pintó «La noche estrellada»?",
-      "opciones": ["Claude Monet", "Vincent van Gogh", "Pablo Picasso", "Salvador Dalí"],
-      "correcta": 1,
-      "tema": "Arte",
-      "descripcion": "Vincent van Gogh la pintó en 1889, desde la ventana de su habitación en Saint-Rémy-de-Provence."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuántos lados tiene un hexágono?",
-      "opciones": ["5", "6", "7", "8"],
-      "correcta": 1,
-      "tema": "Matemática",
-      "descripcion": "El prefijo «hexa» significa seis: un hexágono tiene seis lados."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es el río más largo de Sudamérica?",
-      "opciones": ["Paraná", "Orinoco", "Amazonas", "Río de la Plata"],
-      "correcta": 2,
-      "tema": "Geografía",
-      "descripcion": "El Amazonas es el río más largo de Sudamérica y el de mayor caudal del mundo."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es el símbolo químico del oro?",
-      "opciones": ["Ag", "Au", "Or", "Go"],
-      "correcta": 1,
-      "tema": "Ciencia",
-      "descripcion": "Au viene del latín «aurum». Ag es el símbolo de la plata."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuántos jugadores de un equipo de fútbol hay en la cancha?",
-      "opciones": ["9", "10", "11", "12"],
-      "correcta": 2,
-      "tema": "Deportes",
-      "descripcion": "Cada equipo juega con 11: diez jugadores de campo y un arquero."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es la estrella más cercana a la Tierra?",
-      "opciones": ["Sirio", "Alfa Centauri", "El Sol", "La estrella Polar"],
-      "correcta": 2,
-      "tema": "Astronomía",
-      "descripcion": "El Sol es una estrella y es la más cercana. Después le sigue Próxima Centauri."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿En qué continente está Egipto?",
-      "opciones": ["Asia", "África", "Europa", "Oceanía"],
-      "correcta": 1,
-      "tema": "Geografía",
-      "descripcion": "Egipto está en el noreste de África, aunque la península del Sinaí pertenece a Asia."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Qué instrumento tiene 88 teclas en su versión estándar?",
-      "opciones": ["Órgano", "Piano", "Acordeón", "Clavicordio"],
-      "correcta": 1,
-      "tema": "Música",
-      "descripcion": "El piano moderno estándar tiene 88 teclas: 52 blancas y 36 negras."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es el hueso más largo del cuerpo humano?",
-      "opciones": ["Húmero", "Tibia", "Fémur", "Peroné"],
-      "correcta": 2,
-      "tema": "Cuerpo humano",
-      "descripcion": "El fémur, el hueso del muslo, es el más largo y uno de los más fuertes del cuerpo."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Qué idioma tiene más hablantes nativos en el mundo?",
-      "opciones": ["Inglés", "Español", "Chino mandarín", "Hindi"],
-      "correcta": 2,
-      "tema": "Idiomas",
-      "descripcion": "El chino mandarín es el idioma con más hablantes nativos. El español está segundo."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es la montaña más alta de América?",
-      "opciones": ["Aconcagua", "Denali", "Chimborazo", "Huascarán"],
-      "correcta": 0,
-      "tema": "Geografía",
-      "descripcion": "El Aconcagua, en Mendoza, mide cerca de 6.960 metros y es el pico más alto fuera de Asia."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuántos minutos tiene un día?",
-      "opciones": ["1.440", "1.200", "3.600", "2.400"],
-      "correcta": 0,
-      "tema": "Matemática",
-      "descripcion": "24 horas × 60 minutos = 1.440 minutos."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Qué planeta es conocido como «el planeta rojo»?",
-      "opciones": ["Venus", "Marte", "Mercurio", "Júpiter"],
-      "correcta": 1,
-      "tema": "Astronomía",
-      "descripcion": "Marte se ve rojizo por el óxido de hierro que cubre su superficie."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Qué forma tiene la órbita de la Tierra alrededor del Sol?",
-      "opciones": ["Un círculo perfecto", "Una elipse", "Un cuadrado", "Una espiral"],
-      "correcta": 1,
-      "tema": "Astronomía",
-      "descripcion": "Las órbitas de los planetas son elípticas, aunque la de la Tierra es casi circular."
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuál es el elemento más abundante del universo?",
-      "opciones": ["Oxígeno", "Carbono", "Hidrógeno", "Helio"],
-      "correcta": 2,
-      "tema": "Ciencia",
-      "descripcion": "El hidrógeno forma cerca del 74% de la materia normal del universo. Le sigue el helio.",
-      "dificil": true
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuántos huesos tiene el cuerpo humano adulto?",
-      "opciones": ["186", "206", "226", "256"],
-      "correcta": 1,
-      "tema": "Cuerpo humano",
-      "descripcion": "Un adulto tiene 206 huesos. Los bebés nacen con más, pero varios se fusionan al crecer.",
-      "dificil": true
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿A qué constelación pertenecen las «Tres Marías»?",
-      "opciones": ["Orión", "Escorpio", "Cruz del Sur", "Osa Mayor"],
-      "correcta": 0,
-      "tema": "Astronomía",
-      "descripcion": "Las Tres Marías (Alnitak, Alnilam y Mintaka) forman el cinturón de Orión.",
-      "dificil": true
-    },
-    {
-      "tipo": "normal",
-      "pregunta": "¿Cuánto tarda aproximadamente la luz del Sol en llegar a la Tierra?",
-      "opciones": ["8 segundos", "8 minutos", "8 horas", "1 día"],
-      "correcta": 1,
-      "tema": "Astronomía",
-      "descripcion": "La luz recorre los 150 millones de kilómetros que nos separan del Sol en unos 8 minutos y 20 segundos.",
-      "dificil": true
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "La Gran Muralla China se ve a simple vista desde la Luna.",
-      "correcta": false,
-      "tema": "Mitos",
-      "descripcion": "Es un mito: desde la Luna no se distingue ninguna construcción humana a simple vista."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Al nivel del mar, el agua hierve a 100 °C.",
-      "correcta": true,
-      "tema": "Ciencia",
-      "descripcion": "A presión atmosférica normal (nivel del mar), el agua hierve a 100 °C. En la montaña hierve a menos."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Los murciélagos son mamíferos.",
-      "correcta": true,
-      "tema": "Naturaleza",
-      "descripcion": "Son mamíferos: tienen pelo y alimentan a sus crías con leche. Son los únicos mamíferos que vuelan."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "El Sol es un planeta.",
-      "correcta": false,
-      "tema": "Astronomía",
-      "descripcion": "El Sol es una estrella: produce su propia luz por fusión nuclear."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "La Antártida es el desierto más grande del mundo.",
-      "correcta": true,
-      "tema": "Geografía",
-      "descripcion": "Un desierto se define por las pocas lluvias, no por el calor. La Antártida es el desierto más grande.",
-      "dificil": true
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Los pulpos tienen tres corazones.",
-      "correcta": true,
-      "tema": "Naturaleza",
-      "descripcion": "Tienen dos corazones que bombean sangre a las branquias y uno que la envía al resto del cuerpo."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Mercurio es el planeta más caliente del sistema solar.",
-      "correcta": false,
-      "tema": "Astronomía",
-      "descripcion": "Es Venus: su atmósfera densa atrapa el calor (efecto invernadero) y supera los 460 °C.",
-      "dificil": true
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Argentina tiene 23 provincias.",
-      "correcta": true,
-      "tema": "Argentina",
-      "descripcion": "Son 23 provincias más la Ciudad Autónoma de Buenos Aires."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Botánicamente, el tomate es una fruta.",
-      "correcta": true,
-      "tema": "Naturaleza",
-      "descripcion": "Para la botánica es un fruto porque se forma a partir de la flor y tiene semillas."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Las estrellas fugaces son estrellas que caen.",
-      "correcta": false,
-      "tema": "Astronomía",
-      "descripcion": "Son meteoros: pequeñas partículas que se queman al entrar en la atmósfera."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Un año bisiesto tiene 366 días.",
-      "correcta": true,
-      "tema": "Calendario",
-      "descripcion": "Cada cuatro años (con algunas excepciones) febrero suma un día: el 29."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "La luz viaja más rápido que el sonido.",
-      "correcta": true,
-      "tema": "Ciencia",
-      "descripcion": "Por eso primero se ve el relámpago y después se escucha el trueno."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "El corazón humano tiene cuatro cavidades.",
-      "correcta": true,
-      "tema": "Cuerpo humano",
-      "descripcion": "Dos aurículas y dos ventrículos."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Los pingüinos viven en el Polo Norte.",
-      "correcta": false,
-      "tema": "Naturaleza",
-      "descripcion": "Los pingüinos viven en el hemisferio sur. En el Polo Norte no hay pingüinos."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Desde la Tierra siempre vemos la misma cara de la Luna.",
-      "correcta": true,
-      "tema": "Astronomía",
-      "descripcion": "La Luna tarda lo mismo en girar sobre sí misma que en dar una vuelta a la Tierra, por eso siempre muestra la misma cara.",
-      "dificil": true
+      "tipo": "dificil",
+      "pregunta": "¿Cuál es mi pistola favorita?",
+      "opciones": ["Desert Eagle", "M1911", "Glock 17", "Beretta M9", "Five-Seven", "S 2011-P", "FN Herstal", "CZ 75", "SIG Sauer P226", "CZ 75"],
+      "correcta": 5,
+      "tema": "Gustos - Pistolas",
+      "descripcion": "La S 2011-P es una pistola semiautomática de doble hilera basada en la plataforma clásica 1911, recamarada en calibre 9x19 mm (9mm). Me encanta su ergonomia y su diseño, es mi pistola favorita."
     },
     {
       "tipo": "multiple",
-      "pregunta": "¿Cuáles son los colores primarios en la pintura tradicional?",
-      "opciones": ["Rojo", "Verde", "Amarillo", "Azul", "Naranja"],
-      "correctas": [0, 2, 3],
-      "tema": "Arte",
-      "descripcion": "En el modelo tradicional de pintura los primarios son rojo, amarillo y azul. Verde y naranja son secundarios."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos son planetas del sistema solar?",
-      "opciones": ["Marte", "Plutón", "Venus", "La Luna", "Saturno"],
-      "correctas": [0, 2, 4],
-      "tema": "Astronomía",
-      "descripcion": "Plutón es un planeta enano desde 2006 y la Luna es el satélite de la Tierra."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos animales son mamíferos?",
-      "opciones": ["Delfín", "Tiburón", "Murciélago", "Pingüino", "Ballena"],
-      "correctas": [0, 2, 4],
-      "tema": "Naturaleza",
-      "descripcion": "El tiburón es un pez y el pingüino es un ave."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos países limitan con Argentina?",
-      "opciones": ["Chile", "Perú", "Bolivia", "Uruguay", "Ecuador"],
-      "correctas": [0, 2, 3],
-      "tema": "Argentina",
-      "descripcion": "Argentina limita con Chile, Bolivia, Paraguay, Brasil y Uruguay."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos números son primos?",
-      "opciones": ["2", "9", "13", "21", "17"],
-      "correctas": [0, 2, 4],
-      "tema": "Matemática",
-      "descripcion": "9 = 3 × 3 y 21 = 3 × 7, así que no son primos."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos son estados del agua?",
-      "opciones": ["Sólido", "Líquido", "Gaseoso", "Metálico"],
-      "correctas": [0, 1, 2],
-      "tema": "Ciencia",
-      "descripcion": "El agua puede estar en estado sólido (hielo), líquido o gaseoso (vapor)."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estas lenguas derivan del latín?",
-      "opciones": ["Español", "Alemán", "Italiano", "Portugués", "Inglés"],
-      "correctas": [0, 2, 3],
-      "tema": "Idiomas",
-      "descripcion": "Español, italiano y portugués son lenguas romances. Alemán e inglés son germánicas."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos instrumentos son de cuerda?",
-      "opciones": ["Violín", "Trompeta", "Guitarra", "Arpa", "Flauta"],
-      "correctas": [0, 2, 3],
-      "tema": "Música",
-      "descripcion": "La trompeta y la flauta son instrumentos de viento."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos son continentes?",
-      "opciones": ["Europa", "Groenlandia", "Asia", "Oceanía", "Siberia"],
-      "correctas": [0, 2, 3],
-      "tema": "Geografía",
-      "descripcion": "Groenlandia es una isla y Siberia es una región de Rusia."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estas frutas son cítricos?",
-      "opciones": ["Limón", "Manzana", "Naranja", "Pomelo", "Banana"],
-      "correctas": [0, 2, 3],
-      "tema": "Naturaleza",
-      "descripcion": "Limón, naranja y pomelo son cítricos. La manzana y la banana no."
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos son gases nobles?",
-      "opciones": ["Helio", "Oxígeno", "Neón", "Argón", "Nitrógeno"],
-      "correctas": [0, 2, 3],
-      "tema": "Ciencia",
-      "descripcion": "Helio, neón y argón son gases nobles: casi no reaccionan con otros elementos.",
-      "dificil": true
-    },
-    {
-      "tipo": "multiple",
-      "pregunta": "¿Cuáles de estos libros escribió Jorge Luis Borges?",
-      "opciones": ["Ficciones", "Rayuela", "El Aleph", "Cien años de soledad", "Historia universal de la infamia"],
-      "correctas": [0, 2, 4],
-      "tema": "Literatura",
-      "descripcion": "«Rayuela» es de Julio Cortázar y «Cien años de soledad» de Gabriel García Márquez.",
-      "dificil": true
+      "pregunta": "¿En que lugares del cuerpo no me molestaria que me besaras?",
+      "opciones": ["Cuello", "Mejillas", "Labios", "Espalda", "Pecho", "Brazos", "Manos", "Pelo", "Nariz"],
+      "correctas": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+      "tema": "Gustos - Besos",
+      "descripcion": "Es q amo tus besos ❤️"
     }
   ]
 }
+
+
