@@ -544,6 +544,27 @@
       "correctas": [0, 1, 2, 3],
       "tema": "Tecnología - Herramientas",
       "descripcion": "He utilizado GitHub, Cloudflare Pages, MySQL Workbench y Visual Studio Code."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Soy celoso.",
+      "correcta": true,
+      "tema": "Personalidad - Emociones",
+      "descripcion": "A pesar de que en un inicio pensé que no lo era, si, soy celoso y bastante, pero en vez de enojarme me pongo triste."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Soy muy masoquista.",
+      "correcta": false,
+      "tema": "Personalidad - Emociones",
+      "descripcion": "Soy muy poco masoquista, lo que que si soy es sumiso."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Soy sumiso.",
+      "correcta": true,
+      "tema": "Personalidad - Emociones",
+      "descripcion": "50/50, AMO ser tu presa mi amor, tocame, besame, mordeme, haceme lo que quieras. Aunque también AMO ser tu depredador."
     }
   ]
 }
