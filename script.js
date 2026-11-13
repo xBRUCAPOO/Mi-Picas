@@ -35,6 +35,7 @@ const CLAVES = [
     { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "0" },
     { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños", valor: "0" },
     { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "0" },
+    
     { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "0" },
     { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "0" },
     { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "0" },
