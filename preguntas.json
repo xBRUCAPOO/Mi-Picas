@@ -4,19 +4,6 @@
   "preguntas": [
     {
       "tipo": "normal",
-      "pregunta": "¿Cuál es mi fecha de nacimiento?",
-      "opciones": [
-        "11 de Diciembre",
-        "15 de Diciembre",
-        "10 de Diciembre",
-        "8 de Diciembre"
-      ],
-      "correcta": 2,
-      "tema": "Datos personales - Cumpleaños",
-      "descripcion": "Nací el 10 de diciembre de 2008."
-    },
-    {
-      "tipo": "normal",
       "pregunta": "¿Cuanto calzo?",
       "opciones": [
         "33-34",
@@ -335,6 +322,32 @@
       "correcta": true,
       "tema": "Personalidad - Habilidad",
       "descripcion": "Soy malísimo en el ajedrez xd."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "No tengo problema en jugar juegos como Free Fire, Blood Strike o Call of Duty en celular.",
+      "correcta": false,
+      "tema": "Personalidad - Habilidad",
+      "descripcion": "Soy malisimo jugando a algo que normalmete juego con teclado y mouse con mis dedos."
+    },
+    {
+      "tipo": "normal",
+      "dificil": true,
+      "pregunta": "¿Cuál es el juego que me regalaste?",
+      "opciones": [
+        "Counter-Strike 2",
+        "Call of Duty World at War",
+        "Call of Duty Modern Warfare 2",
+        "Zero Hour",
+        "Call of Duty Black Ops 2",
+        "Ready or Not",
+        "Call of Duty 4 Modern Warfare",
+        "BodyCam",
+        "Call of Duty Black Ops"
+      ],
+      "correcta": 7,
+      "tema": "Regalo - Videojuegos",
+      "descripcion": "El juego que me regalaste es BodyCam, lo queria por su realismo de parecer una cámara corporal y sus animaciones."
     }
   ]
 }
