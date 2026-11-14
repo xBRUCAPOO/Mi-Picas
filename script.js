@@ -15,31 +15,17 @@
 // "valor": la contraseña correcta (solo números; el campo acepta tantos dígitos como tenga el valor).
 // "etiqueta": el texto chiquito que se ve arriba de cada campo (puede ser el acertijo).
 // ============================================
-// const CLAVES = [
-//     { etiqueta: "Mi numero favorito",  valor: "5" },
-//     { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
-//     { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
-//     { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
-//     { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños", valor: "6" },
-//     { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
-//     { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
-//     { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
-//     { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "3" },
-//     { etiqueta: "Sic seben", valor: "67" }
-// ];
-
 const CLAVES = [
-    { etiqueta: "Mi numero favorito",  valor: "0" },
-    { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "0" },
-    { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "0" },
-    { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "0" },
-    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños", valor: "0" },
-    { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "0" },
-    
-    { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "0" },
-    { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "0" },
-    { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "0" },
-    { etiqueta: "Sic seben", valor: "0" }
+    { etiqueta: "Mi numero favorito",  valor: "5" },
+    { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
+    { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
+    { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
+    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños",    },
+    { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
+    { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
+    { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
+    { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "3" },
+    { etiqueta: "Sic seben", valor: "67" }
 ];
 
 // ===== AJUSTES DE LA PRUEBA =====
@@ -73,7 +59,12 @@ const CAMINO_ARCO = "M64 140 V107.5 A69.5 69.5 0 0 1 203 107.5 V140";
 // Carga de preguntas: arranca apenas abre la página, así ya están listas al llegar a la prueba
 let cargaPreguntas = null;
 
+// Control del cielo estrellado: iniciarCielo() completa estas dos funciones.
+// pausar() congela las estrellas (no se dibuja nada) y reanudar() las vuelve a mover
+const controlCielo = { pausar() {}, reanudar() {} };
+
 document.addEventListener("DOMContentLoaded", () => {
+    configurarFinDeEntradas();
     aplicarColorDeTema();
     dibujarPiezas();
     generarClaves();
@@ -89,9 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // UTILIDADES
 // ============================================
 
-// Lee una variable CSS del :root (ej: "--estrella-azul")
+// Lee una variable CSS del :root (ej: "--estrella-azul").
+// Se guarda la primera lectura: los colores del :root no cambian, y leerlos con getComputedStyle
+// en medio de una animación obligaba al navegador a recalcular estilos (trababa en celulares lentos)
+const variablesLeidas = new Map();
 function leerVariable(nombre) {
-    return getComputedStyle(document.documentElement).getPropertyValue(nombre).trim();
+    if (!variablesLeidas.has(nombre)) {
+        variablesLeidas.set(nombre, getComputedStyle(document.documentElement).getPropertyValue(nombre).trim());
+    }
+    return variablesLeidas.get(nombre);
 }
 
 // Convierte "#RRGGBB" en "R, G, B" para usar transparencias en el canvas
@@ -104,6 +101,31 @@ function hexARgb(hex) {
 function aplicarColorDeTema() {
     const meta = document.getElementById("color-tema");
     if (meta) meta.setAttribute("content", leerVariable("--color-fondo"));
+}
+
+// Animaciones de ENTRADA (CSS) que, al terminar, dejan al elemento en su estado normal
+const ANIMACIONES_DE_ENTRADA = new Set(["entrar-arriba", "entrar-opcion", "entrar-tarjeta", "saltar-letra", "entrar-boton", "aparecer-caja", "aparecer"]);
+
+// RENDIMIENTO: una animación CSS que termina con "both"/"forwards" deja al elemento como capa aparte
+// de la placa de video PARA SIEMPRE (en el quiz eran ~10 pantallas de capas: mucha memoria y trabajo
+// en cada cuadro). Cuando termina una entrada, el elemento recibe la clase "ya-entro" y el CSS le saca
+// la animación dejándolo igual a como quedó: la capa se libera.
+// Los grupos que entran de a uno (letras del título, opciones, contraseñas) se liberan TODOS JUNTOS
+// cuando termina el último: una sola actualización en vez de una por elemento
+function configurarFinDeEntradas() {
+    document.addEventListener("animationend", (evento) => {
+        if (evento.pseudoElement) return;
+        const el = evento.target;
+        // La caja de contraseñas ya se fue: se esconde del todo (deja de ocupar a la placa de video)
+        if (evento.animationName === "salir-caja") {
+            el.classList.add("caja--fuera");
+            return;
+        }
+        if (!ANIMACIONES_DE_ENTRADA.has(evento.animationName)) return;
+        const enGrupo = el.classList.contains("letra") || el.classList.contains("opcion") || el.classList.contains("clave");
+        if (!enGrupo) el.classList.add("ya-entro");
+        else if (!el.nextElementSibling && el.parentElement) el.parentElement.classList.add("ya-entro"); // Terminó el último del grupo
+    });
 }
 
 // Atajo para buscar por id
@@ -249,11 +271,28 @@ function crearParticula(clase, color) {
     return el;
 }
 
+// RENDIMIENTO: borra un grupo de partículas de UNA sola vez, cuando terminó la última.
+// Antes cada una se borraba por su cuenta: eran decenas de cambios en la página justo mientras
+// aparecían la llave y el texto (cada cambio frena un instante a la placa de video).
+// Al terminar quedan invisibles (opacidad 0), así que esperar a la última no se nota
+function borrarAlTerminar(elementos, animaciones) {
+    if (elementos.length === 0) return;
+    Promise.allSettled(animaciones.map((a) => a.finished)).then(() => elementos.forEach((el) => el.remove()));
+}
+
+// Elige un valor de una lista corta (en vez de un número cualquiera): así las partículas de una misma
+// explosión terminan en pocos momentos distintos y la página se actualiza menos veces
+function unoDe(...valores) {
+    return valores[Math.floor(Math.random() * valores.length)];
+}
+
 // Chispas que salen desde un rectángulo de la pantalla hacia afuera (por ejemplo, una opción bien respondida)
 function chispasDesde(rect, colores, cantidad = 10) { // 10 por defecto: menos partículas, mejor rendimiento
     if (MOVIMIENTO_REDUCIDO || !rect) return;
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
+    const elementos = [];
+    const animaciones = [];
     for (let i = 0; i < cantidad; i++) {
         const esChispa = Math.random() < 0.6;
         const el = crearParticula(esChispa ? "chispa" : "punto", alAzar(colores));
@@ -270,15 +309,18 @@ function chispasDesde(rect, colores, cantidad = 10) { // 10 por defecto: menos p
         const giro = (Math.random() < 0.5 ? -1 : 1) * (90 + Math.random() * 180);
         const escala = 0.6 + Math.random() * 0.8;
         const medio = tamano / 2;
-        el.animate(
+        elementos.push(el);
+        animaciones.push(el.animate(
             [
                 { transform: `translate(${x0 - medio}px, ${y0 - medio}px) scale(0) rotate(0deg)`, opacity: 1 },
                 { transform: `translate(${x1 - medio}px, ${y1 - medio}px) scale(${escala}) rotate(${giro / 2}deg)`, opacity: 1, offset: 0.5 },
                 { transform: `translate(${x1 - medio}px, ${y1 + 18 - medio}px) scale(0) rotate(${giro}deg)`, opacity: 0 }
             ],
-            { duration: 650 + Math.random() * 400, delay: Math.random() * 90, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" }
-        ).finished.then(() => el.remove());
+            // Duraciones y retrasos de una lista corta (ver unoDe): se ven igual de variadas
+            { duration: unoDe(700, 850, 1000), delay: unoDe(0, 60), easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" }
+        ));
     }
+    borrarAlTerminar(elementos, animaciones);
 }
 
 // Confeti de colores que explota hacia arriba desde el centro y cae girando
@@ -287,30 +329,35 @@ function confeti(cantidad = 45) { // 45 piezas: se ve lleno y no traba el celula
     const colores = ["--color-success", "--color-info", "--color-warning", "--color-error", "--confeti-morado"].map(leerVariable);
     const ancho = window.innerWidth;
     const alto = window.innerHeight;
+    const elementos = [];
+    const animaciones = [];
     for (let i = 0; i < cantidad; i++) {
         const el = crearParticula(Math.random() < 0.75 ? "confeti" : "chispa", alAzar(colores));
         if (!el) break; // Se llegó al tope de partículas
+        elementos.push(el);
         const x0 = ancho / 2 + (Math.random() - 0.5) * 60;
         const y0 = alto * 0.55;
         const xMax = x0 + (Math.random() - 0.5) * ancho * 1.1;
         const yMax = y0 - (alto * 0.35 + Math.random() * alto * 0.35);
         const xFin = xMax + (Math.random() - 0.5) * 120;
         const giro = (Math.random() - 0.5) * 1440;
-        el.animate(
+        animaciones.push(el.animate(
             [
                 { transform: `translate(${x0}px, ${y0}px) rotate(0deg) scale(.4)`, opacity: 1 },
                 { transform: `translate(${xMax}px, ${yMax}px) rotate(${giro / 3}deg) scale(1)`, opacity: 1, offset: 0.35, easing: "ease-in" },
                 { transform: `translate(${xFin}px, ${alto + 40}px) rotate(${giro}deg) scale(1)`, opacity: 0.9 }
             ],
             { duration: 2200 + Math.random() * 1400, delay: Math.random() * 200, easing: "cubic-bezier(.15, .7, .35, 1)", fill: "forwards" }
-        ).finished.then(() => el.remove());
+        ));
     }
+    borrarAlTerminar(elementos, animaciones); // Todo el confeti se borra junto, cuando cayó el último
 }
 
-// "+1" verde que sube desde un elemento (el contador de la racha)
-function masUno(elemento) {
-    if (MOVIMIENTO_REDUCIDO || !elemento) return;
-    const r = elemento.getBoundingClientRect();
+// "+1" verde que sube desde un elemento (el contador de la racha).
+// Acepta el elemento o su rectángulo ya medido (medir antes de cambiar el DOM evita un recálculo forzado)
+function masUno(elementoORect) {
+    if (MOVIMIENTO_REDUCIDO || !elementoORect) return;
+    const r = elementoORect.getBoundingClientRect ? elementoORect.getBoundingClientRect() : elementoORect;
     const el = document.createElement("span");
     el.className = "flotante";
     el.textContent = "+1";
@@ -329,22 +376,23 @@ function masUno(elemento) {
 // DIBUJOS: LLAVE Y CANDADO (estilo Duolingo: formas gordas, labio oscuro abajo y brillo blanco)
 // ============================================
 
-// Llave de as de picas con la M. "sufijo" hace único el id del recorte (hay dos llaves en la página)
-function crearLlave(sufijo) {
-    const pala = "M50 0 C42 20 8 36 8 60 C8 78 22 86 36 80 C40 78 44 77 46 74 L38 94 H62 L54 74 C56 77 60 78 64 80 C78 86 92 78 92 60 C92 36 58 20 50 0 Z";
-    const id = `recorte-llave-${sufijo}`;
+// Forma de la llave (pala de as de picas + caño + dientes), en el sistema de 100 x 246 del dibujo
+const PALA_LLAVE = "M50 0 C42 20 8 36 8 60 C8 78 22 86 36 80 C40 78 44 77 46 74 L38 94 H62 L54 74 C56 77 60 78 64 80 C78 86 92 78 92 60 C92 36 58 20 50 0 Z";
+const SILUETA_LLAVE = `<path d="${PALA_LLAVE}"/><rect x="30" y="86" width="40" height="14" rx="6"/><rect x="43" y="96" width="14" height="150" rx="5"/><rect x="28" y="206" width="18" height="10" rx="3"/><rect x="28" y="228" width="18" height="10" rx="3"/>`;
+
+// Máscara con la silueta de la llave (imagen SVG en línea, sin colores: la máscara solo usa la forma).
+// Recorta el destello para que solo brille sobre la llave
+const MASCARA_LLAVE = `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 246" preserveAspectRatio="none">${SILUETA_LLAVE}</svg>`)}")`;
+
+// Llave de as de picas con la M.
+// RENDIMIENTO: el destello que la cruza ya no se anima DENTRO del SVG (eso obligaba a redibujar la llave
+// en cada cuadro, todo el tiempo, incluso escondida). Ahora es una capa HTML encima, recortada con la
+// silueta de la llave, que solo se desplaza: la mueve la placa de video sin tocar el procesador
+function crearLlave() {
+    const pala = PALA_LLAVE;
     return `
+        <div class="llave-dibujo">
         <svg class="llave-svg" viewBox="0 0 100 246" aria-hidden="true">
-            <defs>
-                <!-- Forma de la llave: recorta el destello para que solo brille sobre la llave -->
-                <clipPath id="${id}">
-                    <path d="${pala}"/>
-                    <rect x="30" y="86" width="40" height="14" rx="6"/>
-                    <rect x="43" y="96" width="14" height="150" rx="5"/>
-                    <rect x="28" y="206" width="18" height="10" rx="3"/>
-                    <rect x="28" y="228" width="18" height="10" rx="3"/>
-                </clipPath>
-            </defs>
             <!-- Labio 3D: la misma forma, más oscura y un poco más abajo -->
             <g class="llave-sombra" transform="translate(0 6)">
                 <path d="${pala}"/>
@@ -366,13 +414,18 @@ function crearLlave(sufijo) {
             <!-- La M, con su sombrita -->
             <text class="llave-letra-sombra" x="50" y="64">M</text>
             <text class="llave-letra" x="50" y="61">M</text>
-            <!-- Destello que cruza la llave cada tanto -->
-            <g clip-path="url(#${id})">
-                <g transform="rotate(20 50 120)">
-                    <rect class="llave-barrido" x="-90" y="-60" width="22" height="380"/>
-                </g>
-            </g>
-        </svg>`;
+        </svg>
+        <!-- Destello que cruza la llave cada tanto (recortado con la silueta de la llave) -->
+        <span class="llave-destello" aria-hidden="true"><span class="llave-barrido"></span></span>
+        </div>`;
+}
+
+// Pone la máscara con la forma de la llave en cada destello
+function recortarDestellos() {
+    document.querySelectorAll(".llave-destello").forEach((capa) => {
+        capa.style.webkitMaskImage = MASCARA_LLAVE;
+        capa.style.maskImage = MASCARA_LLAVE;
+    });
 }
 
 // SVG del corazón completo con sus capas (se usa en cada mitad)
@@ -436,10 +489,11 @@ function dibujarPiezas() {
                 <div class="cara cara--dorso">${svgTapa(394)}</div>
             </div>`;
         cuerpo.insertAdjacentHTML("afterbegin", capas);
-        if (llave) llave.innerHTML = crearLlave("final");
+        if (llave) llave.innerHTML = crearLlave();
     }
     const llaveRecompensa = $("llave-recompensa");
-    if (llaveRecompensa) llaveRecompensa.innerHTML = crearLlave("premio");
+    if (llaveRecompensa) llaveRecompensa.innerHTML = crearLlave();
+    recortarDestellos(); // El destello de las dos llaves se recorta con la silueta de la llave
 }
 
 // ============================================
@@ -725,11 +779,13 @@ async function mostrarRecompensa() {
     const boton = $("boton-recompensa");
 
     if (caja) caja.classList.add("oculta");   // La caja de contraseñas se va
-    document.body.classList.add("capa-abierta"); // Desde acá siempre hay una capa encima: el cielo baja a 30 cuadros por segundo
     await esperar(MOVIMIENTO_REDUCIDO ? 0 : 260);
 
     recompensa.classList.add("visible");
     recompensa.setAttribute("aria-hidden", "false");
+    // Desde acá hay un velo oscuro encima del cielo: las estrellas se congelan (detrás del velo no se nota)
+    // y el celular queda libre para la llave, el texto y las preguntas. Vuelven a moverse con la foto
+    controlCielo.pausar();
 
     if (MOVIMIENTO_REDUCIDO) {
         llave.style.opacity = "1";
@@ -788,60 +844,71 @@ async function salirDeRecompensa() {
     $("recompensa").setAttribute("aria-hidden", "true");
     await esperar(MOVIMIENTO_REDUCIDO ? 0 : 150);
     mostrarQuiz();
+    // Cuando la recompensa terminó de desvanecerse, los rayos dejan de girar (seguían girando escondidos)
+    setTimeout(() => $("rayos").classList.remove("visible"), 400);
 }
 
 // Rayos, destellos y flash que salen del centro del contenedor.
-// Cada elemento se borra solo al terminar su animación.
+// RENDIMIENTO: todas las piezas se agregan juntas a la página (una sola actualización) y se borran
+// juntas cuando terminó la última (antes eran 23 altas y 23 bajas por separado, justo cuando
+// aterrizaba la llave y aparecía el texto)
 function estallar(contenedor) {
     if (!contenedor || MOVIMIENTO_REDUCIDO) return;
+    const piezas = [];
+    const crearPieza = (clase) => {
+        const pieza = document.createElement("span");
+        pieza.className = clase;
+        piezas.push(pieza);
+        return pieza;
+    };
 
     // Flash blanco que se expande y se apaga
-    const flash = document.createElement("span");
-    flash.className = "flash";
-    contenedor.appendChild(flash);
-    flash.animate(
-        [
-            { transform: "scale(.2)", opacity: 0.95 },
-            { transform: "scale(1.6)", opacity: 0.6, offset: 0.4 },
-            { transform: "scale(3)", opacity: 0 }
-        ],
-        { duration: 650, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" }
-    ).finished.then(() => flash.remove());
+    crearPieza("flash");
+    // 10 rayos que se estiran hacia afuera en círculo
+    for (let i = 0; i < 10; i++) crearPieza("rayo");
+    // 12 destellos que salen en todas las direcciones y se apagan
+    for (let i = 0; i < 12; i++) crearPieza("destello");
 
-    // 14 rayos que se estiran hacia afuera en círculo
-    for (let i = 0; i < 10; i++) { // 10 rayos (eran 14)
-        const rayo = document.createElement("span");
-        rayo.className = "rayo";
-        contenedor.appendChild(rayo);
-        const angulo = (360 / 10) * i + (Math.random() * 8 - 4);
-        const retraso = Math.random() * 80;
-        rayo.animate(
-            [
-                { transform: `rotate(${angulo}deg) scaleY(0)`, opacity: 1 },
-                { transform: `rotate(${angulo}deg) scaleY(1.15)`, opacity: 0.9, offset: 0.45 },
-                { transform: `rotate(${angulo}deg) scaleY(1.25)`, opacity: 0 }
-            ],
-            { duration: 800, delay: retraso, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" }
-        ).finished.then(() => rayo.remove());
-    }
+    // Se agregan todas de una vez
+    const fragmento = document.createDocumentFragment();
+    piezas.forEach((pieza) => fragmento.appendChild(pieza));
+    contenedor.appendChild(fragmento);
 
-    // 22 destellos que salen en todas las direcciones y se apagan
-    for (let i = 0; i < 12; i++) { // 12 destellos (eran 22)
-        const destello = document.createElement("span");
-        destello.className = "destello";
-        contenedor.appendChild(destello);
+    const curva = "cubic-bezier(.22, 1, .36, 1)";
+    const animaciones = piezas.map((pieza, i) => {
+        if (i === 0) {
+            return pieza.animate(
+                [
+                    { transform: "scale(.2)", opacity: 0.95 },
+                    { transform: "scale(1.6)", opacity: 0.6, offset: 0.4 },
+                    { transform: "scale(3)", opacity: 0 }
+                ],
+                { duration: 650, easing: curva, fill: "forwards" }
+            );
+        }
+        if (pieza.className === "rayo") {
+            const angulo = 36 * (i - 1) + (Math.random() * 8 - 4);
+            return pieza.animate(
+                [
+                    { transform: `rotate(${angulo}deg) scaleY(0)`, opacity: 1 },
+                    { transform: `rotate(${angulo}deg) scaleY(1.15)`, opacity: 0.9, offset: 0.45 },
+                    { transform: `rotate(${angulo}deg) scaleY(1.25)`, opacity: 0 }
+                ],
+                { duration: 800, delay: unoDe(0, 40, 80), easing: curva, fill: "forwards" }
+            );
+        }
         const angulo = Math.random() * Math.PI * 2;
         const distancia = Math.random() * 170 + 90;
-        const retraso = Math.random() * 120;
-        destello.animate(
+        return pieza.animate(
             [
                 { transform: "translate(0px, 0px) scale(.4)", opacity: 1 },
                 { transform: `translate(${Math.cos(angulo) * distancia}px, ${Math.sin(angulo) * distancia}px) scale(1)`, opacity: 0.9, offset: 0.6 },
                 { transform: `translate(${Math.cos(angulo) * distancia * 1.1}px, ${Math.sin(angulo) * distancia * 1.1}px) scale(.2)`, opacity: 0 }
             ],
-            { duration: 950 + Math.random() * 300, delay: retraso, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" }
-        ).finished.then(() => destello.remove());
-    }
+            { duration: unoDe(1000, 1150), delay: unoDe(0, 60, 120), easing: curva, fill: "forwards" }
+        );
+    });
+    borrarAlTerminar(piezas, animaciones);
 }
 
 // ============================================
@@ -942,6 +1009,7 @@ const quiz = {
     introOcupada: false,    // true mientras corre la animación de "Pregunta difícil"
     ocupado: false,         // true mientras se cambia de pregunta (evita dobles toques)
     introVistas: new Set(), // Preguntas difíciles cuya animación ya se mostró en esta ronda
+    bloqueoHasta: 0,        // Hasta este momento se ignoran los toques del botón (evita saltear el cartel con un doble toque)
     // MAZO DE PREGUNTAS (sin reposición): ids de las preguntas que todavía no aparecieron en este ciclo.
     // Cuando hacen falta más, se agrega un ciclo nuevo con todas, dejando al fondo las del intento anterior
     mazo: [],
@@ -960,8 +1028,16 @@ function configurarQuiz() {
     // La hoja inferior cambia de alto (cartel corto o largo): el quiz le deja siempre el lugar justo abajo
     const hoja = $("hoja");
     if (hoja && "ResizeObserver" in window) {
+        // RENDIMIENTO: la variable se pone solo en los dos elementos que la usan (el quiz y la flecha).
+        // Antes se ponía en el :root y eso obligaba a recalcular los estilos de TODA la página
+        // cada vez que aparecía o se iba el cartel de corrección
+        const usanAltoHoja = [$("quiz"), $("flecha-scroll")].filter(Boolean);
+        let altoAnterior = 0;
         new ResizeObserver(() => {
-            document.documentElement.style.setProperty("--alto-hoja", `${hoja.offsetHeight}px`);
+            const alto = hoja.offsetHeight;
+            if (alto === altoAnterior) return; // Mismo alto: no hay nada que actualizar
+            altoAnterior = alto;
+            usanAltoHoja.forEach((el) => el.style.setProperty("--alto-hoja", `${alto}px`));
         }).observe(hoja);
     }
 }
@@ -1066,7 +1142,8 @@ function dibujarPregunta() {
     $("pregunta-ayuda").textContent = multiple ? "Seleccioná todas las correctas" : "";
 
     const opciones = $("opciones");
-    opciones.classList.remove("opciones--bloqueadas");
+    // "ya-entro" se saca para que las opciones nuevas vuelvan a entrar con su animación
+    opciones.classList.remove("opciones--bloqueadas", "ya-entro");
     opciones.setAttribute("role", multiple ? "group" : "radiogroup");
     opciones.textContent = "";
 
@@ -1104,9 +1181,10 @@ function dibujarPregunta() {
 
     ponerBoton("Comprobar", "check", "comprobar", false);
 
-    // Reinicia la animación de entrada de la tarjeta (entra desde la derecha con rebote)
+    // Reinicia la animación de entrada de la tarjeta (entra desde la derecha con rebote).
+    // También se le saca "ya-entro" (la puso la entrada anterior) para que la animación vuelva a correr
     const tarjeta = $("tarjeta");
-    tarjeta.classList.remove("tarjeta--entrar");
+    tarjeta.classList.remove("tarjeta--entrar", "ya-entro");
     void tarjeta.offsetWidth;
     tarjeta.classList.add("tarjeta--entrar");
 
@@ -1160,6 +1238,8 @@ function elegirOpcion(i) {
 // Qué hace el botón según el momento
 function accionBotonQuiz() {
     if (quiz.introOcupada || quiz.ocupado) return;
+    // Doble toque sin querer en "Comprobar": el segundo toque no saltea el cartel de corrección
+    if (performance.now() < quiz.bloqueoHasta) return;
     switch (quiz.estadoBoton) {
         case "comprobar": comprobar(); break;
         case "continuar": cambiarPregunta(() => { quiz.actual++; }); break;
@@ -1180,6 +1260,7 @@ function comprobar() {
     if (quiz.comprobada || quiz.elegidas.length === 0) return;
     const q = quiz.ronda[quiz.actual];
     quiz.comprobada = true;
+    quiz.bloqueoHasta = performance.now() + 300; // 0,3 s: frena un doble toque sin querer, sin sentirse lento
 
     const bien = quiz.elegidas.length === q.correctas.length && quiz.elegidas.every((i) => q.correctas.includes(i));
     const verdes = [leerVariable("--color-success"), leerVariable("--color-success-claro"), leerVariable("--color-blanco")];
@@ -1189,17 +1270,23 @@ function comprobar() {
     const bienElegidas = quiz.elegidas.filter((i) => q.correctas.includes(i)).length || 1;
     const chispasPorOpcion = Math.max(2, Math.floor(PARTICULAS_POR_PREGUNTA / bienElegidas));
 
-    // Pinta las opciones: bien (verde), mal (rojo) o faltó (verde cortado)
+    // RENDIMIENTO: primero se MIDE todo (posición de cada opción y del contador) y recién después se
+    // cambia el DOM. Medir entre cambios obligaba a recalcular la página una vez por opción
     const opciones = $("opciones");
+    const botones = Array.from(opciones.children);
+    const rects = botones.map((btn) => btn.getBoundingClientRect());
+    const rectContador = $("progreso-contador").getBoundingClientRect();
+
+    // Pinta las opciones: bien (verde), mal (rojo) o faltó (verde cortado)
     opciones.classList.add("opciones--bloqueadas");
-    Array.from(opciones.children).forEach((btn, idx) => {
+    botones.forEach((btn, idx) => {
         const esCorrecta = q.correctas.includes(idx);
         const elegida = quiz.elegidas.includes(idx);
         btn.setAttribute("aria-disabled", "true");
         if (elegida && esCorrecta) {
             btn.classList.add("opcion--bien");
             pop(btn, 1.05, 450);
-            if (bien) chispasDesde(btn.getBoundingClientRect(), verdes, chispasPorOpcion); // Chispas verdes (con tope por pregunta)
+            if (bien) chispasDesde(rects[idx], verdes, chispasPorOpcion); // Chispas verdes (con tope por pregunta)
         } else if (elegida && !esCorrecta) {
             btn.classList.add("opcion--mal");
             temblarLargo(btn, 1700, 9);                                      // Tiembla unos segundos
@@ -1214,7 +1301,7 @@ function comprobar() {
         const aciertos = quiz.actual + 1;
         actualizarProgreso(aciertos);
         pop($("progreso-contador"), 1.45, 520);
-        masUno($("progreso-contador"));
+        masUno(rectContador); // Usa la medida tomada al principio (sin recálculo forzado)
         if (q.dificil) completarMarca(quiz.actual); // Difícil acertada: tilde verde en la barra
         if (aciertos >= quiz.ronda.length) {
             ponerBoton("Abrir el corazón", "arrow_forward", "final", true);
@@ -1462,7 +1549,10 @@ async function mostrarPremio() {
     const premioMarco = $("premio-marco");
     const imagen = $("imagen-premio");
     if (premio) premio.classList.add("visible");
-    if (MOVIMIENTO_REDUCIDO) return;
+    if (MOVIMIENTO_REDUCIDO) {
+        controlCielo.reanudar(); // Sin animaciones: el cielo y la página vuelven a la normalidad enseguida
+        return;
+    }
 
     const marcoAnim = animarCuadros(premioMarco, [
         { opacity: 0, transform: "scale(.3) rotate(-8deg)" },
@@ -1471,19 +1561,21 @@ async function mostrarPremio() {
         { opacity: 1, transform: "scale(1) rotate(0deg)" }
     ], 850);
     if (imagen) {
-        imagen.animate(
-            [
-                { opacity: 0, transform: "scale(1.08)" },
-                { opacity: 1, transform: "scale(1)" }
-            ],
-            // Solo opacidad y escala (el desenfoque animado sobre una foto grande trababa el celular)
-            { duration: 900, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" }
-        );
+        // Solo opacidad y escala (el desenfoque animado sobre una foto grande trababa el celular).
+        // animarCuadros la deja fija al terminar: la foto no queda como capa aparte para siempre
+        animarCuadros(imagen, [
+            { opacity: 0, transform: "scale(1.08)" },
+            { opacity: 1, transform: "scale(1)" }
+        ], 900, "cubic-bezier(.22, 1, .36, 1)");
     }
     await esperar(200);
     estallar($("celebracion"));
     confeti();
     await marcoAnim;
+    // Cuando el cielo terminó de volver a su tamaño, las estrellas se mueven de nuevo
+    // (durante el confeti siguen quietas: así la celebración no se traba)
+    await esperar(1800);
+    controlCielo.reanudar();
 }
 
 // Si no se pudo cargar el JSON: aviso en la tarjeta y botón para reintentar
@@ -1614,7 +1706,9 @@ function armarRonda() {
 function actualizarProgreso(aciertos) {
     const total = quiz.ronda.length || PREGUNTAS_POR_RONDA;
     $("progreso-contador").textContent = `${dosCifras(aciertos)} / ${dosCifras(total)}`;
-    $("progreso-barra").style.width = `${(aciertos / total) * 100}%`;
+    // RENDIMIENTO: la barra ya no cambia de ancho (eso recalculaba la página en cada cuadro del rebote):
+    // mide siempre el 100% y se desliza desde la izquierda; la pista la recorta
+    $("progreso-barra").style.transform = `translateX(${((aciertos / total) * 100 - 100).toFixed(2)}%)`;
 }
 
 // Calaveras sobre la barra en cada pregunta difícil de la ronda (como en Test).
@@ -1763,8 +1857,8 @@ async function introDificil() {
 // - Los colores se preparan una sola vez (antes se armaba un texto de color por estrella en cada cuadro).
 // - Las estrellas chiquitas se dibujan como cuadraditos (mucho más barato que un círculo, y no se nota).
 // - Resolución máxima 1.5x y menos estrellas en celular.
-// - Cuando hay una capa encima (recompensa, quiz, escena, foto), el cielo se dibuja a 30 cuadros por segundo:
-//   detrás del velo oscuro no se nota y libera al celular para las animaciones de adelante.
+// - Cuando hay un velo oscuro encima (recompensa, quiz y escena del corazón) el cielo se congela:
+//   detrás del velo no se nota y libera al celular para las animaciones de adelante. Con la foto vuelve.
 // ============================================
 
 function iniciarCielo() {
@@ -2004,13 +2098,20 @@ function iniciarCielo() {
     }
 
     // Bucle de animación: el navegador lo pausa solo cuando la pestaña no se ve (ahorra batería).
-    // Las estrellas se mueven muy despacio, así que alcanza con 30 cuadros por segundo; con una capa
-    // encima (recompensa, quiz, escena, foto) baja a 15, porque detrás del velo casi no se ve.
-    // Así el celular queda libre para las animaciones de adelante
+    // Las estrellas se mueven muy despacio, así que alcanza con 30 cuadros por segundo.
+    // RENDIMIENTO: mientras hay un velo oscuro encima (recompensa, preguntas y escena del corazón)
+    // el bucle se DETIENE del todo (controlCielo.pausar): el cielo queda congelado detrás del velo,
+    // donde no se nota, y el procesador queda entero para las animaciones de adelante
+    let pausado = false;
+    let bucleActivo = false;
+
     function bucle(marca) {
+        if (pausado) {               // Se pidió pausar: no se programa el próximo cuadro
+            bucleActivo = false;
+            return;
+        }
         requestAnimationFrame(bucle);
-        const intervalo = document.body.classList.contains("capa-abierta") ? 1000 / 15 : 1000 / 30;
-        if (marca - ultimoDibujo < intervalo - 2) return;
+        if (marca - ultimoDibujo < 1000 / 30 - 2) return;
         ultimoDibujo = marca;
         const ahora = marca / 1000;
         const delta = Math.min(ahora - ultimoTiempo, 0.1);
@@ -2018,6 +2119,29 @@ function iniciarCielo() {
         tiempoCielo += delta;
         dibujarCuadro(tiempoCielo, delta);
     }
+
+    // Arranca el bucle (si no estaba corriendo). El primer cuadro solo toma la hora,
+    // así las estrellas siguen desde donde quedaron, sin saltar
+    function arrancarBucle() {
+        if (bucleActivo || MOVIMIENTO_REDUCIDO) return;
+        bucleActivo = true;
+        requestAnimationFrame((marca) => {
+            ultimoTiempo = marca / 1000;
+            bucle(marca);
+        });
+    }
+
+    // "cielo-quieto" en el body: el CSS además frena la luna y esconde la página de contraseñas
+    // (todo eso queda tapado por el velo; así la placa de video no lo vuelve a dibujar en cada cuadro)
+    controlCielo.pausar = () => {
+        pausado = true;
+        document.body.classList.add("cielo-quieto");
+    };
+    controlCielo.reanudar = () => {
+        pausado = false;
+        document.body.classList.remove("cielo-quieto");
+        arrancarBucle();
+    };
 
     // Al girar el celular se redimensiona, con una pequeña espera para no recalcular de más
     let temporizadorResize;
@@ -2030,9 +2154,6 @@ function iniciarCielo() {
 
     if (!MOVIMIENTO_REDUCIDO) {
         programarFugaz(2.5);
-        requestAnimationFrame((marca) => {
-            ultimoTiempo = marca / 1000;
-            bucle(marca);
-        });
+        arrancarBucle();
     }
 }
