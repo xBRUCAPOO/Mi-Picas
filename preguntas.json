@@ -309,6 +309,32 @@
       "correcta": true,
       "tema": "Personalidad - Emociones",
       "descripcion": "50/50, AMO ser tu presa mi amor, tocame, besame, mordeme, haceme lo que quieras. Aunque también AMO ser tu depredador."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿A quienes considero mis hermanos?",
+      "opciones": [
+        "Mike",
+        "Pedro",
+        "Pique",
+        "Perú",
+        "Julián",
+        "Rivas",
+        "Jony",
+        "Gonza",
+        "Mateo", 
+        "Luciano"
+      ],
+      "correctas": [3,  7, 9],
+      "tema": "Familia",
+      "descripcion": "Luciano como hermano de sangre, Perú y Gonza como hermanos de otra madre."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Soy mejor en el Póker que en el Ajedrez.",
+      "correcta": true,
+      "tema": "Personalidad - Habilidad",
+      "descripcion": "Soy malísimo en el ajedrez xd."
     }
   ]
 }
