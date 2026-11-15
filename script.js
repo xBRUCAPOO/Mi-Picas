@@ -16,16 +16,25 @@
 // "etiqueta": el texto chiquito que se ve arriba de cada campo (puede ser el acertijo).
 // ============================================
 const CLAVES = [
-    { etiqueta: "Mi numero favorito",  valor: "5" },
-    { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
-    { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
-    { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
-    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños",    },
-    { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
-    { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
-    { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
-    { etiqueta: "La cantidad de letras de mi color favorito mas la cantidad de letras de mi nombre menos la cantidad de letras de tu nombre",  valor: "3" },
-    { etiqueta: "Sic seben", valor: "67" }
+    { etiqueta: "Mi número favorito", valor: "5" },
+
+    { etiqueta: "La suma de nuestros números favoritos", valor: "37" },
+
+    { etiqueta: "La resta de mi cumpleaños con el tuyo", valor: "8" },
+
+    { etiqueta: "La resta del día en que comenzamos a hablar con el día en que nos hicimos novios (el menor se resta al mayor)", valor: "24" },
+
+    { etiqueta: "La suma de nuestras edades menos la suma de los días de nuestros cumpleaños", valor: "6" },
+
+    { etiqueta: "El día del mes en que viniste por primera vez a mi casa", valor: "7" },
+
+    { etiqueta: "La suma de nuestras edades menos la suma del día en que comenzamos a hablar y el día en que dijimos que nos arruinaríamos la vida", valor: "24" },
+
+    { etiqueta: "La cantidad de letras de mi segundo nombre más la cantidad de letras de tu apellido", valor: "17" },
+
+    { etiqueta: "La cantidad de letras de mi color favorito más las letras de mi primer nombre menos las letras de tu primer nombre", valor: "3" },
+
+    { etiqueta: "Sic Seben", valor: "67" }
 ];
 
 // ===== AJUSTES DE LA PRUEBA =====
