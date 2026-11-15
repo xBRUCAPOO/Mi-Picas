@@ -4,7 +4,7 @@
   "preguntas": [
     {
       "tipo": "normal",
-      "pregunta": "¿Cuanto calzo?",
+      "pregunta": "¿Cuánto calzo?",
       "opciones": [
         "33-34",
         "35-36",
@@ -19,7 +19,7 @@
       ],
       "correcta": 6,
       "tema": "Datos personales",
-      "descripcion": "Soy de Córdoba Capital, Argentina."
+      "descripcion": "Calzo 45-46, depende de la marca de la zapatilla, me han dicho pie de canoa."
     },
     {
       "tipo": "normal",
@@ -51,7 +51,7 @@
       ],
       "correcta": 6,
       "tema": "Gustos - Bebidas",
-      "descripcion": "Mi segunda gaseosa favorita es la fanta."
+      "descripcion": "Mi segunda gaseosa favorita es la Fanta."
     },
     {
       "tipo": "normal",
@@ -83,7 +83,7 @@
       ],
       "correcta": 4,
       "tema": "Gustos - Videojuegos",
-      "descripcion": "Me proyecto con Mark porq en el momento en el que lo jugué. Los 2 eramos unos adolescentes, sin novia, les cuesta tocar le piano y se ilusionaba con cualquier interacción fememina."
+      "descripcion": "Me proyecto con Mark porque, en el momento en el que lo jugué, los dos éramos adolescentes sin novia, nos costaba tocar el piano y nos ilusionábamos con cualquier interacción femenina."
     },
     {
       "tipo": "normal",
@@ -142,7 +142,7 @@
     {
       "tipo": "multiple",
       "dificil": true,
-      "pregunta": "¿Cuáles de estos géneros o experiencias de videojuegos disfruto?",
+      "pregunta": "¿Cuáles de estos géneros de videojuegos prefiero y disfruto mayormente?",
       "opciones": [
         "Novelas visuales",
         "Juegos de disparos en primera persona",
@@ -150,12 +150,19 @@
         "Simuladores tácticos",
         "Videojuegos de ritmo y dificultad",
         "Juegos de estrategia",
-        "Roguelike (progresion)",
+        "Roguelike (progresión)",
         "Juegos deportivos"
       ],
-      "correctas": [0, 1, 3, 4, 5, 6],
+      "correctas": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
       "tema": "Gustos - Videojuegos",
-      "descripcion": "Disfruto especialmente las novelas visuales, las experiencias tácticas como Ready or Not, Los juegos de disparos en tercera persona como los Call of Duty y los desafíos musicales y de precisión como Malatonin."
+      "descripcion": "Disfruto especialmente las novelas visuales como Until Then y The Coffin of Andy and Leyley, las experiencias tácticas como Ready or Not y SCP:5K, los juegos de disparos en primera persona como los Call of Duty, los desafíos musicales y de precisión como Melatonin y los Roguelike como Balatro y Gambonanza."
     },
     {
       "tipo": "normal",
@@ -163,7 +170,7 @@
       "opciones": [
         "Memories",
         "In the pool",
-        "Its been so long",
+        "It's been so long",
         "Duelo Maestro",
         "Fallen Down",
         "The Coffin of Andy and Leyley music",
@@ -172,8 +179,8 @@
         "Aria Math",
         "Ni una foto juntos"
       ],
-      "correcta":6,
-      "tema": "Gustos - Videojuegos",
+      "correcta": 6,
+      "tema": "Gustos - Música",
       "descripcion": "Es la que casi siempre te mando tocando en los audios, es de The Owl House."
     },
     {
@@ -223,11 +230,11 @@
       ],
       "correcta": 5,
       "tema": "Trabajo - Proyectos",
-      "descripcion": "Es ÉLIX, el nombre no viene nada en específicoo, lteralmente es porq sonaba bien xD."
+      "descripcion": "Es ÉLIX; el nombre no viene de nada en específico, literalmente es porque sonaba bien xD."
     },
     {
       "tipo": "normal",
-      "pregunta": "¿Que videojuego odio pero sigo jugando?",
+      "pregunta": "¿Qué videojuego odio pero sigo jugando?",
       "opciones": [
         "Ready or Not",
         "SCP:5K",
@@ -243,7 +250,7 @@
       ],
       "correcta": 6,
       "tema": "Gustos - Videojuegos",
-      "descripcion": "He hablado de todos los videojuegos seleccionados como parte de mis gustos o intereses."
+      "descripcion": "Qué juego poronga el Counter-Strike 2, lo juego por la caja nomás, que vale plata, y casi siempre es una miseria lo que me dan."
     },
     {
       "tipo": "multiple",
@@ -259,37 +266,47 @@
         "Pelo",
         "Nariz"
       ],
-      "correctas": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+      "correctas": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
       "tema": "Gustos - Besos",
       "descripcion": "Es que amo tus besos ❤️"
     },
     {
       "tipo": "vf",
-      "pregunta": "TE AMO MUCHISISIMO.",
+      "pregunta": "TE AMO MUCHISÍSIMO.",
       "correcta": true,
       "tema": "Factos",
       "descripcion": "Te amo inmensamente con toda mi alma amor mío."
     },
     {
       "tipo": "vf",
-      "pregunta": "Sos la mujer mas hermosa que existe en mi vida.",
+      "pregunta": "Sos la mujer más hermosa que existe en mi vida.",
       "correcta": true,
       "tema": "Factos",
-      "descripcion": "Mely, sos la mujer mas hermosa que mis ojos han tenido el placer de presenciar y ninguna otra se acercará siquiera un poco de lo hermosos  que son tus ojos y esa bella carita, sos todo el significado de hermosa y para mi perfecta."
+      "descripcion": "Mely, sos la mujer más hermosa que mis ojos han tenido el placer de presenciar y ninguna otra se acercará siquiera un poco a lo hermosos que son tus ojos y esa bella carita; sos todo el significado de hermosa y, para mí, perfecta."
     },
     {
       "tipo": "vf",
       "pregunta": "Soy celoso.",
       "correcta": true,
       "tema": "Personalidad - Emociones",
-      "descripcion": "A pesar de que en un inicio pensé que no lo era, si, soy celoso y bastante, pero en vez de enojarme me pongo triste."
+      "descripcion": "A pesar de que en un inicio pensé que no lo era, sí, soy celoso y bastante, pero en vez de enojarme me pongo triste."
     },
     {
       "tipo": "vf",
       "pregunta": "Soy muy masoquista.",
       "correcta": false,
       "tema": "Personalidad - Emociones",
-      "descripcion": "Soy muy poco masoquista, lo que que si soy es sumiso."
+      "descripcion": "Soy muy poco masoquista, lo que sí soy es sumiso."
     },
     {
       "tipo": "vf",
@@ -300,7 +317,7 @@
     },
     {
       "tipo": "multiple",
-      "pregunta": "¿A quienes considero mis hermanos?",
+      "pregunta": "¿A quiénes considero mis hermanos?",
       "opciones": [
         "Mike",
         "Pedro",
@@ -310,16 +327,20 @@
         "Rivas",
         "Jony",
         "Gonza",
-        "Mateo", 
+        "Mateo",
         "Luciano"
       ],
-      "correctas": [3,  7, 9],
+      "correctas": [
+        3,
+        7,
+        9
+      ],
       "tema": "Familia",
       "descripcion": "Luciano como hermano de sangre, Perú y Gonza como hermanos de otra madre."
     },
     {
       "tipo": "vf",
-      "pregunta": "Soy mejor en el Póker que en el Ajedrez.",
+      "pregunta": "Soy mejor en el póker que en el ajedrez.",
       "correcta": true,
       "tema": "Personalidad - Habilidad",
       "descripcion": "Soy malísimo en el ajedrez xd."
@@ -329,7 +350,7 @@
       "pregunta": "No tengo problema en jugar juegos como Free Fire, Blood Strike o Call of Duty en celular.",
       "correcta": false,
       "tema": "Personalidad - Habilidad",
-      "descripcion": "Soy malisimo jugando a algo que normalmete juego con teclado y mouse con mis dedos."
+      "descripcion": "Soy malísimo jugando con los dedos a algo que normalmente juego con teclado y mouse."
     },
     {
       "tipo": "normal",
@@ -348,139 +369,50 @@
       ],
       "correcta": 7,
       "tema": "Regalo - Videojuegos",
-      "descripcion": "El juego que me regalaste es BodyCam, lo queria por su realismo de parecer una cámara corporal y sus animaciones."
+      "descripcion": "El juego que me regalaste es BodyCam, lo quería por su realismo de parecer una cámara corporal y sus animaciones."
     },
     {
       "tipo": "normal",
       "dificil": true,
-      "pregunta": "¿A que colegio voy?",
+      "pregunta": "¿A qué colegio voy?",
       "opciones": [
-  "IPET 22 - Juan Filloy",
-  "IPET 26 - Juan Filloy",
-  "IPET 34",
-  "IPET 44 - Ministro Macario Carrizo",
-  "IPET 47 - Norberto J. Quadri",
-  "IPET 48 - Presidente Roca",
-  "IPET 49 - Domingo Faustino Sarmiento",
-  "IPET 50 - Ingeniero Emilio F. Olmos",
-  "IPET 51 - Nicolás Avellaneda",
-  "IPET 52 - Carlos Pellegrini",
-  "IPET 53 - Fray Luis Beltrán",
-  "IPET 54 - Juan Enrique Müller",
-  "IPET 55",
-  "IPET 56 - Abraham Juárez",
-  "IPET 57 - Comodoro Martín Rivadavia",
-  "IPET 58 - General Enrique Mosconi",
-  "IPET 59 - 25 de Mayo",
-  "IPET 60 - Mariano Moreno",
-  "IPET 61 - General Manuel Savio",
-  "IPET 62 - Álvarez Condarco",
-  "IPET 63 - República de Italia",
-  "IPET 64 - Malvinas Argentinas",
-  "IPET 65 - Juan Antonio de Mena",
-  "IPET 66 - Dr. José Antonio Balseiro",
-  "IPET 67 - Teniente Coronel Luis Piedrabuena",
-  "IPET 68 - Coronel Don Luis Álvarez",
-  "IPET 69 - Juana Manso de Noronha",
-  "IPET 70 - Profesor Dr. Humberto Dionisi",
-  "IPET 71 - Dr. Luis Federico Leloir",
-  "IPET 73 - Margarita Weild de Paz",
-  "IPET 74 - Fray Mamerto Esquiú",
-  "IPET 75 - Dr. René Favaloro",
-  "IPET 76 - Gustavo Riemann",
-  "IPET 77 - Gobernador Dr. Santiago del Castillo",
-  "IPET 78 - Juan Bautista Ambrosetti",
-  "IPET 79 - Ingeniero Renato de Marco",
-  "IPET 80 - Dr. Luis Federico Leloir",
-  "IPET 83 - Dr. René Favaloro",
-  "IPET 84 - Jorge Vocos Lescano",
-  "IPET 85 - República de Italia",
-  "IPET 87 - Robertina Moyano de Sastre",
-  "IPET 89 - Paula Albarracín",
-  "IPET 98 - Luis de Tejeda",
-  "IPET 99 - Rosario Vera Peñaloza",
-  "IPET 100 - María Benita Arias",
-  "IPET 101 - República Argentina",
-  "IPET 104 - Arturo Capdevila",
-  "IPET 106 - Remedios de Escalada de San Martín",
-  "IPET 108 - Clotilde Guillén de Rezzano",
-  "IPET 110 - Manuel Hidalgo",
-  "IPET 111 - Ramiro Suárez",
-  "IPET 118 - Juana Azurduy",
-  "IPET 125 - Lidia Pura Benítez",
-  "IPET 129 - Héroes de Malvinas",
-  "IPET 132 - Paravachasca",
-  "IPET 133 - Dr. Florencio Escardó",
-  "IPET 139 - General Manuel Belgrano",
-  "IPET 143 - General José María Paz",
-  "IPET 170 - Padre José Gabriel Brochero",
-  "IPET 200 - Ingeniero José Palacios",
-  "IPET 232 - Profesor Enrique Alberto Flores",
-  "IPET 247 - Ingeniero Carlos A. Cassaffousth",
-  "IPET 248 - Leopoldo Lugones",
-  "IPET 249 - Nicolás Copérnico",
-  "IPET 250 - Dr. Juan Bialet Massé",
-  "IPET 251 - Guarnición Aérea Córdoba",
-  "IPET 253 - Presidente Juan Domingo Perón",
-  "IPET 254 - Tristán de Tejeda",
-  "IPET 255",
-  "IPET 256 - Libertador General José de San Martín",
-  "IPET 257 - Dr. René Favaloro",
-  "IPET 258 - Mayor Ingeniero Francisco de Arteaga",
-  "IPET 259 - Ambrosio Olmos",
-  "IPET 260 - Ernesto Arnaldo Martínez",
-  "IPET 261 - San José",
-  "IPET 262 - Dr. Belisario Roldán",
-  "IPET 263 - Dr. Bernardo Houssay",
-  "IPET 264 - Teodoro Asteggiano",
-  "IPET 265 - Escuela de Minería",
-  "IPET 266 - General Manuel Savio",
-  "IPET 267 - Antonio Graziano",
-  "IPET 300",
-  "IPET 308",
-  "IPET 313 - Dr. Pablo Mirizzi",
-  "IPET 314 - Libertador General José de San Martín",
-  "IPET 318 - Combate de la Tablada",
-  "IPET 322 - Manuel Belgrano",
-  "IPET 331",
-  "IPET 333 - Julio Sallusso",
-  "IPET 334",
-  "IPET 339",
-  "IPET 344",
-  "IPET 351",
-  "IPET 355",
-  "IPET 361",
-  "IPET 362",
-  "IPET 372",
-  "IPET 379",
-  "IPET 382",
-  "IPET 383",
-  "IPET 386",
-  "IPET 389",
-  "IPET 397",
-  "IPET 398",
-  "IPET 402",
-  "IPET 404",
-  "IPET 409",
-  "IPET 411",
-  "IPET 412",
-  "IPET 413"
-],
-      "correcta": 14,
+        "IPET 50 - Ingeniero Emilio F. Olmos",
+        "IPET 51 - Nicolás Avellaneda",
+        "IPET 52 - Carlos Pellegrini",
+        "IPET 53 - Fray Luis Beltrán",
+        "IPET 54 - Juan Enrique Müller",
+        "IPET 55",
+        "IPET 56 - Abraham Juárez",
+        "IPET 57 - Comodoro Martín Rivadavia",
+        "IPET 58 - General Enrique Mosconi",
+        "IPET 59 - 25 de Mayo",
+        "IPET 60 - Mariano Moreno",
+        "IPET 61 - General Manuel Savio",
+        "IPET 62 - Álvarez Condarco",
+        "IPET 63 - República de Italia",
+        "IPET 64 - Malvinas Argentinas",
+        "IPET 65 - Juan Antonio de Mena",
+        "IPET 66 - Dr. José Antonio Balseiro",
+        "IPET 67 - Teniente Coronel Luis Piedrabuena",
+        "IPET 68 - Coronel Don Luis Álvarez",
+        "IPET 69 - Juana Manso de Noronha",
+        "IPET 70 - Profesor Dr. Humberto Dionisi"
+      ],
+      "correcta": 7,
       "tema": "Colegio",
       "descripcion": "Estudio en el penitenciario IPET 57 - Comodoro Martín Rivadavia."
     },
     {
       "tipo": "vf",
-      "pregunta": "Soy incha de River?.",
+      "pregunta": "Soy hincha de River.",
       "correcta": false,
       "tema": "Deportes",
-      "descripcion": "No me gusta el futbol y no soy hincha de ningún equipo."
+      "descripcion": "No me gusta el fútbol y no soy hincha de ningún equipo."
     },
     {
       "tipo": "normal",
       "dificil": true,
-      "pregunta": "¿Cuantos años hice de basquet?",
+      "pregunta": "¿Cuántos años hice de básquet?",
       "opciones": [
         "1-2",
         "3-4",
@@ -488,9 +420,9 @@
         "7-8",
         "9-10"
       ],
-      "correcta": 7,
+      "correcta": 2,
       "tema": "Deportes",
-      "descripcion": "El juego que me regalaste es BodyCam, lo queria por su realismo de parecer una cámara corporal y sus animaciones."
+      "descripcion": "Hice entre 5 y 6 años de básquet."
     }
   ]
 }
