@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     configurarRecompensa();
     configurarQuiz();
     iniciarCielo();
+    configurarBienvenida(); // v1.8: ventana inicial; la página aparece recién al tocar "Continuar"
     cargaPreguntas = cargarPreguntas();
     cargaPreguntas.catch(() => {}); // Si falla, el aviso se muestra recién al llegar a la prueba (mostrarQuiz)
 });
@@ -696,6 +697,27 @@ function repartirDigitos(desde, digitos) {
 function configurarBoton() {
     const boton = $("boton");
     if (boton) boton.addEventListener("click", verificar);
+}
+
+// v1.8: VENTANA DE BIENVENIDA
+// Al entrar, el body tiene "bienvenida": el CSS frena la aparición de la página y acá se pausa el cielo
+// (las estrellas no se dibujan mientras están invisibles: el celular no gasta nada esperando).
+// Al tocar "Continuar" la ventana se va, se saca la clase y arranca la aparición original de la página
+function configurarBienvenida() {
+    const velo = $("bienvenida");
+    const boton = $("boton-bienvenida");
+    if (!velo || !boton) { document.body.classList.remove("bienvenida"); return; }
+    controlCielo.pausar();
+    boton.addEventListener("click", async () => {
+        boton.disabled = true;               // Evita doble toque
+        if (!MOVIMIENTO_REDUCIDO) {
+            velo.classList.add("cerrando");  // Animación de salida de la ventana
+            await esperar(300);
+        }
+        velo.hidden = true;                  // Se saca del todo (no queda como capa invisible)
+        document.body.classList.remove("bienvenida"); // Arrancan cielo, luna, caja y contraseñas
+        controlCielo.reanudar();             // Las estrellas empiezan a moverse
+    }, { once: true });
 }
 
 // Mensaje suave debajo de las contraseñas

@@ -412,6 +412,82 @@ body.cielo-quieto .acceso {
 }
 
 /*==========================================
+    VENTANA DE BIENVENIDA (v1.8)
+    Mientras el body tenga "bienvenida", la aparición de la página (cielo, luna, caja y contraseñas)
+    queda frenada en "animation: none" (invisible). Al tocar "Continuar", script.js saca la clase
+    y las animaciones arrancan desde cero, exactamente como antes al entrar.
+==========================================*/
+
+body.bienvenida .cielo,
+body.bienvenida .luna,
+body.bienvenida .caja,
+body.bienvenida .clave {
+    animation: none;
+}
+
+/* Fondo de la ventana: cubre toda la pantalla y la centra */
+.bienvenida-velo {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    box-sizing: border-box;
+    overflow-y: auto;                      /* Si el texto es largo, se puede deslizar */
+}
+
+/* La ventana flotante: mismo vidrio oscuro que la caja de contraseñas; entra con rebote */
+.bienvenida-ventana {
+    width: 100%;
+    max-width: 380px;
+    margin: auto;                          /* Centrada, y si el texto es muy largo no se corta arriba */
+    box-sizing: border-box;
+    padding: var(--relleno-caja);
+    background: var(--glass-caja);
+    border: 1px solid var(--color-borde-suave);
+    border-radius: var(--radio-caja);
+    box-shadow: 0 24px 60px var(--sombra-principal), 0 0 50px var(--sombra-suave), inset 0 1px 0 var(--color-brillo-borde);
+    text-align: center;
+    animation: aparecer-ventana .6s var(--curva-resorte) .2s both;
+}
+
+/* Salida al tocar "Continuar": cae un poco y se desvanece (misma salida que la caja) */
+.bienvenida-velo.cerrando .bienvenida-ventana {
+    animation: salir-caja .3s var(--curva-salida) forwards;
+    pointer-events: none;
+}
+
+@keyframes aparecer-ventana {
+    from { opacity: 0; transform: translateY(30px) scale(.94); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Título con la misma letra que "Hola" */
+.bienvenida-titulo {
+    font-family: var(--fuente-titulo);
+    font-weight: 400;
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--color-texto);
+    margin: 0 0 .6rem;
+}
+
+.bienvenida-texto {
+    font-family: var(--fuente-texto);
+    font-size: .88rem;
+    line-height: 1.6;
+    color: var(--color-texto-secundario);
+    margin: 0 0 1rem;
+    white-space: pre-line;                 /* Respeta los saltos de línea que escribas en el HTML */
+}
+
+.bienvenida-texto:last-of-type {
+    margin-bottom: 1.4rem;                 /* Más aire antes del botón */
+}
+
+/*==========================================
     BOTONES 3D (estilo Duolingo)
     Tienen un "labio" oscuro abajo; al tocarlos bajan y el labio desaparece, como una tecla
 ==========================================*/

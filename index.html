@@ -17,11 +17,12 @@
     <!-- Íconos de Google Fonts (Material Symbols): solo se descargan los usados (en orden alfabético, como pide Google) -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=arrow_forward,cancel,check,check_box,check_box_outline_blank,check_circle,close,keyboard_arrow_down,restart_alt,skull&display=block" rel="stylesheet">
 
-    <!-- "?v=9" cambia en cada versión: obliga al celular a bajar el CSS nuevo en vez de usar el guardado -->
-    <link rel="stylesheet" href="style.css?v=9">
+    <!-- "?v=10" cambia en cada versión: obliga al celular a bajar el CSS nuevo en vez de usar el guardado -->
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 
-<body>
+<!-- v1.8: "bienvenida" frena la aparición de la página hasta que se toque "Continuar" en la ventana inicial -->
+<body class="bienvenida">
     <!-- ===== FONDO: NOCHE ESTRELLADA ===== -->
     <div class="fondo-noche" aria-hidden="true">
         <div class="nebulosa nebulosa-1"></div>
@@ -29,6 +30,20 @@
         <div class="via-lactea"></div>
         <canvas id="cielo" class="cielo"></canvas>
         <div class="luna"></div>
+    </div>
+
+    <!-- ===== 0) VENTANA DE BIENVENIDA (v1.8) =====
+         Aparece al entrar. Recién al tocar "Continuar" se ejecuta la aparición de la página de contraseñas.
+         ✏️ Cambiá el título y el texto por los tuyos (podés agregar más <p class="bienvenida-texto"> si querés varios párrafos) -->
+    <div class="bienvenida-velo" id="bienvenida">
+        <section class="bienvenida-ventana" role="dialog" aria-modal="true" aria-labelledby="bienvenida-titulo">
+            <h2 class="bienvenida-titulo" id="bienvenida-titulo">Título</h2>
+            <p class="bienvenida-texto">Acá va tu texto.</p>
+            <button class="boton" id="boton-bienvenida" type="button">
+                <span>Continuar</span>
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+            </button>
+        </section>
     </div>
 
     <!-- ===== 1) PANTALLA DE CONTRASEÑAS ===== -->
@@ -49,7 +64,7 @@
         </section>
 
         <footer class="pie">
-            <span>v1.7</span>
+            <span>v1.8</span>
             <span aria-hidden="true">·</span>
             <time datetime="2026-11-14">14/11/2026</time>
         </footer>
@@ -161,15 +176,15 @@
         <div class="premio-clave" id="premio-clave">
             <p class="premio-clave-titulo">Contraseña:</p>
             <p class="premio-clave-numero">7355608</p>
-            <p class="premio-clave-nota">(Todavia no sabes para que es, pero va a serte útil en el futuro, no si cercano o lejado, depende  de como vaya larealción, pero cuando tenga la suficiente confianza, te daré en donde ponerlo.) <br> Gracias por llegar hasta acá, TE AMOO ❤️</p>
+            <p class="premio-clave-nota">(Todavia no sabes para que es, ni yo tampoco, pero ya lo averiguaremso juntos jejeejejej xdxdxdxdxddx dkdiwfiejfiwe fiwfnwei9 fnwifmwif9n)</p>
         </div>
     </section>
 
     <!-- Chispas, confeti y "+1": capa de partículas por encima de todo -->
     <div class="particulas" id="particulas" aria-hidden="true"></div>
 
-    <!-- "?v=9": igual que el CSS, fuerza a bajar el script de esta versión (v1.7) -->
-    <script src="script.js?v=9"></script>
+    <!-- "?v=10": igual que el CSS, fuerza a bajar el script de esta versión (v1.8) -->
+    <script src="script.js?v=10"></script>
 </body>
 
 </html>
