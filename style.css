@@ -1974,10 +1974,13 @@ body.en-quiz .hoja {
     inset: 0;
     z-index: 20;
     display: flex;
+    flex-direction: column;                /* v1.7: la foto arriba y la contraseña debajo, en columna */
+    gap: 18px;                             /* v1.7: separación entre la foto y la contraseña */
     align-items: center;
-    justify-content: center;
+    justify-content: safe center;          /* v1.7: "safe" evita que la foto se corte arriba si no entra todo (celular acostado) */
     padding: 18px;
     box-sizing: border-box;
+    overflow-y: auto;                      /* v1.7: en pantallas muy bajas se puede deslizar para leer la nota */
     background: var(--velo-escena);
     opacity: 0;
     visibility: hidden;
@@ -2006,9 +2009,46 @@ body.en-quiz .hoja {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 72svh;
+    max-height: 56svh;                     /* v1.7: antes 72svh; deja lugar a la contraseña sin tapar la foto */
     object-fit: contain;
     border-radius: 1rem;
+}
+
+/* v1.7: bloque de la contraseña final, centrado horizontalmente debajo de la foto */
+.premio-clave {
+    max-width: min(88vw, 420px);
+    text-align: center;
+    font-family: var(--fuente-ibm-plex-mono);  /* IBM Plex Mono, como se pidió */
+}
+
+.premio-clave p {
+    margin: 0;
+}
+
+/* "Contraseña:" */
+.premio-clave-titulo {
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--color-texto-secundario);
+}
+
+/* El número, grande y en blanco */
+.premio-clave-numero {
+    margin-top: 4px !important;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--color-blanco);
+    user-select: all;                      /* Un toque selecciona todo el número para copiarlo */
+}
+
+/* La nota en gris, más chica */
+.premio-clave-nota {
+    margin-top: 8px !important;
+    font-size: .78rem;
+    line-height: 1.45;
+    color: var(--color-gris);
+    overflow-wrap: anywhere;               /* Las "palabras" largas sin espacios no desbordan la pantalla */
 }
 
 /*==========================================
@@ -2106,7 +2146,7 @@ body.en-quiz .hoja {
     }
 
     .premio-imagen {
-        max-height: 80vh;
+        max-height: 64vh;                  /* v1.7: antes 80vh; deja lugar a la contraseña */
     }
 }
 

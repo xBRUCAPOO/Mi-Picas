@@ -20,7 +20,7 @@ const CLAVES = [
     { etiqueta: "La suma de mi numero favorito con el tuyo",  valor: "37" },
     { etiqueta: "La resta de nuestros dias de nacimiento (el menor le resta al mayor)",  valor: "8" },
     { etiqueta: "La restaa de el día que nos empezamos a hablar con el dia en el que nos hicimos novios (el menor le resta al mayor)",  valor: "24" },
-    { etiqueta: "La suma de nuestras edades con la resta de nuestros dias de nuestros cumpleaños", valor: "6" },
+    { etiqueta: "La suma de nuestras edades con la resta de nuestros deias de nuestros cumpleaños",    },
     { etiqueta: "El día que viniste por primera vez a mi casa",  valor: "7" },
     { etiqueta: "La suma de nuestras edades mas la resta de la suma del dia de nuestros primeros mensajes y el dia que dijimos que nos arruinaremos la vida ",  valor: "24" },
     { etiqueta: "La cantidad de letras de mi segundo nombre mas la cantidad de letras de tu apellido",  valor: "17" },
@@ -1560,6 +1560,13 @@ async function mostrarPremio() {
         { opacity: 1, transform: "scale(.97) rotate(-1deg)", offset: 0.8 },
         { opacity: 1, transform: "scale(1) rotate(0deg)" }
     ], 850);
+    // v1.7: la contraseña aparece suave después de la foto (queda invisible el primer 55% y sube un poco).
+    // Solo opacidad y transform: lo hace la placa de video, no traba el confeti
+    animarCuadros($("premio-clave"), [
+        { opacity: 0, transform: "translateY(14px)" },
+        { opacity: 0, transform: "translateY(14px)", offset: 0.55 },
+        { opacity: 1, transform: "translateY(0)" }
+    ], 1500, "ease-out");
     if (imagen) {
         // Solo opacidad y escala (el desenfoque animado sobre una foto grande trababa el celular).
         // animarCuadros la deja fija al terminar: la foto no queda como capa aparte para siempre
