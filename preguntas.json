@@ -150,6 +150,7 @@
         "Simuladores tácticos",
         "Videojuegos de ritmo y dificultad",
         "Juegos de estrategia",
+        "Roguelike (progresion)",
         "Juegos deportivos"
       ],
       "correctas": [0, 1, 3, 4, 5, 6],
