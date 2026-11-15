@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <!-- Ícono de Mi-Picas: as de picas azul con la M, sobre fondo oscuro con marco negro.
+         Mismos colores y forma de pala que la llave de la página (sin el vástago) -->
+    <style>
+        :root {
+            --icono-marco: #000000;          /* Marco negro */
+            --icono-fondo-a: #0E1538;        /* Fondo oscuro: arriba */
+            --icono-fondo-b: #04060F;        /* Fondo oscuro: abajo */
+            --icono-resplandor: #3B82F6;     /* Brillo azul detrás de la pica */
+            --llave-base: #3B82F6;           /* Pica azul (igual que la llave) */
+            --llave-sombra: #1D4ED8;         /* Labio 3D */
+            --llave-brillo: rgba(255, 255, 255, .45);
+            --llave-letra: #FFFFFF;          /* La M */
+        }
+        .marco { fill: var(--icono-marco); }
+        .tope-a { stop-color: var(--icono-fondo-a); }
+        .tope-b { stop-color: var(--icono-fondo-b); }
+        .resplandor-a { stop-color: var(--icono-resplandor); stop-opacity: .35; }
+        .resplandor-b { stop-color: var(--icono-resplandor); stop-opacity: 0; }
+        .pieza { fill: var(--llave-base); }
+        .sombra { fill: var(--llave-sombra); }
+        .brillo { fill: var(--llave-brillo); }
+        .letra { fill: var(--llave-letra); }
+    </style>
+    <defs>
+        <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" class="tope-a"/>
+            <stop offset="1" class="tope-b"/>
+        </linearGradient>
+        <radialGradient id="resplandor" cx=".5" cy=".46" r=".45">
+            <stop offset="0" class="resplandor-a"/>
+            <stop offset="1" class="resplandor-b"/>
+        </radialGradient>
+    </defs>
+
+    <!-- Marco negro y fondo oscuro -->
+    <rect class="marco" width="512" height="512" rx="112"/>
+    <rect x="30" y="30" width="452" height="452" rx="86" fill="url(#fondo)"/>
+    <rect x="30" y="30" width="452" height="452" rx="86" fill="url(#resplandor)"/>
+
+    <!-- As de picas (coordenadas de la pala de la llave, escaladas al centro) -->
+    <g transform="translate(61 64) scale(3.9)">
+        <!-- Labio 3D: la misma forma, más oscura y un poco más abajo -->
+        <path class="sombra" transform="translate(0 5)" d="M50 0 C42 20 8 36 8 60 C8 78 22 86 36 80 C40 78 44 77 46 74 L38 94 H62 L54 74 C56 77 60 78 64 80 C78 86 92 78 92 60 C92 36 58 20 50 0 Z"/>
+        <!-- Cuerpo de la pica -->
+        <path class="pieza" d="M50 0 C42 20 8 36 8 60 C8 78 22 86 36 80 C40 78 44 77 46 74 L38 94 H62 L54 74 C56 77 60 78 64 80 C78 86 92 78 92 60 C92 36 58 20 50 0 Z"/>
+        <!-- Brillos blancos arriba a la izquierda (estilo Duolingo) -->
+        <ellipse class="brillo" cx="27" cy="54" rx="6" ry="11" transform="rotate(28 27 54)"/>
+        <circle class="brillo" cx="20" cy="70" r="3"/>
+        <!-- La M dibujada como forma (un favicon no puede cargar tipografías), con su sombrita -->
+        <polygon class="sombra" transform="translate(0 2.5)" points="35,63 35,35 42.5,35 50,47.5 57.5,35 65,35 65,63 58.5,63 58.5,46.5 52.3,56.5 47.7,56.5 41.5,46.5 41.5,63"/>
+        <polygon class="letra" points="35,63 35,35 42.5,35 50,47.5 57.5,35 65,35 65,63 58.5,63 58.5,46.5 52.3,56.5 47.7,56.5 41.5,46.5 41.5,63"/>
+    </g>
+</svg>
